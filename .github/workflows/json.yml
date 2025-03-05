@@ -1,0 +1,36 @@
+on:
+  push:
+    paths:
+      - scripts/**
+  schedule:
+    - cron: "0 6 * * *"      
+  workflow_dispatch:      
+
+name: "Update Azure Local Releases JSON and README"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate JSON for Azure Local Releases
+        shell: pwsh
+        run: |
+          Import-Module ('{0}\scripts\Get-AzureLocalRelease.ps1' -f $env:GITHUB_WORKSPACE) 
+          $fileName = ($env:GITHUB_REPOSITORY -split '/')[-1]
+          $folderName = 'json'
+          $folderPath = ('{0}\{1}' -f $env:GITHUB_WORKSPACE, $folderName)
+          if (-not(Test-Path -Path $folderPath -PathType Container -ErrorAction SilentlyContinue)) {
+            $null = New-Item -Path $folderPath -ItemType Directory -Force -ErrorAction Stop
+          }
+          Get-AzureLocalRelease | ConvertTo-Json -Depth 5 | Out-File -FilePath ('{0}\{1}.json' -f $folderPath, $fileName) -Encoding utf8          
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v4
+        with:
+          message: "Auto updating Azure Local Releases"
+          add: "."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

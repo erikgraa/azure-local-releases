@@ -84,10 +84,14 @@ The repository structure is as follows:
 ├───.github
 │   └───workflows
 │           containerapp.yml
+│           json.yml
 │
 ├───assets
 │       cmdlet.png
 │       pode.png
+│
+├───json
+│       azure-local-releases.json
 │
 ├───pode
 │       azure-local.png
