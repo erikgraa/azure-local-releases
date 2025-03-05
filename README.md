@@ -1,68 +1,102 @@
 # Azure Local Releases
 
-This repository creates a codified version of the Azure Local enumerates the list of required firewall endpoints/URLs for Azure Local from Microsoft documentation and creates two JSON files per region (one readable and one compressed).
+The artifacts in this repository help increasing observability of Azure Local releases by offering them as PowerShell objects or as JSON through an API running [Pode](https://badgerati.github.io/Pode).
 
-bruk add To i stedet for å lage jonen på nytt, i tilfelle de bytter url f.eks
+## 🎬 Demo
 
-## Repository 🌳
+See a demo of the Pode API at https://azure-local-releases.graa.dev, hosted as an Azure Container App.
 
-The repository structure is as follows (with multiple regions' endpoints):
+## 🚀 Artifacts
 
+### PowerShell cmdlet 
+
+The PowerShell cmdlet `Get-AzureLocalRelease` retrieves Azure Local releases from Microsoft's documentation.
+
+[![Cmdlet](/assets/cmdlet.png)](https://github.com/erikgraa/azure-local-releases/tree/main/scripts/Get-AzureLocalRelease.ps1)
+
+### Pode API
+
+The Pode API solution uses the cmdlet `Get-AzureLocalRelease` to provide information about Azure Local releases.
+
+[![Pode](/assets/pode.png)](https://azure-local-releases.graa.dev)
+
+## 📄 Howto
+
+### PowerShell cmdlet 
+
+The PowerShell cmdlet can run locally and the objects converted to JSON.
+
+```powershell
+git clone https://github.com/erikgraa/azure-local-releases.git
+. .\azure-local-releases\scripts\Get-AzureLocalRelease.ps1
+
+$releases = Get-AzureLocalRelease
+
+$releases | ConvertTo-Json
 ```
+
+### Pode API
+
+Pode can run locally or as a container workload.
+
+### 1️⃣ Pode API locally
+
+Run the Pode API standalone/locally like so:
+
+```powershell
+git clone https://github.com/erikgraa/azure-local-releases.git
+
+cd azure-local-releases\pode
+.\server.ps1
+
+curl http://localhost:8080/api/releases
+```
+
+### 2️⃣ Pode API as a container workload
+
+Build the container image and run it yourself:
+
+```powershell
+git clone https://github.com/erikgraa/azure-local-releases.git
+cd azure-local-releases
+
+docker build -t pode/azure-local-releases .
+docker run --name pode -p 8080:8080 -d pode/azure-local-releases
+
+curl http://localhost:8080/api/releases
+```
+
+## ✍ Blog post
+
+See the related blog post at https://blog.graa.dev/AzureLocal-Releases for use cases.
+
+## 🌳 Repository
+
+The repository structure is as follows:
+
+```plaintext
+│   Dockerfile
 │   LICENSE
 │   README.md
 │
 ├───.github
 │   └───workflows
-│           update.yml
+│           containerapp.yml
 │
 ├───assets
-│       json.png
+│       cmdlet.png
+│       pode.png
 │
-├───json
-│   │   azure-local-endpoints.json 🍏
-│   │
-│   │
-│   └───<region>
-│           azure-local-endpoints-<region>-compressed.json
-│           azure-local-endpoints-<region>.json
+├───pode
+│       index.html
+│       package.json
+│       server.ps1
+│       server.psd1
 │
 └───scripts
-        Export-AzureLocalEndpoints.ps1
+        Get-AzureLocalRelease.ps1
 ```
-## 🚀 Features
 
-- Parses the list of Azure Local endpoints from Microsoft documentation and converts them to JSON for each region.
-- The URL of the `json\azure-local-endpoints.json` file in this repository can be used as an evergreen link to JSON-formatted files for the various Azure Local required firewall endpoints/URLs.
-## 📄 Howto
-
-### 1️⃣ Run in GitHub
-Fork the https://github.com/erikgraa/azure-local-endpoints repository in GitHub and allow the scheduled workflow to run. This allows for updates every morning at 6am - or at your preferred cadence.
-### 2️⃣ Run locally
-Clone the repository and run the script. Updated list of endpoints codified as JSON will be available in the `json` folder.
-```powershell
-git clone https://github.com/erikgraa/azure-local-endpoints.git
-cd azure-local-endpoints
-```
-```powershell
-. .\scripts\Export-AzureLocalEndpoints.ps1
-Export-AzureLocalEndpoints
-```
-### 3️⃣ Use cases and making sense of the output
-The JSON-formatted lists of endpoints can be used for automation, documentation or compliance purposes. See the related blog post at https://blog.graa.dev/AzureLocal-Endpoints for use cases.
-[![Example](/assets/json.png)](https://github.com/erikgraa/azure-local-endpoints/tree/main/json) 
-## Regions and endpoints
-
-|Region|Updated by Microsoft|Endpoint count|
-| :--- | --- | --- |
-|eastus|2025-01-23|101|
-|westeurope|2025-01-23|106|
-|australiaeast|2025-01-23|106|
-|canadacentral|2025-01-23|106|
-|indiacentral|2025-01-23|105|
-|southeastasia|2025-01-23|105|
-|japaneast|2025-01-23|106|
-|southcentralus|2025-01-23|105|
-## Contributions 👏
+## 👏 Contributions
 
 Any contributions are welcome and appreciated!

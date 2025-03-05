@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "description": "Azure Local Releases",
+  "main": "./server.ps1",
+  "name": "azure-local-releases",
+  "author": "erikgraa",
+  "license": "MIT",
+  "scripts": {
+    "test": "invoke-pester ./tests/*.ps1",
+    "build": "psake",
+    "install": "yarn install --force --ignore-scripts --modules-folder pode_modules",
+    "start": "./server.ps1"
+  }
+}
