@@ -1,4 +1,4 @@
-# Azure Local Releases
+# API for Azure Local Releases with Pode
 
 The artifacts in this repository help increasing observability of Azure Local releases by offering them as PowerShell objects or as JSON through an API running [Pode](https://badgerati.github.io/Pode).
 
