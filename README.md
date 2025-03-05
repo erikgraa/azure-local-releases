@@ -90,11 +90,12 @@ The repository structure is as follows:
 │       azure-local-releases.json
 │
 ├───pode
-│       azure-local.png
-│       index.html
-│       package.json
-│       server.ps1
-│       server.psd1
+│   │   package.json
+│   │   server.ps1
+│   │   server.psd1
+│   │
+│   └───views
+│           index.pode
 │
 └───scripts
         Get-AzureLocalRelease.ps1
