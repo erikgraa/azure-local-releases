@@ -23,7 +23,9 @@ Start-PodeServer @splat -ScriptBlock {
             $location = Get-PodeCache -Key 'location'
 
             if ($null -eq $location) {           
-                Get-Location | Select-Object -ExpandProperty Path | Set-PodeCache -Key 'location' -Ttl 0
+                $location = Get-Location | Select-Object -ExpandProperty Path
+                
+                $location | Set-PodeCache -Key 'location' -Ttl 0
 
                 $cmdletName = 'Get-AzureLocalRelease.ps1'
 
