@@ -12,7 +12,7 @@ Start-PodeServer {
 
         if ($null -eq $releases) {
             $location = Get-Location | Select-Object -ExpandProperty Path
-            if ($location -eq '/') {
+            if ($location -eq '/usr/src/app') {
                 . /usr/src/app/Get-AzureLocalRelease.ps1
             }
             else {
