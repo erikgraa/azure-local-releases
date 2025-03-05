@@ -14,9 +14,7 @@ if ($PSBoundParameters.ContainsKey('Daemon')) {
 Start-PodeServer @splat -ScriptBlock {
     Add-PodeEndpoint -Address * -Port 8080 -Protocol Http
 
-    Set-PodeCacheDefaultTtl -Value 3600
-
-    Add-PodeStaticRoute -Path '/' -Source './' -Defaults @('index.html')
+    Set-PodeViewEngine -Type Pode
 
     Add-PodeTimer -Name 'Fetch releases' -Interval 7200 -OnStart -ScriptBlock {
         Lock-PodeObject -ScriptBlock {
@@ -46,9 +44,30 @@ Start-PodeServer @splat -ScriptBlock {
 
             $releases = Get-AzureLocalRelease
 
+            $latestRelease = $releases | Sort-Object -Property Version -Descending | Select-Object -First 1
+
+            $timestamp = Get-Date
+
             Write-Host "Fetched releases"
    
             $state:releases = $releases
+            $state:latestRelease = $latestRelease
+            $state:timestamp = $timestamp
+        }
+    }
+
+
+    Add-PodeRoute -Method Get -Path '/' -ScriptBlock {
+        Lock-PodeObject -ScriptBlock {
+            $response = Get-PodeState -Name 'releases'
+            $latestrelease = Get-PodeState -Name 'latestRelease'
+            $timestamp = Get-PodeState -Name 'timestamp'
+
+            Write-PodeViewResponse -Path 'index'-Data @{
+                'releases' = $response
+                'latestRelease' = $latestRelease
+                'timestamp' = $timestamp
+            }
         }
     }    
 
