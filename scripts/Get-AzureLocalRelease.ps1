@@ -6,7 +6,7 @@ function Get-AzureLocalRelease {
     [System.Uri]$Uri = 'https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2',
 
     [Parameter(Mandatory=$false)]
-    [Switch]$SkipEndOfSupportReleases,
+    [Switch]$SupportedReleases,
 
     [Parameter(Mandatory=$false)]
     [ValidateSet('String', 'Version')]
@@ -68,11 +68,11 @@ function Get-AzureLocalRelease {
 
         $endOfSupportDate = (Get-Date -Date ([DateTime]$_entry.Matches.Groups[2].Value).AddDays(180) -UFormat '%Y-%m-%d')
 
-        $endOfSupport = if ([DateTime]::Now -le $endOfSupportDate) {
-            $false
+        $supported = if ([DateTime]::Now -le $endOfSupportDate) {
+            $true
         }
         else {
-            $true
+            $false
         }
 
         $hash.Add('version', $fullVersion)
@@ -84,7 +84,7 @@ function Get-AzureLocalRelease {
         $hash.Add('baselineRelease', $baselineRelease)
         $hash.Add('buildType', $buildType)
         $hash.Add('endOfSupportDate', (Get-Date -Date ([DateTime]$_entry.Matches.Groups[2].Value).AddDays(180) -UFormat '%Y-%m-%d'))
-        $hash.add('endOfSupport', $endOfSupport)
+        $hash.add('supported', $supported)
         $hash.Add('urls', @{
             'security' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-7].Value).Replace('&amp;','&')
             'news' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-4].Value).Replace('&amp;','&')
@@ -94,7 +94,7 @@ function Get-AzureLocalRelease {
         $versions += New-Object -TypeName PSCustomObject -Property $hash
       }
 
-      if ($PSBoundParameters.ContainsKey('SkipEndOfSupportReleases')) {
+      if ($PSBoundParameters.ContainsKey('SupportedReleases')) {
         $versions | Where-Object { [DateTime]$_.endOfSupportDate -gt (Get-Date) }
       }
       else {

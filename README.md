@@ -2,9 +2,9 @@
 
 The artifacts in this repository help increasing observability of Azure Local releases by offering them as PowerShell objects or as JSON through an API running [Pode](https://badgerati.github.io/Pode).
 
-## 🎬 Demo
+## 🎬 Example
 
-See a demo of the Pode API at https://azlocalreleases.graa.dev, hosted as an Azure Container App.
+See a demo of the Azure Local Releases Pode API at https://azlocalreleases.graa.dev, hosted as an Azure Container App.
 
 [![GitHub Build and Deploy](https://github.com/erikgraa/azure-local-releases/actions/workflows/containerapp.yml/badge.svg)](https://github.com/erikgraa/azure-local-releases/actions/workflows/containerapp.yml)
 
@@ -22,7 +22,7 @@ The Pode API solution uses the cmdlet `Get-AzureLocalRelease` to provide informa
 
 [![Pode](/assets/pode.png)](https://azlocalreleases.graa.dev)
 
-## 📄 Howto
+## 📄 Usage
 
 ### PowerShell cmdlet 
 
@@ -50,8 +50,6 @@ git clone https://github.com/erikgraa/azure-local-releases.git
 
 cd azure-local-releases\pode
 .\server.ps1
-
-curl http://localhost:8080/api/releases
 ```
 
 ### 2️⃣ Pode API as a container workload
@@ -64,8 +62,6 @@ cd azure-local-releases
 
 docker build -t pode/azure-local-releases .
 docker run --name pode -p 8080:8080 -d pode/azure-local-releases
-
-curl http://localhost:8080/api/releases
 ```
 
 ## ✍ Blog post
