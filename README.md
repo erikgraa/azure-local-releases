@@ -6,6 +6,8 @@ The artifacts in this repository help increasing observability of Azure Local re
 
 See a demo of the Pode API at https://azlocalreleases.graa.dev, hosted as an Azure Container App.
 
+[![GitHub Build and Deploy](https://github.com/erikgraa/azure-local-releases/actions/workflows/containerapp.yml/badge.svg)](https://github.com/erikgraa/azure-local-releases/actions/workflows/containerapp.yml)
+
 ## 🚀 Artifacts
 
 ### PowerShell cmdlet 

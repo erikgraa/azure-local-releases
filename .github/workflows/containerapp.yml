@@ -1,13 +1,12 @@
 on:
   push:
     paths:
-      - .github/**
       - pode/**
       - scripts/**
       - Dockerfile
   workflow_dispatch:      
 
-name: ACR_and_ContainerApp
+name: "GitHub Build and Deploy"
 
 jobs:
     build-push-and-deploy:
