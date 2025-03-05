@@ -88,6 +88,7 @@ The repository structure is as follows:
 │       pode.png
 │
 ├───pode
+│       azure-local.png
 │       index.html
 │       package.json
 │       server.ps1
