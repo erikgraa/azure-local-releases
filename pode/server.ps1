@@ -70,7 +70,7 @@ Start-PodeServer @splat -ScriptBlock {
 
                 $latestRelease = $releases | Sort-Object -Property Version -Descending | Select-Object -First 1                          
 
-                $state:latestFetchTimestamp = $latestFetchTimestamp               
+                $state:latestFetchTimestamp = $latestFetchTimestamp
                 $state:releases = $releases
                 $state:latestRelease = $latestRelease
             }
@@ -87,7 +87,7 @@ Start-PodeServer @splat -ScriptBlock {
         Lock-PodeObject -ScriptBlock {
             $response = Get-PodeState -Name 'releases'
             $latestrelease = Get-PodeState -Name 'latestRelease'
-            $timestamp = Get-PodeState -Name 'timestamp'
+            $latestFetchTimestamp = Get-PodeState -Name 'latestFetchTimestamp'
 
             Write-PodeViewResponse -Path 'index'-Data @{
                 'releases' = $response
