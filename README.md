@@ -44,7 +44,7 @@ Pode can run locally or for instance as a container workload.
 Run the Pode API standalone/locally like so:
 
 ```powershell
-Install-Module -Name Pode
+Install-Module -Name Pode -MinimumVersion 2.12.0
 
 git clone https://github.com/erikgraa/azure-local-releases.git
 

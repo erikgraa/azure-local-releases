@@ -22,6 +22,14 @@ Start-PodeServer @splat -ScriptBlock {
 
     Add-PodeTimer -Name 'Fetch releases' -Interval 7200 -OnStart -ScriptBlock {
         Lock-PodeObject -ScriptBlock {    
+            $runningTimestamp = Get-PodeState -Name 'runningTimestamp'
+
+            if ($null -eq $runningTimestamp) {
+                $runningTimestamp = Get-Date
+
+                Set-PodeState -Name 'runningTimeStamp' -Value $runningTimeStamp
+            }
+
             $cmdletPath = Get-PodeState -Name 'cmdletPath'
 
             if ($null -eq $cmdletPath) {
@@ -70,9 +78,9 @@ Start-PodeServer @splat -ScriptBlock {
 
                 $latestRelease = $releases | Sort-Object -Property Version -Descending | Select-Object -First 1                          
 
-                $state:latestFetchTimestamp = $latestFetchTimestamp
-                $state:releases = $releases
-                $state:latestRelease = $latestRelease
+                Set-PodeState -Name 'latestFetchTimestamp' -Value $latestFetchTimestamp
+                Set-PodeState -Name 'releases' -Value $releases
+                Set-PodeState -Name 'latestRelease' -Value $latestRelease
             }
             else {
                 Write-PodeHost 'Could not retrieve releases from the Internet or local JSON file'
@@ -85,14 +93,16 @@ Start-PodeServer @splat -ScriptBlock {
 
     Add-PodeRoute -Method Get -Path '/' -ScriptBlock {
         Lock-PodeObject -ScriptBlock {
-            $response = Get-PodeState -Name 'releases'
             $latestrelease = Get-PodeState -Name 'latestRelease'
             $latestFetchTimestamp = Get-PodeState -Name 'latestFetchTimestamp'
+            $response = Get-PodeState -Name 'releases'            
+            $runningTimestamp = Get-PodeState -Name 'runningTimestamp'
 
             Write-PodeViewResponse -Path 'index'-Data @{
-                'releases' = $response
                 'latestRelease' = $latestRelease
                 'latestFetchTimestamp' = $latestFetchTimestamp
+                'releases' = $response                
+                'runningTimeStamp' = $runningTimeStamp
             }
         }
     }

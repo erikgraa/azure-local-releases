@@ -19,54 +19,63 @@ td, th {
 </style>
 </head>
 <body>
+  <center>
+    <h1>Azure Local Releases Tool</h1>
 
-<h1>Azure Local Releases API with Pode</h1>
+    <table>
+    <tr>
+      <th>Version</th>
+      <th>Availability date</th>
+      <th>Release Train</th>
+      <th>Release</th>
+      <th>Baseline Release</th>
+      <th>Build Type</th>
+      <th>Supported</th>
+      <th>End-of-Support date</th>
+    </tr>
+    $(foreach ($release in ($data.releases | Sort-Object -Property Version -Descending)) { 
+      if ($release.version -eq $data.latestRelease.version) {
+        "<tr bgcolor='lightgreen'>";
+      }
+      elseif ($release.version -ne $data.latestRelease.version -and $release.supported -eq $false) {
+        "<tr bgcolor='#E94C4c'>";
+      }
+      else {
+        "<tr bgcolor='#11B584'>";
+      }
+      "<td>$($release.version)";
+      "</td>";
+      "<td>$($release.availabilityDate)</td>";  
+      "<td>$($release.releaseTrain)</td>";
+      "<td>$($release.release)</td>";
+      "<td>$($release.baselineRelease)</td>";  
+      "<td>$($release.buildType)</td>";    
+      "<td>$($release.supported)</td>";  
+      "<td>$($release.endOfSupportDate)</td>";
+      "</tr>"
+    })
+    </table><br>
 
-<a href="/docs/swagger">Swagger</a><br><br>
+    <h2>Documentation</h2>
 
-<a href="https://badgerati.github.io/Pode">Pode documentation</a><br><br>
+    OpenAPI documentation: <a href="/docs/swagger">Swagger</a><br><br>
 
-GitHub repository: <a href="https://github.com/erikgraa/azure-local-releases">https://github.com/erikgraa/azure-local-releases</a><br><br>
+    GitHub repository: <a href="https://github.com/erikgraa/azure-local-releases">https://github.com/erikgraa/azure-local-releases</a><br><br>
 
-Related blog post: <a href="https://blog.graa.dev/AzureLocal-Releases">https://blog.graa.dev/AzureLocal-Releases</a><br><br>
+    Related blog post: <a href="https://blog.graa.dev/AzureLocal-Releases">https://blog.graa.dev/AzureLocal-Releases</a><br><br>
 
-<h2>Releases</h2>
+    <hr>    
 
-<table>
-<tr>
-  <th>Version</th>
-  <th>Availability date</th>
-  <th>Release Train</th>
-  <th>Release</th>
-  <th>Baseline Release</th>
-  <th>Build Type</th>
-  <th>Supported</th>
-  <th>End-of-Support date</th>
-</tr>
-$(foreach ($release in ($data.releases | Sort-Object -Property Version -Descending)) { 
-  if ($release.version -eq $data.latestRelease.version) {
-    "<tr bgcolor='lightgreen'>";
-  }
-  elseif ($release.version -ne $data.latestRelease.version -and $release.supported -eq $false) {
-    "<tr bgcolor='#E94C4c'>";
-  }
-  else {
-    "<tr bgcolor='#11B584'>";
-  }
-  "<td>$($release.version)";
-  "</td>";
-  "<td>$($release.availabilityDate)</td>";  
-  "<td>$($release.releaseTrain)</td>";
-  "<td>$($release.release)</td>";
-  "<td>$($release.baselineRelease)</td>";  
-  "<td>$($release.buildType)</td>";    
-  "<td>$($release.supported)</td>";  
-  "<td>$($release.endOfSupportDate)</td>";
-  "</tr>"
-})
-</table><br>
+    <span>Release data fetched at $($data.latestFetchTimestamp)</span><br>
+    <span>Running since $($data.runningTimestamp)</span><br>
 
-<span>Page generated at $(Get-Date).<br>Release data fetched at $($data.latestFetchTimestamp)</span>
+    <p style='text-align: center;
+    width: 100%;
+    font-size: 0.9em;
+    bottom: 0px;'>
+    Powered by <a href='https://badgerati.github.io/Pode/' style='color: rgb(22, 68, 166); text-decoration: none;'>Pode</a>
+</p>
+  </center>
 
 </body>
 </html>
