@@ -85,7 +85,7 @@ function Get-AzureLocalRelease {
         $hash.Add('buildType', $buildType)
         $hash.Add('endOfSupportDate', (Get-Date -Date ([DateTime]$_entry.Matches.Groups[2].Value).AddDays(180) -UFormat '%Y-%m-%d'))
         $hash.add('supported', $supported)
-        $hash.Add('urls', @{
+        $hash.Add('urls', [Ordered]@{
             'security' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-7].Value).Replace('&amp;','&')
             'news' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-4].Value).Replace('&amp;','&')
             'issues' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-2].Value).Replace('&amp;','&')
