@@ -1,3 +1,6 @@
+#Requires -RunAsAdministrator
+#Requires -Version 7.4
+
 param (
     [Parameter(Mandatory=$false)]
     [Switch]$Daemon
@@ -9,6 +12,7 @@ if ($PSBoundParameters.ContainsKey('Daemon')) {
     $splat.Add('Daemon', $true)
 }
 
+
 [System.Threading.Thread]::CurrentThread.CurrentUICulture = 'en-US'
 
 Start-PodeServer @splat -ScriptBlock {
@@ -17,45 +21,67 @@ Start-PodeServer @splat -ScriptBlock {
     Set-PodeViewEngine -Type Pode
 
     Add-PodeTimer -Name 'Fetch releases' -Interval 7200 -OnStart -ScriptBlock {
-        Lock-PodeObject -ScriptBlock {
-            $location = Get-PodeCache -Key 'location'
+        Lock-PodeObject -ScriptBlock {    
+            $cmdletPath = Get-PodeState -Name 'cmdletPath'
 
-            if ($null -eq $location) {           
+            if ($null -eq $cmdletPath) {
                 $location = Get-Location | Select-Object -ExpandProperty Path
-                
-                $location | Set-PodeCache -Key 'location' -Ttl 0
 
                 $cmdletName = 'Get-AzureLocalRelease.ps1'
 
-                try {
-                    if ($location -eq '/usr/src/app') {
-                        $cmdlet = ('/usr/src/app/{0}' -f $cmdletName)
-                    }
-                    else {
-                        $cmdlet = ('../scripts/{0}' -f $cmdletName)        
-                    }      
-
-                    Import-Module -Name $cmdlet
+                if ($location -eq '/usr/src/app') {
+                    $cmdletPath = ('/usr/src/app/{0}' -f $cmdletName)
                 }
-                catch {
-                    Write-Host ("Cannot find cmdlet '{0}'" -f $cmdletName)
+                else {
+                    $cmdletPath = ('../scripts/{0}' -f $cmdletName)        
+                }
+
+                Set-PodeState -Name 'cmdletPath' -Value $cmdletPath
+                Set-PodeState -Name 'location' -Value $location
+            }
+
+            Import-Module -Name $cmdletPath -Force
+
+            try {
+                $releases = Get-AzureLocalRelease
+
+                $latestFetchTimestamp = Get-Date
+            }
+            catch {
+                Write-PodeHost ('Releases were not retrievable from the Internet: {0}' -f $_)
+
+                $location = Get-PodeState -Name 'location'
+
+                $releasesPath = if (Test-Path -Path ('{0}/azure-local-releases.json' -f $location)) {
+                    ('{0}/azure-local-releases.json' -f $location)
+                }
+                elseif (Test-Path -Path ('../json/azure-local-releases.json' -f $location)) {
+                    ('../json/azure-local-releases.json' -f $location)
+                }
+
+                if ($null -ne $releasesPath) {
+                    $releases = Get-Content -Path $releasesPath | ConvertFrom-Json
+                    $latestFetchTimestamp = Get-Item -Path $releasesPath | Select-Object -ExpandProperty LastWriteTime
                 }
             }
 
-            $releases = Get-AzureLocalRelease
+            if ($releases -ne $null) {
+                Write-PodeHost ('Last fetch timestamp is {0}' -f $latestFetchTimestamp)            
 
-            $latestRelease = $releases | Sort-Object -Property Version -Descending | Select-Object -First 1
+                $latestRelease = $releases | Sort-Object -Property Version -Descending | Select-Object -First 1                          
 
-            $timestamp = Get-Date
-
-            Write-Host "Fetched releases"
-   
-            $state:releases = $releases
-            $state:latestRelease = $latestRelease
-            $state:timestamp = $timestamp
+                $state:latestFetchTimestamp = $latestFetchTimestamp               
+                $state:releases = $releases
+                $state:latestRelease = $latestRelease
+            }
+            else {
+                Write-PodeHost 'Could not retrieve releases from the Internet or local JSON file'
+            }
+        }
+        catch {
+            Write-PodeHost $_
         }
     }
-
 
     Add-PodeRoute -Method Get -Path '/' -ScriptBlock {
         Lock-PodeObject -ScriptBlock {
@@ -66,10 +92,10 @@ Start-PodeServer @splat -ScriptBlock {
             Write-PodeViewResponse -Path 'index'-Data @{
                 'releases' = $response
                 'latestRelease' = $latestRelease
-                'timestamp' = $timestamp
+                'latestFetchTimestamp' = $latestFetchTimestamp
             }
         }
-    }    
+    }
 
     Add-PodeRoute -Method Get -Path '/api/releases' -ScriptBlock {
         Lock-PodeObject -ScriptBlock {

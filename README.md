@@ -1,6 +1,6 @@
 # API for Azure Local Releases with Pode
 
-The artifacts in this repository help increasing observability and traceability of Azure Local releases that can be consumed by offering details of them as PowerShell objects or as JSON through an API running [Pode](https://badgerati.github.io/Pode).
+The artifacts in this repository help increasing observability and traceability of Azure Local releases by offering details of them via a PowerShell cmdlet or through an API running [Pode](https://badgerati.github.io/Pode).
 
 ## 🎬 Example
 
@@ -18,7 +18,7 @@ The PowerShell cmdlet `Get-AzureLocalRelease` retrieves Azure Local releases fro
 
 ### Pode API
 
-The Pode API solution uses the cmdlet `Get-AzureLocalRelease` to provide information about Azure Local releases.
+Pode makes uses of the cmdlet `Get-AzureLocalRelease` to provide the details about Azure Local releases.
 
 [![Pode](/assets/pode.png)](https://azlocalreleases.graa.dev)
 
@@ -26,33 +26,33 @@ The Pode API solution uses the cmdlet `Get-AzureLocalRelease` to provide informa
 
 ### PowerShell cmdlet 
 
-The PowerShell cmdlet can run locally and the objects converted to JSON.
+The PowerShell cmdlet `Get-AzureLocalRelease` can run locally.
 
 ```powershell
 git clone https://github.com/erikgraa/azure-local-releases.git
 . .\azure-local-releases\scripts\Get-AzureLocalRelease.ps1
 
-$releases = Get-AzureLocalRelease
-
-$releases | ConvertTo-Json
+Get-AzureLocalRelease
 ```
 
 ### Pode API
 
-Pode can run locally or as a container workload.
+Pode can run locally or for instance as a container workload.
 
-### 1️⃣ Pode API locally
+### 1️⃣ Run Pode API locally
 
 Run the Pode API standalone/locally like so:
 
 ```powershell
+Install-Module -Name Pode
+
 git clone https://github.com/erikgraa/azure-local-releases.git
 
 cd azure-local-releases\pode
 .\server.ps1
 ```
 
-### 2️⃣ Pode API as a container workload
+### 2️⃣ Run Pode API as a container workload
 
 Build the container image and run it yourself:
 
@@ -66,7 +66,7 @@ docker run --name pode -p 8080:8080 -d pode/azure-local-releases
 
 ## ✍ Blog post
 
-See the related blog post at https://blog.graa.dev/AzureLocal-Releases for use cases.
+See the related blog post at https://blog.graa.dev/AzureLocal-Releases for possible use cases.
 
 ## 🌳 Repository
 

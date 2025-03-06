@@ -2,6 +2,7 @@
 FROM badgerati/pode:latest
 
 # Copy local files to the container
+COPY ./json/* /usr/src/app/
 COPY ./pode/* /usr/src/app/
 COPY ./scripts/Get-AzureLocalRelease.ps1 /usr/src/app/
 

@@ -48,10 +48,10 @@ $(foreach ($release in ($data.releases | Sort-Object -Property Version -Descendi
     "<tr bgcolor='lightgreen'>";
   }
   elseif ($release.version -ne $data.latestRelease.version -and $release.supported -eq $false) {
-    "<tr bgcolor='#B22222'>";
+    "<tr bgcolor='#E94C4c'>";
   }
   else {
-    "<tr bgcolor='green'>";
+    "<tr bgcolor='#11B584'>";
   }
   "<td>$($release.version)";
   "</td>";
@@ -66,7 +66,7 @@ $(foreach ($release in ($data.releases | Sort-Object -Property Version -Descendi
 })
 </table><br>
 
-<span>Page generated at $(Get-Date).<br>Release data fetched at $($data.timestamp)</span>
+<span>Page generated at $(Get-Date).<br>Release data fetched at $($data.latestFetchTimestamp)</span>
 
 </body>
 </html>
