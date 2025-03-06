@@ -67,7 +67,6 @@ td, th {
     <hr>    
 
     <span>Release data fetched at $($data.latestFetchTimestamp)</span><br>
-    <span>Running since $($data.runningTimestamp)</span><br>
 
     <p style='text-align: center;
     width: 100%;

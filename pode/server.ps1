@@ -22,14 +22,6 @@ Start-PodeServer @splat -ScriptBlock {
 
     Add-PodeTimer -Name 'Fetch releases' -Interval 7200 -OnStart -ScriptBlock {
         Lock-PodeObject -ScriptBlock {    
-            $runningTimestamp = Get-PodeState -Name 'runningTimestamp'
-
-            if ($null -eq $runningTimestamp) {
-                $runningTimestamp = Get-Date
-
-                Set-PodeState -Name 'runningTimeStamp' -Value $runningTimeStamp
-            }
-
             $cmdletPath = Get-PodeState -Name 'cmdletPath'
 
             if ($null -eq $cmdletPath) {
@@ -96,13 +88,11 @@ Start-PodeServer @splat -ScriptBlock {
             $latestrelease = Get-PodeState -Name 'latestRelease'
             $latestFetchTimestamp = Get-PodeState -Name 'latestFetchTimestamp'
             $response = Get-PodeState -Name 'releases'            
-            $runningTimestamp = Get-PodeState -Name 'runningTimestamp'
 
             Write-PodeViewResponse -Path 'index'-Data @{
                 'latestRelease' = $latestRelease
                 'latestFetchTimestamp' = $latestFetchTimestamp
                 'releases' = $response                
-                'runningTimeStamp' = $runningTimeStamp
             }
         }
     }
