@@ -247,7 +247,7 @@
     "baselineRelease": true,
     "buildType": "Cumulative",
     "endOfSupportDate": "2025-03-24",
-    "supported": true,
+    "supported": false,
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-24081&preserve-view=true",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-24081&preserve-view=true#features-and-improvements-in-24081",
