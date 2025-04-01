@@ -355,5 +355,22 @@
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-24113&preserve-view=true#features-and-improvements-in-24113",
       "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-24113&preserve-view=true"
     }
+  },
+  {
+    "version": "10.2503.0.13",
+    "availabilityDate": "2025-03-31",
+    "osBuild": "25398.1486",
+    "releaseTrain": "2503",
+    "release": "2503.0.13",
+    "releaseShortened": "2503.0",
+    "baselineRelease": true,
+    "buildType": "Feature",
+    "endOfSupportDate": "2025-09-27",
+    "supported": true,
+    "urls": {
+      "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2503&preserve-view=true",
+      "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2503&preserve-view=true#features-and-improvements-in-2503",
+      "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2503&preserve-view=true"
+    }
   }
 ]
