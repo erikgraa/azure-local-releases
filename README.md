@@ -6,7 +6,7 @@ The artifacts in this repository help increasing observability and traceability 
 
 ## 🎬 Demo
 
-See a live demo of the Azure Local Releases Pode API at https://azlocalreleases.graa.dev (hosted as an Azure Container App).  
+See a live demo of the Azure Local Releases Pode API at https://releases.azurelocal.graa.dev (hosted as an Azure Container App).  
 
 ## 🚀 Artifacts
 
@@ -20,7 +20,7 @@ The PowerShell cmdlet `Get-AzureLocalRelease` retrieves Azure Local releases fro
 
 Pode makes uses of the cmdlet `Get-AzureLocalRelease` to provide the details about Azure Local releases.
 
-[![Pode](/assets/pode.png)](https://azlocalreleases.graa.dev)
+[![Pode](/assets/pode.png)](https://releases.azurelocal.graa.dev)
 
 ## 📄 Usage
 
