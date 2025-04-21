@@ -1,4 +1,4 @@
-# Azure Local Releases Tracker
+# Azure Local Releases Tool
 
 The artifacts in this repository help increasing observability and traceability of Azure Local releases by offering details of them via a PowerShell cmdlet or through an API running [Pode](https://badgerati.github.io/Pode).  
 
