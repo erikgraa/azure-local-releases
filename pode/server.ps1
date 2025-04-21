@@ -150,12 +150,14 @@ Start-PodeServer @splat -ScriptBlock {
                 $response = @()
 
                 foreach ($_releaseTrain in $uniqueReleaseTrains) {
-                    $supported = if ((-not($releases | Where-Object { $_.ReleaseTrain -eq $_releaseTrain }).supported.Contains($true))) {
-                        $false
-                    }
-                    else {
-                        $true
-                    }                 
+                    $supported = $false
+
+                    foreach ($_release in $releases | Where-Object { $_.ReleaseTrain -eq $_releaseTrain }) {
+                        if ($_release.supported) {
+                            $supported = $true
+                            break
+                        }
+                    }   
 
                     $hash = @{
                         'releaseTrain' = $_releaseTrain
