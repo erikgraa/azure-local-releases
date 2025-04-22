@@ -28,6 +28,7 @@ td, th {
       <th>Availability date</th>
       <th>Release Train</th>
       <th>Release</th>
+      <th>OS Build</th>
       <th>Baseline Release</th>
       <th>Build Type</th>
       <th>Supported</th>
@@ -48,6 +49,7 @@ td, th {
       "<td>$($release.availabilityDate)</td>";  
       "<td>$($release.releaseTrain)</td>";
       "<td>$($release.release)</td>";
+      "<td>$($release.osBuild)</td>";
       "<td>$($release.baselineRelease)</td>";  
       "<td>$($release.buildType)</td>";    
       "<td>$($release.supported)</td>";  
