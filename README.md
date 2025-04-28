@@ -6,7 +6,9 @@ The artifacts in this repository help increasing observability and traceability 
 
 ## 🎬 Demo
 
-See a live demo of the Azure Local Releases Pode API at https://releases.azurelocal.graa.dev (hosted as an Azure Container App).  
+See a live demo of the Azure Local Releases Pode API at https://releases.azurelocal.graa.dev (hosted as an Azure Container App).
+
+[![Demo](/assets/demo.png)](https://releases.azurelocal.graa.dev)
 
 ## 🚀 Artifacts
 
