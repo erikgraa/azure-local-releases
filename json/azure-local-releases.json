@@ -273,14 +273,14 @@
   },
   {
     "version": "12.2504.1001.20",
-    "availabilityDate": "2025-04-23",
+    "availabilityDate": "2025-04-29",
     "osBuild": "26100.3775",
     "releaseTrain": "2504",
     "release": "2504.1001.20",
     "releaseShortened": "2504.1001",
     "baselineRelease": true,
     "buildType": "Feature",
-    "endOfSupportDate": "2025-10-20",
+    "endOfSupportDate": "2025-10-26",
     "supported": true,
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2504&preserve-view=true",
