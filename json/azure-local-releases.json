@@ -298,7 +298,7 @@
     "baselineRelease": true,
     "buildType": "Feature",
     "endOfSupportDate": "2025-05-13",
-    "supported": true,
+    "supported": false,
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2411&preserve-view=true",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2411&preserve-view=true#features-and-improvements-in-2411",
