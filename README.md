@@ -68,7 +68,9 @@ docker run --name pode -p 8080:8080 -d pode/azure-local-releases
 
 ## ✍ Blog post
 
-See the related blog post at https://blog.graa.dev/AzureLocal-Releases for possible use cases.
+See the related blog posts at https://blog.graa.dev for possible use cases:
+* https://blog.graa.dev/AzureLocal-Releases
+* https://blog.graa.dev/AzureLocal-InternetConstrainedUpdates
 
 ## 🌳 Repository
 

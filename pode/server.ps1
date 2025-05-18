@@ -125,10 +125,23 @@ Start-PodeServer @splat -ScriptBlock {
                 if ($null -ne $WebEvent.Query['version']) {
                     $response = $response | Where-Object { $_.version -eq $WebEvent.Query['version'] }
                 }                    
-            
+                
+                if ($null -ne $WebEvent.Query['newDeployments']) {
+                    $response = $response | Where-Object { $_.newDeployments -eq [bool]::Parse($WebEvent.Query['newDeployments']) }
+                }
+
+                if ($null -ne $WebEvent.Query['solutionUpdate']) {
+                    if ([bool]::Parse($WebEvent.Query['solutionUpdate'] -eq $true)) {
+                        $response = $response | Where-Object { $_.solutionUpdate.Count -gt 0 }
+                    }
+                    else {
+                        $response = $response | Where-Object { $_.solutionUpdate.Count -eq 0 }
+                    } 
+                }                
+
                 if ($WebEvent.Query['latest'] -eq $true) {
                     $response = $response | Sort-Object -Property Version -Descending | Select-Object -First 1
-                }
+                }                
 
                 Write-PodeJsonResponse -Value @{ releases = $response }
             }
@@ -140,6 +153,8 @@ Start-PodeServer @splat -ScriptBlock {
         (New-PodeOAStringProperty -Name 'buildType' -Description "A Feature build is the first release in a release train, whereas Cumulative builds are subsequent releases in a release train" | ConvertTo-PodeOAParameter -In Query),
         (New-PodeOAStringProperty -Name 'version' -Description "Full version, e.g. 10.2411.3.2" | ConvertTo-PodeOAParameter -In Query),
         (New-PodeOAStringProperty -Name 'osBuild' -Description "OS Build" | ConvertTo-PodeOAParameter -In Query),
+        (New-PodeOABoolProperty -Name 'newDeployments' -Description "Retrieve only releases to be used in new deployments" | ConvertTo-PodeOAParameter -In Query)
+        (New-PodeOABoolProperty -Name 'solutionUpdate' -Description "Retrieve only releases with downloadable solution update ZIP" | ConvertTo-PodeOAParameter -In Query)
         (New-PodeOABoolProperty -Name 'latest' -Description "Retrieve only the latest release" | ConvertTo-PodeOAParameter -In Query)
     ) -PassThru | Set-PodeOARouteInfo -Summary 'Retrieve Azure Local Releases' -Tags 'Releases'
 

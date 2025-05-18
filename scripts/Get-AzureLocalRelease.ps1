@@ -24,9 +24,15 @@ function Get-AzureLocalRelease {
       # ISO 8601
       $tablePattern = "(?ms)<tr>\n<td>\d+\.\d+\.\d+\.\d+.*?Availability date.*?<\/td>\n<\/tr>"
 
-      $entryPattern = '(?ms)<tr>\n<td>(\d+\.\d+\.\d+\.\d+)\s+<br><br>\s+Availability date:\s+(\d{4,4}-\d{2,2}-\d{2,2})<\/td>\n<td>(\d+.\d+)<\/td>\n<td><a href="(.+?)".*?>((\w+) OS security update)<\/a><\/td>\n<td><a href="(.+?)".*?>(Features and improvements)<\/a><\/td>\n<td><a href="(.+?)".*?>(Known issues)<\/a><\/td>\n<\/tr>'
+      $entryPattern = '(?ms)<tr>\n<td>(\d+\.\d+\.\d+\.\d+)\s+<br><br>\s+Availability date:\s+(\d{4,4}-\d{2,2}-\d{2,2})<\/td>\n<td>(\d+.\d+)<\/td>\n<td><a href="(.+?)".*?>((\w+) OS security update)<\/a><\/td>\n<td><a href="(.+?)".*?>(Features and improvements)<\/a><\/td>\n<td><a href="(.+?)".*?>(Known issues)<\/a><\/td>\n(<td>Not applicable<\/td>\n|<td><a href="(.+\.zip)".*SHA256: (.*?)<\/td>\n)?<\/tr>'
 
       $table = (Select-String -InputObject $documentation -Pattern $tablePattern -AllMatches).Matches.Groups
+
+      $newDeploymentsPattern = '(?ms)<section id="tabpanel_1_new-deployments".*?<\/section>'
+      $newDeployments = (Select-String -InputObject $documentation -Pattern $newDeploymentsPattern).matches.value
+
+      $existingDeploymentsPattern = '(?ms)<section id="tabpanel_1_existing-deployments".*?<\/section>'
+      $existingDeployments = (Select-String -InputObject $documentation -Pattern $existingDeploymentsPattern).matches.value
 
       if ($null -eq $table) {
         throw ('No releases found at {0}, format or URL may have changed' -f $Uri)
@@ -42,11 +48,45 @@ function Get-AzureLocalRelease {
         # Releases after 2408.0 are "baseline releases"
         $baselineReleaseThreshold = [version]'10.2408.0.0'
 
+        # Only releases after 2411.3 have cumulative SU ZIPs
+        $SUThreshold = [version]'10.2411.3.0'
+
         $baselineRelease = if ($fullVersion -ge $baselineReleaseThreshold) {
             $true
         }
         else {
             $false
+        }
+
+        $newDeployment = if ($newDeployments -match $_entry.Matches.Groups[1].Value) {
+          $true
+        }
+        else {
+          $false
+        }
+
+        $existingDeployment = if ($existingDeployments -match $_entry.Matches.Groups[1].Value) {
+          $true
+        }
+        else {
+          $false
+        }
+        
+        $oldVersion = if ($newDeployments -eq $false -and $existingDeployment -eq $false) {
+          $true
+        }
+        else {
+          $false
+        }
+
+        $solutionUpdate = if ($fullversion -ge $SUThreshold -and $existingDeployment -and $_entry.Matches.Groups[-2].Value -match 'https') {
+          [Ordered]@{
+            'uri' = $_entry.Matches.Groups[-2].Value
+            'fileHash' = $_entry.Matches.Groups[-1].Value
+          }
+        }
+        else {
+          @{}
         }
 
         # The first release of a release train is a feature build. Any subsequent release within a release train is a cumulative update build.
@@ -77,6 +117,7 @@ function Get-AzureLocalRelease {
 
         $hash.Add('version', $fullVersion)
         $hash.Add('availabilityDate', $_entry.Matches.Groups[2].Value)
+        $hash.Add('newDeployments', $newDeployment)
         $hash.Add('osBuild', $_entry.Matches.Groups[3].Value)
         $hash.Add('releaseTrain', $_entry.Matches.Groups[1].Value.Split('.')[1])
         $hash.Add('release', $release)
@@ -85,10 +126,11 @@ function Get-AzureLocalRelease {
         $hash.Add('buildType', $buildType)
         $hash.Add('endOfSupportDate', (Get-Date -Date ([DateTime]$_entry.Matches.Groups[2].Value).AddDays(180) -UFormat '%Y-%m-%d'))
         $hash.add('supported', $supported)
+        $hash.Add('solutionUpdate', $solutionUpdate)
         $hash.Add('urls', [Ordered]@{
-            'security' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-7].Value).Replace('&amp;','&')
-            'news' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-4].Value).Replace('&amp;','&')
-            'issues' = ('{0}{1}' -f $baseUrl, $_entry.Matches.Groups[-2].Value).Replace('&amp;','&')
+            'security' = ('{0}{1}' -f $baseUrl, (($_entry).Matches.Groups | Where-Object { $_.Value -match '^security-update' }).Value.Replace('&amp;','&'))
+            'news' = ('{0}{1}' -f $baseUrl, (($_entry).Matches.Groups | Where-Object { $_.Value -match '^whats-new?' }).Value.Replace('&amp;','&'))
+            'issues' = ('{0}{1}' -f $baseUrl, (($_entry).Matches.Groups | Where-Object { $_.Value -match '^known-issues?' }).Value.Replace('&amp;','&'))
         })
 
         $versions += New-Object -TypeName PSCustomObject -Property $hash
