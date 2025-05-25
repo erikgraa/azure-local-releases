@@ -352,7 +352,7 @@
     "baselineRelease": true,
     "buildType": "Cumulative",
     "endOfSupportDate": "2025-05-25",
-    "supported": true,
+    "supported": false,
     "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2411&preserve-view=true",
