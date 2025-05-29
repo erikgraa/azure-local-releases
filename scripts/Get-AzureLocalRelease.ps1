@@ -21,6 +21,28 @@ function Get-AzureLocalRelease {
 
       $documentation = Invoke-RestMethod -Uri $uri
 
+      $solutionUpdateUri = 'https://raw.githubusercontent.com/MicrosoftDocs/azure-stack-docs/refs/heads/main/azure-local/update/import-discover-updates-offline-23h2.md'
+
+      $solutionUpdatePattern = "\[(.*?)\].*?(https:\/\/.*?.zip).*?\|(.*?)\|"
+
+      $solutionUpdateContent = Invoke-RestMethod -Uri $solutionUpdateUri
+
+      $solutionUpdate = (Select-String -InputObject $solutionUpdateContent -Pattern $solutionUpdatePattern -AllMatches)
+
+      $solutionUpdateHash = @{}
+
+      $i = 0
+      
+      while ($i -lt $solutionUpdate.Matches.Groups.Count-1) {   
+        $solutionUpdateHash.Add($solutionUpdate.Matches.Groups[$i+1].Value.Trim(), @{
+          'uri' = $solutionUpdate.Matches.Groups[$i+2].Value.Trim()
+          'fileHash' = $solutionUpdate.Matches.Groups[$i+3].Value.Trim()
+        })
+
+        $i+= 4
+      }
+
+
       # ISO 8601
       $tablePattern = "(?ms)<tr>\n<td>\d+\.\d+\.\d+\.\d+.*?Availability date.*?<\/td>\n<\/tr>"
 
@@ -43,7 +65,8 @@ function Get-AzureLocalRelease {
       for($i=$table.Length-1; $i -ge 0; $i--) {
         $_entry = Select-String -Pattern $entryPattern -InputObject $table[$i].Value
 
-        $fullVersion = [version]$_entry.Matches.Groups[1].Value
+        $fullVersionString = $_entry.Matches.Groups[1].Value
+        $fullVersion = [version]$fullVersionString
 
         # Releases after 2408.0 are "baseline releases"
         $baselineReleaseThreshold = [version]'10.2408.0.0'
@@ -79,10 +102,10 @@ function Get-AzureLocalRelease {
           $false
         }
 
-        $solutionUpdate = if ($fullversion -ge $SUThreshold -and $existingDeployment -and $_entry.Matches.Groups[-2].Value -match 'https') {
+        $solutionUpdate = if ($fullversion -ge $SUThreshold -and $solutionupdateHash.ContainsKey($fullVersionString)) {
           [Ordered]@{
-            'uri' = $_entry.Matches.Groups[-2].Value
-            'fileHash' = $_entry.Matches.Groups[-1].Value
+            'uri' = $solutionupdateHash.Get_Item($fullVersionString).uri
+            'fileHash' = $solutionupdateHash.Get_Item($fullVersionString).fileHash
           }
         }
         else {
