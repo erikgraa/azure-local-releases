@@ -4,6 +4,9 @@ The artifacts in this repository help increasing observability and traceability 
 
 [![GitHub Build and Deploy](https://github.com/erikgraa/azure-local-releases/actions/workflows/containerapp.yml/badge.svg)](https://github.com/erikgraa/azure-local-releases/actions/workflows/containerapp.yml)
 
+> [!IMPORTANT]  
+> This tool only covers generic Azure Local releases as parsed from [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2). Please verify with specific OEM hardware vendors' documentation for supported installation/upgrade paths according to their particular compatibility matrices
+
 ## 🎬 Demo
 
 See a live demo of the Azure Local Releases Pode API at https://releases.azurelocal.graa.dev (hosted as an Azure Container App).
