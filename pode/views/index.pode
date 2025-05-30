@@ -16,6 +16,13 @@ td, th {
   padding: 8px;
 }
 
+.warning-prompt {
+  background: #FCEEAE;
+  border: 1px solid #000000;
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 40%;
+}
 </style>
 </head>
 <body>
@@ -69,11 +76,17 @@ td, th {
     })
     </table><br>
 
+    <h2>Disclaimer</h2>    
+
+    <p class="warning-prompt">⚠️ This list along with the API is using parsed data from Microsoft's documentation and only covers generic Azure Local releases.<br>OEM hardware vendors may offer their own release cadence after additional validation and certification that is not reflected here, with corresponding Solution Builder Extension (SBE) updates and golden images.<br>Please verify with specific OEM hardware vendors' documentation for supported installation/upgrade paths according to their compatibility matrices.</p>
+
     <h2>Documentation</h2>
 
     OpenAPI documentation: <a href="/docs/swagger">Swagger</a><br><br>
 
     GitHub repository: <a href="https://github.com/erikgraa/azure-local-releases">https://github.com/erikgraa/azure-local-releases</a><br><br>
+
+    Microsoft documentation: <a href="https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2">Azure Local release information</a><br><br>
 
     Related blog posts:<br>
     <a href="https://blog.graa.dev/AzureLocal-Releases">https://blog.graa.dev/AzureLocal-Releases</a><br>
