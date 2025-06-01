@@ -37,17 +37,13 @@ td, th {
       <th>Release</th>
       <th>OS Build</th>
       <th>Baseline Release</th>
-      <th>Build Type</th>
       <th>Supported</th>
       <th>End-of-Support date</th>
       <th>For new deployments</th>
       <th>Solution Update bundle download</th>
     </tr>
-    $(foreach ($release in ($data.releases | Sort-Object -Property Version -Descending)) { 
-      if ($release.version -eq $data.latestRelease.version) {
-        "<tr bgcolor='lightgreen'>";
-      }
-      elseif ($release.version -ne $data.latestRelease.version -and $release.supported -eq $false) {
+    $(foreach ($release in ($data.releases | Sort-Object -Property AvailabilityDate,Version -Descending)) { 
+      if($release.supported -eq $false) {
         "<tr bgcolor='#E94C4c'>";
       }
       else {
@@ -60,7 +56,6 @@ td, th {
       "<td>$($release.release)</td>";
       "<td>$($release.osBuild)</td>";
       "<td>$($release.baselineRelease)</td>";  
-      "<td>$($release.buildType)</td>";    
       "<td>$($release.supported)</td>";  
       "<td>$($release.endOfSupportDate)</td>";
       "<td>$($release.newDeployments)</td>";      

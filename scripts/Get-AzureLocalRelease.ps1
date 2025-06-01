@@ -1,3 +1,16 @@
+<#PSScriptInfo
+  .VERSION 1.0
+  .GUID 082911ff-1d75-4cbc-9391-ab093db0aaab
+  .AUTHOR erikgraa
+#>
+
+<#
+
+  .DESCRIPTION
+  Script to enumerate Azure Local releases.
+
+#>
+
 function Get-AzureLocalRelease {
   [CmdletBinding()]
   param (
@@ -113,12 +126,13 @@ function Get-AzureLocalRelease {
         }
 
         # The first release of a release train is a feature build. Any subsequent release within a release train is a cumulative update build.
-        $buildType = if ($null -eq ($versions | Where-Object { $_.releaseTrain -eq $_entry.Matches.Groups[1].Value.Split('.')[1] })) {
+        # After the 2503 release it's not really possible to determine this with accuracy programmatically. The next feature update is 2510.
+        <# $buildType = if ($null -eq ($versions | Where-Object { $_.releaseTrain -eq $_entry.Matches.Groups[1].Value.Split('.')[1] })) {
           'Feature'
         }
         else {
           'Cumulative'
-        }
+        }#>
 
         if ($OutputType -eq 'String') {
           $fullVersion = $fullVersion.ToString()
@@ -146,7 +160,7 @@ function Get-AzureLocalRelease {
         $hash.Add('release', $release)
         $hash.Add('releaseShortened', $releaseShortened)
         $hash.Add('baselineRelease', $baselineRelease)
-        $hash.Add('buildType', $buildType)
+        #$hash.Add('buildType', $buildType)
         $hash.Add('endOfSupportDate', (Get-Date -Date ([DateTime]$_entry.Matches.Groups[2].Value).AddDays(180) -UFormat '%Y-%m-%d'))
         $hash.add('supported', $supported)
         $hash.Add('solutionUpdate', $solutionUpdate)

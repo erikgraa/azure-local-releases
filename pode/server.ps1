@@ -114,9 +114,9 @@ Start-PodeServer @splat -ScriptBlock {
                     $response = $response | Where-Object { $_.baselineRelease -eq [bool]::Parse($WebEvent.Query['baselineRelease']) }
                 }
 
-                if ($null -ne $WebEvent.Query['buildType']) {
+                <#if ($null -ne $WebEvent.Query['buildType']) {
                     $response = $response | Where-Object { $_.buildType -eq $WebEvent.Query['buildType'] }
-                }
+                }#>
 
                 if ($null -ne $WebEvent.Query['osBuild']) {
                     $response = $response | Where-Object { $_.osBuild -eq $WebEvent.Query['osBuild'] }
@@ -150,7 +150,7 @@ Start-PodeServer @splat -ScriptBlock {
         (New-PodeOABoolProperty -Name 'supported' -Description "Support status" | ConvertTo-PodeOAParameter -In Query),
         (New-PodeOAStringProperty -Name 'releaseTrain' -Description "A release train, e.g. 2408 or 2411" | ConvertTo-PodeOAParameter -In Query),
         (New-PodeOABoolProperty -Name 'baselineRelease' -Description "A baseline releases can be used for new deployments" | ConvertTo-PodeOAParameter -In Query),
-        (New-PodeOAStringProperty -Name 'buildType' -Description "A Feature build is the first release in a release train, whereas Cumulative builds are subsequent releases in a release train" | ConvertTo-PodeOAParameter -In Query),
+        #(New-PodeOAStringProperty -Name 'buildType' -Description "A Feature build is the first release in a release train, whereas Cumulative builds are subsequent releases in a release train" | ConvertTo-PodeOAParameter -In Query),
         (New-PodeOAStringProperty -Name 'version' -Description "Full version, e.g. 10.2411.3.2" | ConvertTo-PodeOAParameter -In Query),
         (New-PodeOAStringProperty -Name 'osBuild' -Description "OS Build" | ConvertTo-PodeOAParameter -In Query),
         (New-PodeOABoolProperty -Name 'newDeployments' -Description "Retrieve only releases to be used in new deployments" | ConvertTo-PodeOAParameter -In Query)
