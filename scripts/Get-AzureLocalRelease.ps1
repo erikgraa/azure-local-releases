@@ -1,5 +1,5 @@
 <#PSScriptInfo
-  .VERSION 1.0
+  .VERSION 1.1
   .GUID 082911ff-1d75-4cbc-9391-ab093db0aaab
   .AUTHOR erikgraa
 #>
@@ -63,10 +63,14 @@ function Get-AzureLocalRelease {
 
       $table = (Select-String -InputObject $documentation -Pattern $tablePattern -AllMatches).Matches.Groups
 
-      $newDeploymentsPattern = '(?ms)<section id="tabpanel_1_new-deployments".*?<\/section>'
+      #$newDeploymentsPattern = '(?ms)<section id="tabpanel_1_new-deployments".*?<\/section>'
+      $newDeploymentsPattern = '(?ms)<section id="tabpanel_1_OS-build-26100-xxxx".*?<\/section>'
+      
       $newDeployments = (Select-String -InputObject $documentation -Pattern $newDeploymentsPattern).matches.value
 
-      $existingDeploymentsPattern = '(?ms)<section id="tabpanel_1_existing-deployments".*?<\/section>'
+      #$existingDeploymentsPattern = '(?ms)<section id="tabpanel_1_existing-deployments".*?<\/section>'
+      $existingDeploymentsPattern = '(?ms)<section id="tabpanel_1_OS-build-25398-xxxx".*?<\/section>'
+
       $existingDeployments = (Select-String -InputObject $documentation -Pattern $existingDeploymentsPattern).matches.value
 
       if ($null -eq $table) {
