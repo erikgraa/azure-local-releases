@@ -326,7 +326,7 @@
   {
     "version": "12.2504.1001.20",
     "availabilityDate": "2025-04-29",
-    "newDeployments": false,
+    "newDeployments": true,
     "osBuild": "26100.3775",
     "releaseTrain": "2504",
     "release": "2504.1001.20",
@@ -344,7 +344,7 @@
   {
     "version": "12.2505.1001.23",
     "availabilityDate": "2025-05-28",
-    "newDeployments": false,
+    "newDeployments": true,
     "osBuild": "26100.4061",
     "releaseTrain": "2505",
     "release": "2505.1001.23",
