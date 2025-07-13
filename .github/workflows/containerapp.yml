@@ -5,6 +5,7 @@ on:
     paths:
       - pode/**
       - scripts/**
+      - json/**
       - Dockerfile
   workflow_dispatch:      
 
