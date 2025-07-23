@@ -403,16 +403,19 @@
   },
   {
     "version": "12.2507.1001.8",
-    "availabilityDate": "2025-07-16",
+    "availabilityDate": "2025-07-21",
     "newDeployments": true,
     "osBuild": "26100.4652",
     "releaseTrain": "2507",
     "release": "2507.1001.8",
     "releaseShortened": "2507.1001",
     "baselineRelease": true,
-    "endOfSupportDate": "2026-01-12",
+    "endOfSupportDate": "2026-01-17",
     "supported": true,
-    "solutionUpdate": {},
+    "solutionUpdate": {
+      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2507.1001.8/CombinedSolutionBundle.12.2507.1001.8.zip",
+      "fileHash": "CFAB3177DFDA0AB365DEE3EF19EAA5EFE4BEA2225054F086202DF31E1AF1C355"
+    },
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2507&preserve-view=true&tabs=new-deployments",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2507&preserve-view=true#features-and-improvements-in-2507",
@@ -523,16 +526,19 @@
   },
   {
     "version": "11.2507.1001.7",
-    "availabilityDate": "2505-07-16",
+    "availabilityDate": "2505-07-21",
     "newDeployments": false,
     "osBuild": "25398.1732",
     "releaseTrain": "2507",
     "release": "2507.1001.7",
     "releaseShortened": "2507.1001",
     "baselineRelease": true,
-    "endOfSupportDate": "2506-01-12",
+    "endOfSupportDate": "2506-01-17",
     "supported": true,
-    "solutionUpdate": {},
+    "solutionUpdate": {
+      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2507.1001.7/CombinedSolutionBundle.11.2507.1001.7.zip",
+      "fileHash": "F3E288E1854253E25AD063D3DA4B766CF634FE294BD6814F4A4A1551FB855773"
+    },
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2507&preserve-view=true",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2507&preserve-view=true#features-and-improvements-in-2507",
