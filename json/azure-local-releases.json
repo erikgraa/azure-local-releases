@@ -432,7 +432,7 @@
     "releaseShortened": "2411.3",
     "baselineRelease": true,
     "endOfSupportDate": "2025-08-19",
-    "supported": true,
+    "supported": false,
     "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-24113&preserve-view=true",
