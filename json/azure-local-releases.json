@@ -297,7 +297,7 @@
     "releaseShortened": "2503.0",
     "baselineRelease": true,
     "endOfSupportDate": "2025-09-27",
-    "supported": true,
+    "supported": false,
     "solutionUpdate": {
       "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/10.2503.0.13/CombinedSolutionBundle.10.2503.0.13.zip",
       "fileHash": "BAA0CEB0CF695CCCF36E39F70BF2E67E0B886B91CDE97F8C2860CE299E2A5126"
