@@ -441,7 +441,7 @@
     "releaseShortened": "2504.1001",
     "baselineRelease": true,
     "endOfSupportDate": "2025-10-18",
-    "supported": true,
+    "supported": false,
     "solutionUpdate": {
       "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2504.1001.19/CombinedSolutionBundle.11.2504.1001.19.zip",
       "fileHash": "7658C5CBAE241951C786D06D35E8B09A1160FDC5E9B8CAEDEB374ECC22A2CB68"
