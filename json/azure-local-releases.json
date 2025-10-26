@@ -339,7 +339,7 @@
     "releaseShortened": "2504.1001",
     "baselineRelease": true,
     "endOfSupportDate": "2025-10-26",
-    "supported": true,
+    "supported": false,
     "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2504&preserve-view=true&tabs=new-deployments",
