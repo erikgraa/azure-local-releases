@@ -589,10 +589,7 @@
     "baselineRelease": true,
     "endOfSupportDate": "2026-04-22",
     "supported": true,
-    "solutionUpdate": {
-      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2510.1002.87/CombinedSolutionBundle.11.2510.1002.87.zip",
-      "fileHash": "D0F837AF742C335695E5694E5BE840CFF9DA7AFE457336CD7C5D84E15F8E41EB"
-    },
+    "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-25010&preserve-view=true",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2510&preserve-view=true#features-and-improvements-in-2510",
