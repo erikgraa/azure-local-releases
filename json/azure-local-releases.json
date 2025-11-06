@@ -453,20 +453,17 @@
     }
   },
   {
-    "version": "12.2510.1002.88",
-    "availabilityDate": "2025-10-24",
+    "version": "12.2510.1002.94",
+    "availabilityDate": "2025-11-05",
     "newDeployments": true,
     "osBuild": "26100.6899",
     "releaseTrain": "2510",
-    "release": "2510.1002.88",
+    "release": "2510.1002.94",
     "releaseShortened": "2510.1002",
     "baselineRelease": true,
-    "endOfSupportDate": "2026-04-22",
+    "endOfSupportDate": "2026-05-04",
     "supported": true,
-    "solutionUpdate": {
-      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2510.1002.88/CombinedSolutionBundle.12.2510.1002.88.zip",
-      "fileHash": "5A13A5D01B5B32466883C83C89186B0FED937CAB53E7DF76D46E6275721952D2"
-    },
+    "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2510&preserve-view=true&tabs=new-deployments",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2510&preserve-view=true#features-and-improvements-in-2510",
@@ -579,15 +576,15 @@
     }
   },
   {
-    "version": "11.2510.1002.87",
-    "availabilityDate": "2025-10-24",
+    "version": "11.2510.1002.93",
+    "availabilityDate": "2025-11-05",
     "newDeployments": false,
     "osBuild": "25398.1913",
     "releaseTrain": "2510",
-    "release": "2510.1002.87",
+    "release": "2510.1002.93",
     "releaseShortened": "2510.1002",
     "baselineRelease": true,
-    "endOfSupportDate": "2026-04-22",
+    "endOfSupportDate": "2026-05-04",
     "supported": true,
     "solutionUpdate": {},
     "urls": {
