@@ -444,7 +444,7 @@
     "supported": true,
     "solutionUpdate": {
       "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2509.1001.22/CombinedSolutionBundle.12.2509.1001.22.zip",
-      "fileHash": "15771552A97785B7EE291587FE62EE678EDE850E2250A5407EE6738AFEF729B65B"
+      "fileHash": "15771552A97785B7EE291587FE62EE678EDE850E2250A5407EE6738AFEF729B6"
     },
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2509&preserve-view=true&tabs=new-deployments",
@@ -463,7 +463,10 @@
     "baselineRelease": true,
     "endOfSupportDate": "2026-05-04",
     "supported": true,
-    "solutionUpdate": {},
+    "solutionUpdate": {
+      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2510.1002.94/CombinedSolutionBundle.12.2510.1002.94.zip",
+      "fileHash": "4A82DB455A5487D183310ED8252D25EE6A1489FE992C47E6F49B8996A2E4FC15"
+    },
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2510&preserve-view=true&tabs=new-deployments",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2510&preserve-view=true#features-and-improvements-in-2510",
@@ -586,7 +589,10 @@
     "baselineRelease": true,
     "endOfSupportDate": "2026-05-04",
     "supported": true,
-    "solutionUpdate": {},
+    "solutionUpdate": {
+      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2510.1002.93/CombinedSolutionBundle.11.2510.1002.93.zip",
+      "fileHash": "E1B0B205A90A93827E14643927767DD2675710844FCA56EE3DF2C8FFD60622F9"
+    },
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-25010&preserve-view=true",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2510&preserve-view=true#features-and-improvements-in-2510",
