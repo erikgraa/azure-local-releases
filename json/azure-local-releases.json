@@ -321,7 +321,7 @@
     "releaseShortened": "2505.1001",
     "baselineRelease": true,
     "endOfSupportDate": "2025-11-24",
-    "supported": true,
+    "supported": false,
     "solutionUpdate": {
       "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2505.1001.22/CombinedSolutionBundle.11.2505.1001.22.zip",
       "fileHash": "AB2C7CE74168BF9FD679E7CE644BC57A20A0A3A418C5E8663EBCF53FC0B45113"
@@ -342,7 +342,7 @@
     "releaseShortened": "2505.1001",
     "baselineRelease": true,
     "endOfSupportDate": "2025-11-24",
-    "supported": true,
+    "supported": false,
     "solutionUpdate": {
       "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2505.1001.23/CombinedSolutionBundle.12.2505.1001.23.zip",
       "fileHash": "29E5F6732D9B1BD4E0C2667F6FB1D7F43ADF78B4AEA8E34486C7F03DD46D155C"
