@@ -564,20 +564,17 @@
     }
   },
   {
-    "version": "12.2511.1002.5",
-    "availabilityDate": "2025-11-18",
+    "version": "12.2511.1002.502",
+    "availabilityDate": "2025-12-03",
     "newDeployments": true,
     "osBuild": "26100.7171",
     "releaseTrain": "2511",
-    "release": "2511.1002.5",
+    "release": "2511.1002.502",
     "releaseShortened": "2511.1002",
     "baselineRelease": true,
-    "endOfSupportDate": "2026-05-17",
+    "endOfSupportDate": "2026-06-01",
     "supported": true,
-    "solutionUpdate": {
-      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2511.1002.5/CombinedSolutionBundle.12.2511.1002.5.zip",
-      "fileHash": "5E6EF65EFA1E50A6C076688F58A58C6497132163D27B4482ED64EE00861D3574"
-    },
+    "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2511&preserve-view=true&tabs=new-deployments",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2511&preserve-view=true#features-and-improvements-in-2511",
