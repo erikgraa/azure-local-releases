@@ -1,41 +1,5 @@
 [
   {
-    "version": "10.2402.3.10",
-    "availabilityDate": "2024-05-21",
-    "newDeployments": false,
-    "osBuild": "25398.887",
-    "releaseTrain": "2402",
-    "release": "2402.3.10",
-    "releaseShortened": "2402.3",
-    "baselineRelease": false,
-    "endOfSupportDate": "2024-11-17",
-    "supported": false,
-    "solutionUpdate": {},
-    "urls": {
-      "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
-      "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-24023",
-      "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
-    }
-  },
-  {
-    "version": "10.2405.0.24",
-    "availabilityDate": "2024-05-30",
-    "newDeployments": false,
-    "osBuild": "25398.887",
-    "releaseTrain": "2405",
-    "release": "2405.0.24",
-    "releaseShortened": "2405.0",
-    "baselineRelease": false,
-    "endOfSupportDate": "2024-11-26",
-    "supported": false,
-    "solutionUpdate": {},
-    "urls": {
-      "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
-      "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2405",
-      "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
-    }
-  },
-  {
     "version": "10.2402.4.4",
     "availabilityDate": "2024-06-19",
     "newDeployments": false,
@@ -375,6 +339,27 @@
     }
   },
   {
+    "version": "12.2506.1001.29",
+    "availabilityDate": "2025-07-02",
+    "newDeployments": false,
+    "osBuild": "26100.4349",
+    "releaseTrain": "2506",
+    "release": "2506.1001.29",
+    "releaseShortened": "2506.1001",
+    "baselineRelease": true,
+    "endOfSupportDate": "2025-12-29",
+    "supported": true,
+    "solutionUpdate": {
+      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2506.1001.29/CombinedSolutionBundle.12.2506.1001.29.zip",
+      "fileHash": "C8227DF98F97FDE807A2B711206A1FE23531340DC717F89CDA7A324BA0B316C7"
+    },
+    "urls": {
+      "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2506&preserve-view=true&tabs=new-deployments",
+      "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2506&preserve-view=true#features-and-improvements-in-2506",
+      "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2506&preserve-view=true"
+    }
+  },
+  {
     "version": "11.2507.1001.9",
     "availabilityDate": "2025-07-24",
     "newDeployments": false,
@@ -456,27 +441,6 @@
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-25010&preserve-view=true",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2510&preserve-view=true#features-and-improvements-in-2510",
       "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2510&preserve-view=true"
-    }
-  },
-  {
-    "version": "12.2506.1001.29",
-    "availabilityDate": "2025-07-02",
-    "newDeployments": true,
-    "osBuild": "26100.4349",
-    "releaseTrain": "2506",
-    "release": "2506.1001.29",
-    "releaseShortened": "2506.1001",
-    "baselineRelease": true,
-    "endOfSupportDate": "2025-12-29",
-    "supported": true,
-    "solutionUpdate": {
-      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2506.1001.29/CombinedSolutionBundle.12.2506.1001.29.zip",
-      "fileHash": "C8227DF98F97FDE807A2B711206A1FE23531340DC717F89CDA7A324BA0B316C7"
-    },
-    "urls": {
-      "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2506&preserve-view=true&tabs=new-deployments",
-      "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2506&preserve-view=true#features-and-improvements-in-2506",
-      "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2506&preserve-view=true"
     }
   },
   {
@@ -564,24 +528,39 @@
     }
   },
   {
-    "version": "12.2511.1002.502",
-    "availabilityDate": "2025-12-03",
+    "version": "12.2511.1002.5",
+    "availabilityDate": "2025-11-18",
     "newDeployments": true,
     "osBuild": "26100.7171",
     "releaseTrain": "2511",
-    "release": "2511.1002.502",
+    "release": "2511.1002.5",
     "releaseShortened": "2511.1002",
     "baselineRelease": true,
-    "endOfSupportDate": "2026-06-01",
+    "endOfSupportDate": "2026-05-17",
     "supported": true,
-    "solutionUpdate": {
-      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2511.1002.502/CombinedSolutionBundle.12.2511.1002.502.zip",
-      "fileHash": "497ABE8459F86415B91A7F75741B37975B15A19BFFFEDB1A45F171F49B9CB1F6"
-    },
+    "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2511&preserve-view=true&tabs=new-deployments",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2511&preserve-view=true#features-and-improvements-in-2511",
       "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2511&preserve-view=true"
+    }
+  },
+  {
+    "version": "12.2512.1002.16",
+    "availabilityDate": "2025-12-16",
+    "newDeployments": true,
+    "osBuild": "26100.7462",
+    "releaseTrain": "2512",
+    "release": "2512.1002.16",
+    "releaseShortened": "2512.1002",
+    "baselineRelease": true,
+    "endOfSupportDate": "2026-06-14",
+    "supported": true,
+    "solutionUpdate": {},
+    "urls": {
+      "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2512&preserve-view=true&tabs=new-deployments",
+      "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2512&preserve-view=true#features-and-improvements-in-2512",
+      "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2512&preserve-view=true"
     }
   }
 ]
