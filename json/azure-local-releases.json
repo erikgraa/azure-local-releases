@@ -528,20 +528,17 @@
     }
   },
   {
-    "version": "12.2601.1002.38",
-    "availabilityDate": "2026-01-22",
+    "version": "12.2601.1002.503",
+    "availabilityDate": "2026-02-02",
     "newDeployments": true,
     "osBuild": "26100.32230",
     "releaseTrain": "2601",
-    "release": "2601.1002.38",
+    "release": "2601.1002.503",
     "releaseShortened": "2601.1002",
     "baselineRelease": true,
-    "endOfSupportDate": "2026-07-21",
+    "endOfSupportDate": "2026-08-01",
     "supported": true,
-    "solutionUpdate": {
-      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2601.1002.38/CombinedSolutionBundle.12.2601.1002.38.zip",
-      "fileHash": "C51165CCB65308200D102AA6B95F58134EFB2F8D5BFC3C88749D044F3F647B01"
-    },
+    "solutionUpdate": {},
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2601&preserve-view=true&tabs=new-deployments",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2601&preserve-view=true#features-and-improvements-in-2601",
