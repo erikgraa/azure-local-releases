@@ -538,7 +538,10 @@
     "baselineRelease": true,
     "endOfSupportDate": "2026-08-01",
     "supported": true,
-    "solutionUpdate": {},
+    "solutionUpdate": {
+      "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2601.1002.503/CombinedSolutionBundle.12.2601.1002.503.zip",
+      "fileHash": "68848F4082C3F1B75D303476193E81A4593316DAABB8C45380AFEFAD94E90E78"
+    },
     "urls": {
       "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2601&preserve-view=true&tabs=new-deployments",
       "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2601&preserve-view=true#features-and-improvements-in-2601",
