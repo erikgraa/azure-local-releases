@@ -24,8 +24,9 @@ param (
   [Parameter(Mandatory=$false)]
   [String]$LegacyJsonPath = (Join-Path -Path $PSScriptRoot -ChildPath '../json/azure-local-releases.json'),
 
+  # Defaults to SITE_URL, then the custom domain in <OutputPath>/CNAME, then https://<owner>.github.io/<repo>/
   [Parameter(Mandatory=$false)]
-  [String]$SiteUrl = $(if ($env:SITE_URL) { $env:SITE_URL } elseif ($env:GITHUB_REPOSITORY) { 'https://{0}.github.io/{1}/' -f ($env:GITHUB_REPOSITORY -split '/')[0].ToLower(), ($env:GITHUB_REPOSITORY -split '/')[1] } else { 'https://erikgraa.github.io/azure-local-releases/' }),
+  [String]$SiteUrl,
 
   [Parameter(Mandatory=$false)]
   [Int]$FeedItemCount = 30,
@@ -44,6 +45,24 @@ $ErrorActionPreference = 'Stop'
 . (Join-Path -Path $PSScriptRoot -ChildPath 'Get-AzureLocalRelease.ps1')
 
 $sourceUrl = 'https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2'
+
+if (-not $SiteUrl) {
+  $cnamePath = Join-Path -Path $OutputPath -ChildPath 'CNAME'
+
+  if ($env:SITE_URL) {
+    $SiteUrl = $env:SITE_URL
+  }
+  elseif ((Test-Path -Path $cnamePath -PathType Leaf) -and (Get-Content -Path $cnamePath -Raw).Trim()) {
+    $SiteUrl = 'https://{0}/' -f (Get-Content -Path $cnamePath -Raw).Trim()
+  }
+  elseif ($env:GITHUB_REPOSITORY) {
+    $SiteUrl = 'https://{0}.github.io/{1}/' -f ($env:GITHUB_REPOSITORY -split '/')[0].ToLower(), ($env:GITHUB_REPOSITORY -split '/')[1]
+  }
+  else {
+    $SiteUrl = 'https://erikgraa.github.io/azure-local-releases/'
+  }
+}
+
 $SiteUrl = $SiteUrl.TrimEnd('/') + '/'
 $dataPath = Join-Path -Path $OutputPath -ChildPath 'data/releases.json'
 
@@ -160,7 +179,21 @@ $dataJson = ($data | ConvertTo-Json -Depth 8) + "`n"
 # Compare the content ignoring the generatedAt timestamp, which changes on every run
 $withoutTimestamp = { param ([String]$Text) ($Text -replace "`r`n", "`n") -replace '(?m)^\s*"generatedAt":.*\n', '' }
 
-if (-not $Force -and (Test-Path -Path $dataPath -PathType Leaf) -and ((& $withoutTimestamp (Get-Content -Path $dataPath -Raw)) -ceq (& $withoutTimestamp $dataJson))) {
+$feedJsonPath = Join-Path -Path $OutputPath -ChildPath 'feed.json'
+
+# The feeds contain absolute URLs, so they also need regenerating when the site URL changes (for instance a new custom domain)
+$siteUrlChanged = $true
+
+if (Test-Path -Path $feedJsonPath -PathType Leaf) {
+  try {
+    $siteUrlChanged = (Get-Content -Path $feedJsonPath -Raw | ConvertFrom-Json).home_page_url -ne $SiteUrl
+  }
+  catch {
+    $siteUrlChanged = $true
+  }
+}
+
+if (-not $Force -and -not $siteUrlChanged -and (Test-Path -Path $dataPath -PathType Leaf) -and ((& $withoutTimestamp (Get-Content -Path $dataPath -Raw)) -ceq (& $withoutTimestamp $dataJson))) {
   Write-Host ('No changes in {0} releases ({1} supported), nothing written' -f $releases.Count, @($releases | Where-Object { $_.supported }).Count)
   & $setOutput 'false'
   return

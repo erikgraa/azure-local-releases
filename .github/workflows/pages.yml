@@ -27,6 +27,7 @@ jobs:
 
     permissions:
       contents: write
+      pages: write
 
     outputs:
       # Scheduled runs only deploy when the data changed. Pushes (site or script changes) and manual runs always deploy.
@@ -34,6 +35,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
 
       # Compares against the committed site/data/releases.json (ignoring generatedAt) and only writes files when the
       # content changed. Fails without touching any files if parsing yields nothing or looks suspicious.

@@ -20,9 +20,9 @@ This repository used to offer a PowerShell cmdlet and a [Pode](https://badgerati
 
 ## 🎬 Site
 
-Live at https://erikgraa.github.io/azure-local-releases/.
+Live at https://releases.azurelocal.graa.dev/.
 
-[![Azure Local releases site](/assets/demo.png)](https://erikgraa.github.io/azure-local-releases/)
+[![Azure Local releases site](/assets/demo.png)](https://releases.azurelocal.graa.dev/)
 
 - **Hero**: the release recommended for new deployments (release date, end of support, OS build, link to the release notes) next to a live countdown (days, hours, minutes, seconds) to the next end of support and a retirement queue of all supported releases
 - **Version checker**: pick the version you run and see how much runway you have, or that it is out of support, and what to update to
@@ -37,9 +37,9 @@ Live at https://erikgraa.github.io/azure-local-releases/.
 
 | Artifact | URL |
 | --- | --- |
-| RSS 2.0 feed of new releases | https://erikgraa.github.io/azure-local-releases/feed.xml |
-| JSON Feed 1.1 of new releases | https://erikgraa.github.io/azure-local-releases/feed.json |
-| Releases and release trains as JSON | https://erikgraa.github.io/azure-local-releases/data/releases.json |
+| RSS 2.0 feed of new releases | https://releases.azurelocal.graa.dev/feed.xml |
+| JSON Feed 1.1 of new releases | https://releases.azurelocal.graa.dev/feed.json |
+| Releases and release trains as JSON | https://releases.azurelocal.graa.dev/data/releases.json |
 | Plain array of releases (also committed to this repository) | [json/azure-local-releases.json](json/azure-local-releases.json) |
 
 `data/releases.json` looks like this:
@@ -159,13 +159,17 @@ Guards: `Build-Site.ps1` throws, before any file is written, if fewer than 20 re
 
 If `main` has branch protection that blocks pushes from `github-actions[bot]`, allow the bot to bypass it or the data commit step will fail.
 
-Permissions are scoped per job: `contents: write` for the build job (to commit the data) and `pages: write` plus `id-token: write` for the deploy job.
+Permissions are scoped per job: `contents: write` (to commit the data) and `pages: write` (for `actions/configure-pages`) for the build job, and `pages: write` plus `id-token: write` for the deploy job, which uses the `github-pages` environment. The artifact is `site/`, including `site/CNAME`.
 
 ### One-time setup
 
-1. In the repository go to **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. Without this the deploy job cannot publish.
-2. Run the workflow once from the Actions tab (or push to `main`) to publish the first version. The site will then be at `https://<owner>.github.io/<repo>/`.
-3. Optional: if the site is served from a custom domain, set the repository variable `SITE_URL` (**Settings → Secrets and variables → Actions → Variables**) so the feeds contain the right links, and configure the domain under Pages.
+The repository is already set up for Pages with GitHub Actions as the source and the custom domain `releases.azurelocal.graa.dev`. In a fork, or if you change the domain:
+
+1. **Source**: **Settings → Pages → Build and deployment → Source** must be **GitHub Actions**. Without this the deploy job cannot publish.
+2. **Custom domain**: set it under **Settings → Pages → Custom domain** and keep [`site/CNAME`](site/CNAME) in sync. The file is part of the published artifact, and `Build-Site.ps1` uses it as the base URL for the absolute links in the feeds (override with the repository variable `SITE_URL` or `-SiteUrl`). Changing the domain regenerates the feeds on the next run. Without a custom domain, delete `site/CNAME` and the site is served from `https://<owner>.github.io/<repo>/`, which works too because all site links are relative.
+3. **DNS**: the domain needs a `CNAME` record pointing to `<owner>.github.io` (for `releases.azurelocal.graa.dev`: `erikgraa.github.io`). If it still points at the old Azure Container App, change it. It can take a while before GitHub provisions the certificate.
+4. **HTTPS**: once the certificate is ready, tick **Enforce HTTPS** under Pages.
+5. Run the workflow once from the Actions tab (or push to `main`) to publish the first version.
 
 ## 🗑 What was removed
 
@@ -178,7 +182,7 @@ Permissions are scoped per job: `contents: write` for the build job (to commit t
 | `assets/pode.png` | No longer relevant |
 | Query API `/api/releases` (`supported`, `releaseTrain`, `baselineRelease`, `osBuild`, `version`, `newDeployments`, `solutionUpdate`, `latest`) and `/api/releasetrains` | A static site cannot filter server side. Fetch `data/releases.json` and filter client side, for example `jq '.releases[] \| select(.supported)'` or `Where-Object supported`. `trains` in the JSON replaces `/api/releasetrains` and `newDeployments` replaces `?newDeployments=true`. |
 
-The previous demo at `releases.azurelocal.graa.dev` was hosted by the container app. The GitHub Pages site does not use that domain unless it is configured as a custom domain.
+The previous demo at `releases.azurelocal.graa.dev` was hosted by the container app. The same domain now serves the GitHub Pages site, so the DNS record has to point at GitHub Pages instead, see [One-time setup](#one-time-setup).
 
 ## ✍ Blog post
 
@@ -209,6 +213,7 @@ See the related blog posts at https://blog.graa.dev for possible use cases:
 │
 └───site
         app.js
+        CNAME
         index.html
         style.css
         sw.js

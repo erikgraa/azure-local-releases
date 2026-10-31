@@ -1,8 +1,8 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
   "title": "Azure Local releases",
-  "home_page_url": "https://erikgraa.github.io/azure-local-releases/",
-  "feed_url": "https://erikgraa.github.io/azure-local-releases/feed.json",
+  "home_page_url": "https://releases.azurelocal.graa.dev/",
+  "feed_url": "https://releases.azurelocal.graa.dev/feed.json",
   "description": "New Azure Local releases and when they reach end of support.",
   "language": "en",
   "items": [
