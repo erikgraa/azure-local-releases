@@ -1,7 +1,0 @@
-@{
-    Web = @{
-        TransferEncoding = @{
-            Default = "gzip"
-        }    
-    }        
-}
