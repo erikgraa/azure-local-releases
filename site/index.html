@@ -1,108 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Azure Local releases &amp; end of support</title>
-  <meta name="description" content="Azure Local releases, availability dates and end of support dates, with status and countdowns. Updated daily from Microsoft's documentation.">
-  <meta name="color-scheme" content="light dark">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6cbd'/%3E%3Cpath d='M8 21l5-10 4 7 2-4 5 7z' fill='white'/%3E%3C/svg%3E">
+  <title>Azure Local Release Radar · releases &amp; end of support</title>
+  <meta name="description" content="Every Azure Local release, its support window and the countdown to end of support. Updated daily from Microsoft's release information.">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%237c5cff'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%234cc9f0' stroke-width='4'/%3E%3C/svg%3E">
   <link rel="alternate" type="application/rss+xml" title="Azure Local releases (RSS)" href="feed.xml">
   <link rel="alternate" type="application/feed+json" title="Azure Local releases (JSON Feed)" href="feed.json">
   <link rel="stylesheet" href="style.css">
   <script>
-    // Apply the saved theme before first paint to avoid a flash
-    try {
-      var theme = localStorage.getItem('theme');
-      if (theme) document.documentElement.dataset.theme = theme;
-    } catch (e) {}
+    // Apply the theme before first paint to avoid a flash
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.dataset.theme = t;
+    })();
   </script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div>
-        <h1>Azure Local releases</h1>
-        <p class="subtitle">Release dates, support status and end of support, at a glance.</p>
+  <div class="backdrop" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="gridlines"></div></div>
+
+  <nav aria-label="Primary">
+    <div class="wrap">
+      <a class="logo" href="#top"><span class="logo-mark"><i></i></span>Azure Local <span class="sub">Release Radar</span></a>
+      <div class="nav-links">
+        <a href="#lifecycle">Lifecycle</a>
+        <a href="#releases">Releases</a>
+        <a class="keep" href="#checker">Check my version</a>
       </div>
-      <nav class="header-links" aria-label="Links">
-        <a href="feed.xml">RSS</a>
-        <a href="feed.json">JSON Feed</a>
-        <a href="data/releases.json">JSON data</a>
-        <a href="https://github.com/erikgraa/azure-local-releases">GitHub</a>
-        <button type="button" id="theme-toggle" class="icon-button" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.5-.05-1-.14-1.47A5.5 5.5 0 0 1 12.47 3.14 9.2 9.2 0 0 0 12 3z"/></svg>
-        </button>
-      </nav>
+      <a class="icon-btn" href="feed.xml" aria-label="RSS feed" title="RSS feed">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.2" fill="currentColor"/></svg>
+      </a>
+      <button type="button" class="icon-btn" id="theme" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
     </div>
-  </header>
+  </nav>
 
-  <main class="container">
-    <noscript><p class="notice">This page needs JavaScript to render the table. The data is also available as <a href="data/releases.json">JSON</a> and <a href="feed.xml">RSS</a>.</p></noscript>
+  <main class="wrap" id="top">
+    <header class="hero">
+      <div class="hero-main">
+        <span class="eyebrow"><span class="pulse"></span> Live lifecycle tracker<span id="updated"></span></span>
+        <h1>Know what to run.<br><span class="grad">Know when to move.</span></h1>
+        <p class="lede">Every Azure Local release, its support window and the clock to end of support, straight from Microsoft's release information.</p>
+        <div class="rec" id="rec" aria-live="polite"><p class="loading">Loading releases…</p></div>
+      </div>
+      <aside class="count" id="count" aria-label="Next end of support"></aside>
+    </header>
 
-    <section class="cards" id="cards" aria-label="Summary" hidden></section>
+    <noscript><p class="notice">This page needs JavaScript. The data is also available as <a href="data/releases.json">JSON</a>, <a href="feed.json">JSON Feed</a> and <a href="feed.xml">RSS</a>.</p></noscript>
+    <p class="notice" id="error" hidden>The release data could not be loaded. Try again later, or use the <a href="data/releases.json">JSON data</a> directly.</p>
 
-    <section aria-labelledby="releases-heading">
-      <h2 id="releases-heading" class="visually-hidden">Releases</h2>
+    <div class="checker" id="checker">
+      <label for="mine">Which version are you running?</label>
+      <div class="select"><select id="mine"><option value="">Select…</option></select></div>
+      <div class="verdict" id="verdict" aria-live="polite"><span class="dot"></span><span>Pick your version to see how much runway you have.</span></div>
+    </div>
 
-      <div class="toolbar">
-        <div class="field grow">
-          <label for="search">Search</label>
-          <input id="search" type="search" placeholder="Version, release train or OS build" autocomplete="off">
+    <section id="lifecycle" aria-labelledby="lifecycle-title">
+      <div class="stats" id="stats"></div>
+      <div class="sec-head">
+        <div>
+          <h2>Lifecycle</h2>
+          <h3 id="lifecycle-title">Every release train, on one timeline</h3>
+          <p>Each bar runs from when a release train first became available to its end of support. The last 60 days are flagged as ending soon.</p>
         </div>
-        <div class="field">
-          <label for="os">OS version</label>
-          <select id="os">
-            <option value="">All</option>
-            <option value="24H2">24H2 (26100)</option>
-            <option value="23H2">23H2 (25398)</option>
-          </select>
-        </div>
-        <div class="field">
-          <span class="label" id="status-label">Status</span>
-          <div class="segmented" id="status" role="group" aria-labelledby="status-label">
-            <button type="button" data-value="supported" aria-pressed="true">Supported</button>
-            <button type="button" data-value="ending" aria-pressed="false">Ending soon</button>
-            <button type="button" data-value="eol" aria-pressed="false">End of support</button>
-            <button type="button" data-value="all" aria-pressed="false">All</button>
-          </div>
+        <div class="legend">
+          <span><i class="lg-full"></i>Supported</span>
+          <span><i class="lg-end"></i>Ending soon</span>
+          <span><i class="lg-today"></i>Today</span>
         </div>
       </div>
-
-      <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
-
-      <div class="table-wrap">
-        <table id="releases">
-          <thead>
-            <tr>
-              <th scope="col" data-sort="version"><button type="button">Version</button></th>
-              <th scope="col" data-sort="osBuild"><button type="button">OS build</button></th>
-              <th scope="col" data-sort="firstAvailabilityDate"><button type="button">Released</button></th>
-              <th scope="col" data-sort="status"><button type="button">Status</button></th>
-              <th scope="col" data-sort="endOfSupportDate"><button type="button">End of support</button></th>
-              <th scope="col" data-sort="daysLeft"><button type="button">Time left</button></th>
-              <th scope="col">Links</th>
-            </tr>
-          </thead>
-          <tbody id="rows"></tbody>
-        </table>
-        <p class="empty" id="empty" hidden>No releases match the current filters.</p>
-        <p class="empty" id="error" hidden>The release data could not be loaded. Try again later, or use the <a href="data/releases.json">JSON data</a> directly.</p>
+      <div class="tl" id="tl">
+        <div class="tl-scroll"><div class="tl-inner" id="tlInner"></div></div>
+        <div class="tl-foot">
+          <span class="tl-hint">Hover a bar for dates · click a row to see its releases · swipe sideways on small screens</span>
+          <button type="button" class="mini" id="tlToggle" aria-pressed="false">Show full history</button>
+        </div>
       </div>
     </section>
 
-    <section class="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">How end of support is determined</h2>
-      <p>Microsoft supports each Azure Local release for six months. The end of support date shown here is 180 days after the release first became available, as listed on <a href="https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2">Microsoft's release information</a>. Releases ending within 60 days are flagged as <em>ending soon</em>.</p>
-      <p class="muted">This only covers generic Azure Local releases. Verify supported installation and update paths with your OEM hardware vendor. Data is refreshed daily<span id="generated"></span>.</p>
+    <section id="releases" aria-labelledby="releases-title">
+      <div class="sec-head">
+        <div><h2>Releases</h2><h3 id="releases-title">Browse &amp; filter</h3></div>
+        <div class="selects">
+          <div class="select"><select id="os" aria-label="Filter by OS version"><option value="">All OS versions</option><option value="24H2">24H2 (26100)</option><option value="23H2">23H2 (25398)</option></select></div>
+          <div class="select"><select id="sort" aria-label="Sort releases"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="eol">Ends soonest</option></select></div>
+        </div>
+      </div>
+      <div class="controls">
+        <label class="search">
+          <span class="visually-hidden">Search releases</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Search version, release train or OS build  (press / )" autocomplete="off">
+        </label>
+        <div class="chips" id="chips" role="group" aria-label="Filter by status"></div>
+      </div>
+      <p class="result-count" id="result-count" role="status" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="about" aria-labelledby="about-title">
+      <h2 id="about-title">How end of support is determined</h2>
+      <p>Microsoft supports each Azure Local release for six months. The end of support date shown here is 180 days after a release first became available, as listed in <a href="https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2">Microsoft's release information</a>. Releases within 60 days of that date are flagged as <em>ending soon</em>. The release recommended for new deployments is the one Microsoft names on that page.</p>
+      <p class="muted">This only covers generic Azure Local releases. Verify supported installation and update paths with your OEM hardware vendor.</p>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <a href="https://github.com/erikgraa/azure-local-releases">erikgraa/azure-local-releases</a> · Not affiliated with Microsoft
+  <footer>
+    <div class="wrap">
+      <p class="feeds">
+        <a href="feed.xml">RSS</a> · <a href="feed.json">JSON Feed</a> · <a href="data/releases.json">JSON data</a> · <a href="https://github.com/erikgraa/azure-local-releases">GitHub</a>
+      </p>
+      <p>Not affiliated with Microsoft · works offline once loaded · data refreshed daily</p>
     </div>
   </footer>
+  <div class="tip" id="tip" role="presentation"></div>
 
   <script src="app.js"></script>
 </body>
