@@ -1,5 +1,5 @@
 // Network first, falling back to the cache, so the site keeps working offline without ever serving stale data online
-const CACHE = 'release-radar-v1';
+const CACHE = 'release-radar-v2';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'data/releases.json'];
 
 self.addEventListener('install', event => {

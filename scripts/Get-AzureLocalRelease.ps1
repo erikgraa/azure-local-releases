@@ -11,6 +11,68 @@
 
 #>
 
+function ConvertTo-AzureLocalFeatureHighlight {
+  [CmdletBinding()]
+  param (
+    [Parameter(Mandatory=$true)]
+    [String]$Html,
+
+    [Parameter(Mandatory=$false)]
+    [Int]$Maximum = 5
+  )
+
+  # Boilerplate entries that appear in nearly every release and are not features
+  $skipPattern = '^(OS( version)? changes|\.NET|PowerShell updates|Azure Migrate|Documentation updates|Archival of)'
+
+  $clean = {
+    param ($Text)
+
+    $Text = [System.Net.WebUtility]::HtmlDecode([Regex]::Replace($Text, '<[^>]+>', ' '))
+    [Regex]::Replace($Text, '\s+', ' ').Trim()
+  }
+
+  # <li><p><strong>Title</strong>: description</p> [<ul><li>first sub item</li>]
+  $itemPattern = '(?s)<li>\s*<p>\s*<strong>(.*?)</strong>\s*:?\s*(.*?)</p>(?:\s*<ul>\s*<li>(.*?)</li>)?'
+
+  $seen = @{}
+
+  foreach ($_item in [Regex]::Matches($Html, $itemPattern)) {
+    $title = (& $clean $_item.Groups[1].Value).TrimEnd(':').Trim()
+
+    if ($title -eq '' -or $title -match $skipPattern -or $seen.ContainsKey($title)) {
+      continue
+    }
+
+    $seen[$title] = $true
+
+    $preview = $title -match '\(preview\)'
+    $title = ([Regex]::Replace($title, '\s*\(preview\)', '', 'IgnoreCase')).Trim()
+
+    $summary = & $clean $_item.Groups[2].Value
+
+    # Link sentences add nothing outside of the documentation
+    $summary = ([Regex]::Replace($summary, '\s*(For more (information|details)|To learn more|Learn more)\b.*$', '')).Trim()
+
+    if ($summary -eq '' -and $_item.Groups[3].Success) {
+      $summary = ([Regex]::Replace((& $clean $_item.Groups[3].Value), '\s*(For more (information|details)|To learn more|Learn more)\b.*$', '')).Trim()
+    }
+
+    if ($summary.Length -gt 220) {
+      $summary = ($summary.Substring(0, 220) -replace '\s+\S*$', '').TrimEnd(' ', ',', ';', ':') + '…'
+    }
+
+    [Ordered]@{
+      'title' = $title
+      'summary' = $summary
+      'preview' = $preview
+    }
+
+    if ($seen.Count -ge $Maximum) {
+      break
+    }
+  }
+}
+
 function Get-AzureLocalRelease {
   [CmdletBinding()]
   param (
@@ -21,6 +83,9 @@ function Get-AzureLocalRelease {
     [Parameter(Mandatory=$false)]
     [Switch]$SupportedReleases,
 
+    # Skip retrieving feature highlights from the "What's new" documentation
+    [Parameter(Mandatory=$false)]
+    [Switch]$SkipFeatures,
     [Parameter(Mandatory=$false)]
     [ValidateSet('String', 'Version')]
     [String]$OutputType = 'String'
@@ -52,6 +117,22 @@ function Get-AzureLocalRelease {
     }
     catch {
       Write-Warning ('Solution update information could not be retrieved: {0}' -f $_)
+    }
+
+    # Feature highlights per release train from the "What's new" article. Optional enrichment, so failures are not fatal.
+    $featuresByTrain = @{}
+
+    if (-not $SkipFeatures) {
+      try {
+        $whatsNew = [String](Invoke-RestMethod -Uri ('{0}whats-new' -f $baseUrl))
+
+        foreach ($_section in [Regex]::Matches($whatsNew, '(?s)<h2 id="features-and-improvements-in-(\d+)">(.*?)(?=<h2 |$)')) {
+          $featuresByTrain[$_section.Groups[1].Value] = @(ConvertTo-AzureLocalFeatureHighlight -Html $_section.Groups[2].Value)
+        }
+      }
+      catch {
+        Write-Warning ('Feature highlights could not be retrieved: {0}' -f $_)
+      }
     }
 
     # The version listed in a table row is the latest build of a release. Earlier builds follow as "Supersedes: <version> Availability date: <date>".
@@ -125,6 +206,13 @@ function Get-AzureLocalRelease {
       $hash.Add('endOfSupportDate', $endOfSupportDate.ToString('yyyy-MM-dd'))
       $hash.Add('supported', ((Get-Date).Date -le $endOfSupportDate))
       $hash.Add('supersedes', @($builds | Select-Object -Skip 1))
+      $features = @()
+
+      if ($featuresByTrain.ContainsKey($parts[1])) {
+        $features = @($featuresByTrain[$parts[1]])
+      }
+
+      $hash.Add('features', $features)
       $hash.Add('solutionUpdate', $(if ($solutionUpdateHash.ContainsKey($fullVersionString)) { $solutionUpdateHash[$fullVersionString] } else { @{} }))
       $hash.Add('urls', [Ordered]@{
         'security' = (& $link '^security-update' 'security-update/security-update')

@@ -27,7 +27,7 @@ Live at https://erikgraa.github.io/azure-local-releases/.
 - **Hero**: the release recommended for new deployments (release date, end of support, OS build, link to the release notes) next to a live countdown (days, hours, minutes, seconds) to the next end of support and a retirement queue of all supported releases
 - **Version checker**: pick the version you run and see how much runway you have, or that it is out of support, and what to update to
 - **Lifecycle timeline**: a Gantt-style view with one bar per release train from first availability to end of support, the last 60 days hatched as *ending soon*, and a marker for today. Shows recent trains by default, with the full history one click away. Click a bar to jump to its releases.
-- **Release cards**: status pill (**Recommended**, **Supported**, **Ending soon**, **End of support**), progress through the support window, days left, OS build, earlier builds, links to what's new, security updates, known issues and the solution update ZIP, and buttons to copy the version or ZIP SHA256
+- **Release cards**: status pill (**Recommended**, **Supported**, **Ending soon**, **End of support**), progress through the support window and days left. **Details** expands to the release's top feature highlights (with a *Preview* marker and a link to the full release notes), the OS build and earlier builds, links to what's new, security updates, known issues and the solution update ZIP, and buttons to copy the version or ZIP SHA256
 - **Search, filters and sorting**: search by version, release train or OS build (press `/`), filter by status chip and OS version (24H2/23H2) and sort by newest, oldest or ends soonest. The view is kept in the URL so it can be shared.
 - Feed links (RSS, JSON Feed, JSON data) in the header and footer
 - Light and dark theme (follows your system, with a toggle), reduced-motion support and a layout for mobile screens
@@ -66,6 +66,9 @@ Live at https://erikgraa.github.io/azure-local-releases/.
       "endOfSupportDate": "2027-04-20",
       "supported": true,
       "supersedes": [],
+      "features": [
+        { "title": "Rack aware clusters with SAN", "summary": "Rack aware clusters now support disaggregated SAN deployments, …", "preview": true }
+      ],
       "solutionUpdate": { "uri": "https://...", "fileHash": "..." },
       "urls": { "security": "https://...", "news": "https://...", "issues": "https://..." }
     }
@@ -74,6 +77,17 @@ Live at https://erikgraa.github.io/azure-local-releases/.
 ```
 
 `supported` reflects the time of generation. Consumers that need an accurate value should compare `endOfSupportDate` to the current date.
+
+### Feature highlights
+
+`features` lists up to five highlights per release, taken from the matching *Features and improvements in 2610* (and so on for each release train) section of Microsoft's [What's new](https://learn.microsoft.com/en-us/azure/azure-local/whats-new) article (the full notes are linked from `urls.news`). It is best effort:
+
+- Each entry has a `title`, a short `summary` (link sentences removed, truncated at 220 characters) and a `preview` flag for features marked as preview.
+- Boilerplate entries that appear in nearly every release (OS changes, .NET and PowerShell updates, Azure Migrate, documentation updates) are skipped.
+- All releases in the same train share the same highlights, for example 11.2510 and 12.2510.
+- `features` is an empty array for releases without highlights, such as older trains the article no longer covers or releases that only contain boilerplate. The site then links to the release notes instead.
+- If the article can't be parsed during a run, highlights already published are kept rather than dropped.
+- The three first highlights are also added to the description of each RSS and JSON Feed item.
 
 ### How end of support is determined
 
@@ -93,14 +107,15 @@ Get-AzureLocalRelease
 Get-AzureLocalRelease -SupportedReleases
 ```
 
-Parameters: `-Uri` (documentation URL), `-SupportedReleases` (only releases not yet at end of support) and `-OutputType String|Version` (type of `version`).
+Parameters: `-Uri` (documentation URL), `-SupportedReleases` (only releases not yet at end of support), `-OutputType String|Version` (type of `version`) and `-SkipFeatures` (don't retrieve feature highlights from the What's new article).
 
 What changed in the cmdlet:
 
 - Parses the current layout of Microsoft's release information, including the "Older versions" tables for 26100.xxx (12.x), 25398.xxx (11.x) and 25398.xxx (10.x), instead of relying on tab ids and a column layout that no longer exist.
 - Follows the chain of builds in a table row (`Supersedes: <version> Availability date: <date>`). `version` and `availabilityDate` are the latest build, `firstAvailabilityDate` is when the release first became available and `supersedes` lists the earlier builds.
 - Reads which build is meant for new deployments (`newDeployments`) from the "New deployments of this software use the … build" note.
-- Adds `firstAvailabilityDate`, `osVersion` (`24H2`/`23H2`) and `supersedes`. Existing properties are kept, and `supported` now compares dates correctly.
+- Adds `firstAvailabilityDate`, `osVersion` (`24H2`/`23H2`), `supersedes` and `features`. Existing properties are kept, and `supported` now compares dates correctly.
+- Retrieves feature highlights per release train from the What's new article, see [Feature highlights](#feature-highlights).
 - Falls back to the general documentation pages when a row has no links, ignores the offline update ZIP lookup if it is unavailable (with a warning) and throws if no releases are found, so a documentation change is noticed rather than producing empty data.
 
 ## 🛠 Development
@@ -114,28 +129,37 @@ cd site
 python -m http.server 8000   # or any other static file server
 ```
 
-`Build-Site.ps1` writes `site/data/releases.json`, `site/feed.xml` and `site/feed.json` (git-ignored, generated on deploy) and refreshes `json/azure-local-releases.json`. It fails instead of producing a site if too few releases are parsed, so a change in Microsoft's documentation format never publishes an empty site.
+`Build-Site.ps1` writes `site/data/releases.json`, `site/feed.xml`, `site/feed.json` and `json/azure-local-releases.json`. These files are committed: the existing `site/data/releases.json` is the baseline the next run is compared against, see [Deployment](#deployment).
+
+```powershell
+./scripts/Build-Site.ps1          # writes files only if the content changed
+./scripts/Build-Site.ps1 -Force   # always write, for instance after changing the site URL
+```
 
 ### Deployment
 
 The workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) ("Build and deploy site") keeps the site and data up to date.
 
-| Trigger | When |
-| --- | --- |
-| Schedule | Daily at 06:00 UTC (`cron: "0 6 * * *"`) |
-| Push to `main` | When `scripts/**`, `site/**` or the workflow itself changes |
-| Manual | *Run workflow* on the Actions tab (`workflow_dispatch`) |
+| Trigger | When | Deploys |
+| --- | --- | --- |
+| Schedule | Daily at 06:00 UTC (`cron: "0 6 * * *"`) | Only if the data changed |
+| Push to `main` | When `scripts/**`, `site/**` or the workflow itself changes | Always, so site changes go live |
+| Manual | *Run workflow* on the Actions tab (`workflow_dispatch`), optionally with *force* | Always |
 
 What it does:
 
-1. **build** job: runs `scripts/Build-Site.ps1` with PowerShell 7, which fetches Microsoft's documentation and writes the JSON data, RSS feed and JSON Feed.
-2. Commits `json/azure-local-releases.json` back to `main` only if it changed (as `github-actions[bot]`). This keeps the raw file URL working for existing consumers. These commits do not retrigger the workflow.
-3. Uploads `site/` as a Pages artifact.
-4. **deploy** job (only on `main`): publishes the artifact with `actions/deploy-pages`.
+1. **build** job: runs `scripts/Build-Site.ps1` with PowerShell 7. The script fetches Microsoft's release information and What's new article and compares the result with the committed `site/data/releases.json`, **ignoring the `generatedAt` timestamp**. If the content is identical it writes nothing and reports `changed=false`.
+2. If the content changed, the script writes the JSON data, RSS feed, JSON Feed and `json/azure-local-releases.json` (with a new `generatedAt`), and the workflow commits them to `main` as `github-actions[bot]` (commit message "Auto updating Azure Local Releases"). Commits made with the workflow token do not retrigger the workflow.
+3. Uploads `site/` as a Pages artifact, unless this is a scheduled run where nothing changed.
+4. **deploy** job (only on `main`): publishes the artifact with `actions/deploy-pages`. It is skipped on scheduled runs where nothing changed.
 
-Guard: if Microsoft changes the documentation format and fewer than 20 releases are parsed, or none are supported, `Build-Site.ps1` fails and the workflow stops before deploying. The previously published site stays up and the failed run is visible in the Actions tab. The countdowns and status badges are calculated in the browser, so they stay correct between refreshes.
+So on a day where Microsoft's documentation has not changed, a scheduled run fetches, compares and stops: **no commit and no redeploy**. Data changes that count include a new release, new feature highlights, a release reaching its end of support date (`supported` flips) and a different recommended build.
 
-Permissions are scoped per job: `contents: write` for the build job (to commit the JSON) and `pages: write` plus `id-token: write` for the deploy job.
+Guards: `Build-Site.ps1` throws, before any file is written, if fewer than 20 releases are parsed, no release is supported, the number of releases drops by more than 10% compared with the published data, or the newest release is older than the newest published one. The run then fails (the repository owner gets the usual failed workflow notification), the committed data stays as it was and the published site stays up. The countdowns and status badges are calculated in the browser, so they stay correct between refreshes even without a redeploy.
+
+If `main` has branch protection that blocks pushes from `github-actions[bot]`, allow the bot to bypass it or the data commit step will fail.
+
+Permissions are scoped per job: `contents: write` for the build job (to commit the data) and `pages: write` plus `id-token: write` for the deploy job.
 
 ### One-time setup
 

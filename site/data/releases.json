@@ -1,0 +1,1939 @@
+{
+  "generatedAt": "2026-10-31T13:46:47Z",
+  "source": "https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2",
+  "supportPolicy": {
+    "days": 180,
+    "description": "Each Azure Local release is supported for six months (180 days) after it first became available. endOfSupportDate is derived from firstAvailabilityDate."
+  },
+  "newDeployments": [
+    "12.2610.1004.41"
+  ],
+  "trains": [
+    {
+      "releaseTrain": "2610",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-10-22",
+      "endOfSupportDate": "2027-04-20",
+      "supported": true,
+      "versions": [
+        "12.2610.1004.41"
+      ]
+    },
+    {
+      "releaseTrain": "2609",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-09-11",
+      "endOfSupportDate": "2027-03-10",
+      "supported": true,
+      "versions": [
+        "12.2609.1003.7"
+      ]
+    },
+    {
+      "releaseTrain": "2608",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-08-18",
+      "endOfSupportDate": "2027-02-14",
+      "supported": true,
+      "versions": [
+        "12.2608.1003.9"
+      ]
+    },
+    {
+      "releaseTrain": "2607",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-07-22",
+      "endOfSupportDate": "2027-01-18",
+      "supported": true,
+      "versions": [
+        "12.2607.1003.73"
+      ]
+    },
+    {
+      "releaseTrain": "2606",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-06-15",
+      "endOfSupportDate": "2026-12-12",
+      "supported": true,
+      "versions": [
+        "12.2606.1003.205"
+      ]
+    },
+    {
+      "releaseTrain": "2605",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-05-28",
+      "endOfSupportDate": "2026-11-24",
+      "supported": true,
+      "versions": [
+        "12.2605.1003.1003"
+      ]
+    },
+    {
+      "releaseTrain": "2604",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-04-22",
+      "endOfSupportDate": "2026-10-19",
+      "supported": false,
+      "versions": [
+        "12.2604.1003.1006"
+      ]
+    },
+    {
+      "releaseTrain": "2603",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-03-17",
+      "endOfSupportDate": "2026-09-13",
+      "supported": false,
+      "versions": [
+        "12.2603.1002.502"
+      ]
+    },
+    {
+      "releaseTrain": "2602",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-02-17",
+      "endOfSupportDate": "2026-08-16",
+      "supported": false,
+      "versions": [
+        "12.2602.1002.501"
+      ]
+    },
+    {
+      "releaseTrain": "2601",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2026-01-22",
+      "endOfSupportDate": "2026-07-21",
+      "supported": false,
+      "versions": [
+        "12.2601.1002.503"
+      ]
+    },
+    {
+      "releaseTrain": "2512",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-12-16",
+      "endOfSupportDate": "2026-06-14",
+      "supported": false,
+      "versions": [
+        "12.2512.1002.16"
+      ]
+    },
+    {
+      "releaseTrain": "2511",
+      "osVersions": [
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-11-18",
+      "endOfSupportDate": "2026-05-17",
+      "supported": false,
+      "versions": [
+        "12.2511.1002.502"
+      ]
+    },
+    {
+      "releaseTrain": "2510",
+      "osVersions": [
+        "23H2",
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-10-24",
+      "endOfSupportDate": "2026-05-04",
+      "supported": false,
+      "versions": [
+        "11.2510.1002.93",
+        "12.2510.1002.531"
+      ]
+    },
+    {
+      "releaseTrain": "2509",
+      "osVersions": [
+        "23H2",
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-09-22",
+      "endOfSupportDate": "2026-03-21",
+      "supported": false,
+      "versions": [
+        "11.2509.1001.21",
+        "12.2509.1001.22"
+      ]
+    },
+    {
+      "releaseTrain": "2508",
+      "osVersions": [
+        "23H2",
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-08-29",
+      "endOfSupportDate": "2026-02-25",
+      "supported": false,
+      "versions": [
+        "11.2508.1001.51",
+        "12.2508.1001.52"
+      ]
+    },
+    {
+      "releaseTrain": "2507",
+      "osVersions": [
+        "23H2",
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-07-24",
+      "endOfSupportDate": "2026-01-20",
+      "supported": false,
+      "versions": [
+        "10.2507.0.6",
+        "11.2507.1001.9",
+        "12.2507.1001.10"
+      ]
+    },
+    {
+      "releaseTrain": "2506",
+      "osVersions": [
+        "23H2",
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-07-02",
+      "endOfSupportDate": "2025-12-29",
+      "supported": false,
+      "versions": [
+        "10.2506.0.15",
+        "11.2506.1001.28",
+        "12.2506.1001.29"
+      ]
+    },
+    {
+      "releaseTrain": "2505",
+      "osVersions": [
+        "23H2",
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-05-28",
+      "endOfSupportDate": "2025-11-24",
+      "supported": false,
+      "versions": [
+        "10.2505.0.16",
+        "11.2505.1001.22",
+        "12.2505.1001.23"
+      ]
+    },
+    {
+      "releaseTrain": "2504",
+      "osVersions": [
+        "23H2",
+        "24H2"
+      ],
+      "firstAvailabilityDate": "2025-04-21",
+      "endOfSupportDate": "2025-10-26",
+      "supported": false,
+      "versions": [
+        "11.2504.1001.21",
+        "12.2504.1001.20"
+      ]
+    },
+    {
+      "releaseTrain": "2503",
+      "osVersions": [
+        "23H2"
+      ],
+      "firstAvailabilityDate": "2025-03-31",
+      "endOfSupportDate": "2025-09-27",
+      "supported": false,
+      "versions": [
+        "10.2503.0.13"
+      ]
+    },
+    {
+      "releaseTrain": "2411",
+      "osVersions": [
+        "23H2"
+      ],
+      "firstAvailabilityDate": "2024-11-14",
+      "endOfSupportDate": "2025-08-19",
+      "supported": false,
+      "versions": [
+        "10.2411.0.22",
+        "10.2411.0.24",
+        "10.2411.1.10",
+        "10.2411.2.12",
+        "10.2411.3.2"
+      ]
+    },
+    {
+      "releaseTrain": "2408",
+      "osVersions": [
+        "23H2"
+      ],
+      "firstAvailabilityDate": "2024-09-05",
+      "endOfSupportDate": "2025-04-21",
+      "supported": false,
+      "versions": [
+        "10.2408.0.29",
+        "10.2408.1.9",
+        "10.2408.2.7"
+      ]
+    },
+    {
+      "releaseTrain": "2405",
+      "osVersions": [
+        "23H2"
+      ],
+      "firstAvailabilityDate": "2024-07-16",
+      "endOfSupportDate": "2025-02-16",
+      "supported": false,
+      "versions": [
+        "10.2405.2.7",
+        "10.2405.3.7"
+      ]
+    }
+  ],
+  "releases": [
+    {
+      "version": "12.2610.1004.41",
+      "availabilityDate": "2026-10-22",
+      "firstAvailabilityDate": "2026-10-22",
+      "newDeployments": true,
+      "osBuild": "26100.33650",
+      "osVersion": "24H2",
+      "releaseTrain": "2610",
+      "release": "2610.1004.41",
+      "releaseShortened": "2610.1004",
+      "baselineRelease": true,
+      "endOfSupportDate": "2027-04-20",
+      "supported": true,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Azure Government Arizona region expansion",
+          "summary": "You can now deploy and manage Azure Local deployments using the US Gov Arizona region, providing an additional Azure Government region beyond US Gov Virginia with support up to Impact Level 5 (IL5).",
+          "preview": true
+        },
+        {
+          "title": "Rack aware clusters with SAN",
+          "summary": "Rack aware clusters now support disaggregated SAN deployments, enabling workload protection across two rooms with synchronized storage replication and independent compute and storage management.",
+          "preview": true
+        },
+        {
+          "title": "Disk witness for SAN deployments",
+          "summary": "You can now configure disk witness for SAN deployments directly in the Azure portal deployment wizard, helping enable rack aware clusters with SAN.",
+          "preview": false
+        },
+        {
+          "title": "Composed ISO refresh cadence",
+          "summary": "Composed ISO releases now follow a semiannual cadence aligned with OEM validation and release cycles.",
+          "preview": false
+        },
+        {
+          "title": "Provisioned Machine resources",
+          "summary": "Starting with this release, the Azure portal automatically creates a Provisioned Machine resource for each Azure Arc-enabled server in an Azure Local cluster, using the same resource name. These resources are created…",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2610.1004.41/CombinedSolutionBundle.12.2610.1004.41.zip",
+        "fileHash": "5E240F2982F4B2403172238B49F357641A195BC2FDA164543EDCF63236303F44"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2610&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2610&preserve-view=true#features-and-improvements-in-2610",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2610&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2609.1003.7",
+      "availabilityDate": "2026-09-11",
+      "firstAvailabilityDate": "2026-09-11",
+      "newDeployments": false,
+      "osBuild": "26100.33438",
+      "osVersion": "24H2",
+      "releaseTrain": "2609",
+      "release": "2609.1003.7",
+      "releaseShortened": "2609.1003",
+      "baselineRelease": true,
+      "endOfSupportDate": "2027-03-10",
+      "supported": true,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Automatic backup of system-level secrets",
+          "summary": "With this release, you can automatically back up system-level secrets, such as Trusted Launch virtual machine keys, BitLocker recovery keys, and other sensitive information, to an Azure Key Vault instance that serves as…",
+          "preview": true
+        },
+        {
+          "title": "Local Identity with Azure Key Vault",
+          "summary": "Internal DNS (preview) : In this release, you can deploy Azure Local by using Local Identity with internal DNS.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2609.1003.7/CombinedSolutionBundle.12.2609.1003.7.zip",
+        "fileHash": "C0DD738362B3B44FBA9E801483C297011B706B740A2A5F5482B0A71D0A70F054"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2609&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2609&preserve-view=true#features-and-improvements-in-2609",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2609&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2608.1003.9",
+      "availabilityDate": "2026-09-01",
+      "firstAvailabilityDate": "2026-08-18",
+      "newDeployments": false,
+      "osBuild": "26100.33296",
+      "osVersion": "24H2",
+      "releaseTrain": "2608",
+      "release": "2608.1003.9",
+      "releaseShortened": "2608.1003",
+      "baselineRelease": true,
+      "endOfSupportDate": "2027-02-14",
+      "supported": true,
+      "supersedes": [
+        {
+          "version": "12.2608.1003.8",
+          "availabilityDate": "2026-08-18"
+        }
+      ],
+      "features": [
+        {
+          "title": "Azure Local VMs",
+          "summary": "Graceful VM shutdown : The Azure portal now provides Shut down (recommended) and Turn off options for Azure Local VMs. Shut down gracefully powers down the guest operating system before turning off the VM, while Turn…",
+          "preview": false
+        },
+        {
+          "title": "Azure Arc Site Manager",
+          "summary": "View and manage Azure Local VMs across sites from a centralized Azure Arc Site Manager experience, with Kubernetes cluster support also available.",
+          "preview": true
+        },
+        {
+          "title": "Add node via Azure portal",
+          "summary": "You can now add nodes to an existing Azure Local cluster directly from the Azure portal with a new guided scale-out experience.",
+          "preview": true
+        },
+        {
+          "title": "Update workflow changes",
+          "summary": "This release introduces the prepare updates workflow, allowing you to prepare updates now and install them at a later time.",
+          "preview": false
+        },
+        {
+          "title": "GPU Management from Azure",
+          "summary": "Manage and monitor GPU resources in Azure Local from Azure, including centralized GPU inventory, partition configuration, GPU assignment to workloads, and lifecycle management of GPU-accelerated workloads.",
+          "preview": true
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2608.1003.9/CombinedSolutionBundle.12.2608.1003.9.zip",
+        "fileHash": "150ED78820BE0E8EA75ACF9F1D3F7F375199D98749C1A762134E674CE406FAC4"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2608&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2608&preserve-view=true#features-and-improvements-in-2608",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2608&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2607.1003.73",
+      "availabilityDate": "2026-08-07",
+      "firstAvailabilityDate": "2026-07-22",
+      "newDeployments": false,
+      "osBuild": "26100.33158",
+      "osVersion": "24H2",
+      "releaseTrain": "2607",
+      "release": "2607.1003.73",
+      "releaseShortened": "2607.1003",
+      "baselineRelease": true,
+      "endOfSupportDate": "2027-01-18",
+      "supported": true,
+      "supersedes": [
+        {
+          "version": "12.2607.1003.71",
+          "availabilityDate": "2026-07-29"
+        },
+        {
+          "version": "12.2607.1003.69",
+          "availabilityDate": "2026-07-22"
+        }
+      ],
+      "features": [
+        {
+          "title": "Azure Local VMs",
+          "summary": "DNS server and gateway appliances for workloads can be deployed as Azure Local VMs (GA) : You can now assign Azure Local VMs the DNS server or gateway IP address of a workload logical network. This capability enables…",
+          "preview": false
+        },
+        {
+          "title": "Full file system location displayed for storage paths",
+          "summary": "The storage path property now displays the complete file system location, including the GUID folder, for both existing and new storage paths. This change helps you see exactly where workloads are placed.",
+          "preview": false
+        },
+        {
+          "title": "New built-in roles for Azure Local migrations",
+          "summary": "Azure Migrate introduces new Azure role-based access control (RBAC) roles that provide purpose-built access for configuring, performing, and monitoring Azure Local migrations.",
+          "preview": false
+        },
+        {
+          "title": "Terraform support for replication and migration",
+          "summary": "You can now use Terraform to replicate and migrate VMs to Azure Local through Azure Migrate. This feature is currently in preview.",
+          "preview": true
+        },
+        {
+          "title": "SAN integration using iSCSI is now generally available (GA) for hyperconverged deployment",
+          "summary": "You can now integrate external storage area network (SAN) storage from supported vendors with Azure Local using Internet Small Computer Systems Interface (iSCSI), in addition to Fibre Channel (FC).",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2607.1003.73/CombinedSolutionBundle.12.2607.1003.73.zip",
+        "fileHash": "90112DA91420ADD41DA39EDB36A42EC5E6698029F841243314AB76883C8AE8D3"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2607&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2607&preserve-view=true#features-and-improvements-in-2607",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2607&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2605.1003.1003",
+      "availabilityDate": "2026-06-18",
+      "firstAvailabilityDate": "2026-05-28",
+      "newDeployments": false,
+      "osBuild": "26100.32860",
+      "osVersion": "24H2",
+      "releaseTrain": "2605",
+      "release": "2605.1003.1003",
+      "releaseShortened": "2605.1003",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-11-24",
+      "supported": true,
+      "supersedes": [
+        {
+          "version": "12.2605.1003.210",
+          "availabilityDate": "2026-05-28"
+        }
+      ],
+      "features": [
+        {
+          "title": "SAN integration using iSCSI",
+          "summary": "You can now integrate external storage area network (SAN) storage from supported vendors with Azure Local using Internet Small Computer Systems Interface (iSCSI), in addition to Fibre Channel (FC). This feature is…",
+          "preview": true
+        },
+        {
+          "title": "GPU metrics",
+          "summary": "You can now monitor GPU metrics in Azure Local for GPUs configured using GPU Partitioning (GPU-P).",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2605.1003.1003/CombinedSolutionBundle.12.2605.1003.1003.zip",
+        "fileHash": "ED74E6D94FDB97495D8552E4E0BAA42B9914D7C8EA938EE3EAC35A7C259D4F88"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2605&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2605&preserve-view=true#features-and-improvements-in-2605",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2605&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2606.1003.205",
+      "availabilityDate": "2026-06-15",
+      "firstAvailabilityDate": "2026-06-15",
+      "newDeployments": false,
+      "osBuild": "26100.32995",
+      "osVersion": "24H2",
+      "releaseTrain": "2606",
+      "release": "2606.1003.205",
+      "releaseShortened": "2606.1003",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-12-12",
+      "supported": true,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2606.1003.205/CombinedSolutionBundle.12.2606.1003.205.zip",
+        "fileHash": "9A240D4310E04AE68395201EAE88233EAE6192D1B2DF1B849CBA0ECB80003490"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2606&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2606&preserve-view=true#features-and-improvements-in-2606",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2606&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2604.1003.1006",
+      "availabilityDate": "2026-05-28",
+      "firstAvailabilityDate": "2026-04-22",
+      "newDeployments": false,
+      "osBuild": "26100.32690",
+      "osVersion": "24H2",
+      "releaseTrain": "2604",
+      "release": "2604.1003.1006",
+      "releaseShortened": "2604.1003",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-10-19",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "12.2604.1003.1005",
+          "availabilityDate": "2026-05-11"
+        },
+        {
+          "version": "12.2604.1003.1002",
+          "availabilityDate": "2026-05-01"
+        },
+        {
+          "version": "12.2604.1003.209",
+          "availabilityDate": "2026-04-22"
+        }
+      ],
+      "features": [
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "This release supports the following Kubernetes versions: 1.31.12, 1.31.13, 1.32.8, 1.32.9, 1.33.4, 1.33.5. Kubernetes version 1.30 is no longer supported.",
+          "preview": false
+        },
+        {
+          "title": "Disaggregated deployments for Azure Local",
+          "summary": "Starting with this release, you can deploy Azure Local using Storage Area Network (SAN) storage only. This architecture enables independent scaling of storage and compute, allowing clusters to scale beyond 16 nodes.",
+          "preview": false
+        },
+        {
+          "title": "SAN support for Azure Local",
+          "summary": "SAN storage is now generally available for Azure Local. You can attach SAN storage and use it alongside Storage Spaces Direct.",
+          "preview": false
+        },
+        {
+          "title": "Local identity with Key Vault",
+          "summary": "Starting with this release, local identity with Key Vault is generally available.",
+          "preview": false
+        },
+        {
+          "title": "Manage update settings for Azure Local",
+          "summary": "Starting with this release, you can control how updates are applied to Azure Local.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2604.1003.1006/CombinedSolutionBundle.12.2604.1003.1006.zip",
+        "fileHash": "4213E03B356463FBEBBF16073F10F2F245D0FCD0ABD1198EEC5D7CCA43CBFC54"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2604",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2603.1002.502",
+      "availabilityDate": "2026-05-28",
+      "firstAvailabilityDate": "2026-03-17",
+      "newDeployments": false,
+      "osBuild": "26100.32522",
+      "osVersion": "24H2",
+      "releaseTrain": "2603",
+      "release": "2603.1002.502",
+      "releaseShortened": "2603.1002",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-09-13",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "12.2603.1002.500",
+          "availabilityDate": "2026-04-06"
+        },
+        {
+          "version": "12.2603.1002.15",
+          "availabilityDate": "2026-03-17"
+        }
+      ],
+      "features": [
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "This release supports the following Kubernetes versions: 1.31.12, 1.31.13, 1.32.8, 1.32.9, 1.33.4, 1.33.5. Kubernetes version 1.30 is no longer supported.",
+          "preview": false
+        },
+        {
+          "title": "Support for NVIDIA RTX PRO 6000 Blackwell Server Edition GPU on Azure Local",
+          "summary": "Starting with this release, NVIDIA RTX PRO 6000 GPU is supported on Azure Local VMs and Azure Kubernetes Service (AKS) enabled by Azure Arc. This feature allows you to run GPU-accelerated workloads on Azure Local using…",
+          "preview": false
+        },
+        {
+          "title": "Improved Secure Boot Certificate readiness",
+          "summary": "Starting with this release, Azure Local orchestrates Secure Boot 2023 certificate update. This process helps you deploy protection for CVE-2023-24932 while minimizing risk during updates.",
+          "preview": false
+        },
+        {
+          "title": "Simplified machine provisioning",
+          "summary": "Starting with this release, use simplified machine provisioning to install the OS and register your Azure Local machines together in a single streamlined process.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2603.1002.502/CombinedSolutionBundle.12.2603.1002.502.zip",
+        "fileHash": "308A2A880982968BD74CA9B8AD48039F06C9F4BC28032AC245721764AEE20291"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2603",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2602.1002.501",
+      "availabilityDate": "2026-03-02",
+      "firstAvailabilityDate": "2026-02-17",
+      "newDeployments": false,
+      "osBuild": "26100.32370",
+      "osVersion": "24H2",
+      "releaseTrain": "2602",
+      "release": "2602.1002.501",
+      "releaseShortened": "2602.1002",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-08-16",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "12.2602.1002.7",
+          "availabilityDate": "2026-02-17"
+        }
+      ],
+      "features": [
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "This release supports the following Kubernetes versions: 1.31.12, 1.31.13, 1.32.8, 1.32.9, 1.33.4, 1.33.5. Kubernetes version 1.30 is no longer supported.",
+          "preview": false
+        },
+        {
+          "title": "Enhanced update workflow from the Azure portal",
+          "summary": "Starting with this release, the update workflow from the Azure portal now provides richer, more detailed information.",
+          "preview": false
+        },
+        {
+          "title": "End of Windows Server Subscription and Extended Security Updates (ESU) purchases for OS version 20349.xxxx (22H2)",
+          "summary": "If running OS version 20349.xxxx (version 22H2), you can no longer purchase Windows Server Subscription or ESU.",
+          "preview": false
+        },
+        {
+          "title": "Drift detection",
+          "summary": "Starting with this release, the drift detection framework identifies configuration deviations, improves troubleshooting, and helps reduce configuration-related issues in your Azure Local environment.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2602.1002.501/CombinedSolutionBundle.12.2602.1002.501.zip",
+        "fileHash": "B7109C8067F7C4D99D1B7A956FC911525384B211BB34BAF13BC68E229BD6F628"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2602",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2510.1002.531",
+      "availabilityDate": "2026-02-17",
+      "firstAvailabilityDate": "2025-11-05",
+      "newDeployments": false,
+      "osBuild": "26100.6899",
+      "osVersion": "24H2",
+      "releaseTrain": "2510",
+      "release": "2510.1002.531",
+      "releaseShortened": "2510.1002",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-05-04",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "12.2510.1002.529",
+          "availabilityDate": "2026-01-08"
+        },
+        {
+          "version": "12.2510.1002.94",
+          "availabilityDate": "2025-11-05"
+        }
+      ],
+      "features": [
+        {
+          "title": "Azure Local rack aware clustering",
+          "summary": "Azure Local now supports rack aware clustering. This Preview feature allows you to define local availability zones based on physical racks in your datacenter, enhancing the resilience of your cluster against rack-level…",
+          "preview": true
+        },
+        {
+          "title": "Upgrade",
+          "summary": "Starting with this release, solution upgrade from 11.2510 to 12.2510 is available to everyone and no longer requires you to opt in. The reliability of the upgrade orchestration is also improved.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM updates",
+          "summary": "Software Defined Networking (SDN) : SDN enabled by Azure Arc on Azure Local is now generally available. This feature allows you to create and manage network security groups (NSGs) and network security rules for your…",
+          "preview": false
+        },
+        {
+          "title": "Trusted Virtual Machine (Trusted VM) guest attestation",
+          "summary": "- Azure Local 2510 release introduces guest attestation (also known as boot integrity verification) for Azure Local virtual machines with Trusted launch.",
+          "preview": true
+        },
+        {
+          "title": "Azure Local deployment using local identity",
+          "summary": "This feature moved from Limited Preview to Preview. There were many changes made to the documentation for deploying Azure Local using local identity with Azure Key Vault, including:",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2510",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2601.1002.503",
+      "availabilityDate": "2026-02-02",
+      "firstAvailabilityDate": "2026-01-22",
+      "newDeployments": false,
+      "osBuild": "26100.32230",
+      "osVersion": "24H2",
+      "releaseTrain": "2601",
+      "release": "2601.1002.503",
+      "releaseShortened": "2601.1002",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-07-21",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "12.2601.1002.38",
+          "availabilityDate": "2026-01-22"
+        }
+      ],
+      "features": [
+        {
+          "title": "Infrastructure logical network surfaced in Azure portal",
+          "summary": "The infrastructure logical network created during Azure Local deployment is now visible in the Azure portal. This visibility allows administrators to review the infrastructure network configuration. This change also…",
+          "preview": false
+        },
+        {
+          "title": "VMConnect for Azure Local VMs",
+          "summary": "Starting with 2601 release, you can connect to Windows and Linux based Azure Local VMs that don't have network connectivity or have boot failures.",
+          "preview": true
+        },
+        {
+          "title": "Unique ID for data disks",
+          "summary": "In 2601 release, you can identify data disks on your Azure Local instance with a new property called Unique ID . The unique ID matches the UniqueId of the data disk ( Get-Disk | Select-Object UniqueId ).",
+          "preview": false
+        },
+        {
+          "title": "Rack aware clustering General Availability (GA)",
+          "summary": "Rack aware clustering is now generally available. This feature allows you to define local availability zones based on physical racks in your datacenter, enhancing the resilience of your cluster against rack-level…",
+          "preview": false
+        },
+        {
+          "title": "Diagnostics log collection in Azure portal",
+          "summary": "You can now collect diagnostics logs directly from the Azure portal to help with support investigations. This change eliminates the need to manually gather logs from individual nodes.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2601.1002.503/CombinedSolutionBundle.12.2601.1002.503.zip",
+        "fileHash": "68848F4082C3F1B75D303476193E81A4593316DAABB8C45380AFEFAD94E90E78"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2601",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "11.2504.1001.21",
+      "availabilityDate": "2026-01-22",
+      "firstAvailabilityDate": "2025-04-21",
+      "newDeployments": false,
+      "osBuild": "25398.1551",
+      "osVersion": "23H2",
+      "releaseTrain": "2504",
+      "release": "2504.1001.21",
+      "releaseShortened": "2504.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-10-18",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "11.2504.1001.19",
+          "availabilityDate": "2025-04-21"
+        }
+      ],
+      "features": [
+        {
+          "title": "Registration and deployment changes",
+          "summary": "Starting with this release, you can download a specific version of Azure Local software instead of just the latest version. For each upcoming release, you can choose from up to last six supported versions.",
+          "preview": false
+        },
+        {
+          "title": "Security changes",
+          "summary": "The Dynamic Root of Trust for Measurement (DRTM) is enabled by default for all new 2504 deployments running OS version 26100.3775 .",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM changes",
+          "summary": "Data disk expansion : With this release, you can expand the size of a data disk attached to an Azure Local VM.",
+          "preview": false
+        },
+        {
+          "title": "Update improvements",
+          "summary": "Improved reliability when downloading updates.",
+          "preview": false
+        },
+        {
+          "title": "Add and repair node changes",
+          "summary": "For Microsoft images, download the OS image matching the solution version of your existing cluster. See the Release table for the correct version. For OEM images, contact your OEM.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2504.1001.21/CombinedSolutionBundle.11.2504.1001.21.zip",
+        "fileHash": "55FC9EC3018D6A58D88438EED18A12DDED1409B46D50F462943FB2FC2FCED56F"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2504",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2512.1002.16",
+      "availabilityDate": "2025-12-16",
+      "firstAvailabilityDate": "2025-12-16",
+      "newDeployments": false,
+      "osBuild": "26100.7462",
+      "osVersion": "24H2",
+      "releaseTrain": "2512",
+      "release": "2512.1002.16",
+      "releaseShortened": "2512.1002",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-06-14",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Simplified cluster registration during deployment",
+          "summary": "Starting with this release, Azure Local cluster deployments don't use a Service Principal Name (Microsoft Entra ID App) with a self-signed certificate. Instead, the cluster uses system-assigned managed identity (SMI) to…",
+          "preview": false
+        },
+        {
+          "title": "Support for NVIDIA L-series GPU on AKS on Azure Local",
+          "summary": "Starting with this release, NVIDIA L-series GPU is supported on Azure Kubernetes Service (AKS) enabled by Azure Arc on Azure Local. This preview feature allows you to run GPU-accelerated workloads on AKS clusters…",
+          "preview": true
+        },
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "This release supports the following Kubernetes versions: 1.30.13, 1.30.14, 1.31.9, 1.31.10, 1.32.5, 1.32.6.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2512.1002.16/CombinedSolutionBundle.12.2512.1002.16.zip",
+        "fileHash": "EE8BC57EA3B59B1761B07F99B559F5E6280CDE21C0ECDC939EAC6BC7B8D2F4E6"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2512&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2512&preserve-view=true#features-and-improvements-in-2512",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2512&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2511.1002.502",
+      "availabilityDate": "2025-12-03",
+      "firstAvailabilityDate": "2025-11-18",
+      "newDeployments": false,
+      "osBuild": "26100.7171",
+      "osVersion": "24H2",
+      "releaseTrain": "2511",
+      "release": "2511.1002.502",
+      "releaseShortened": "2511.1002",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-05-17",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "12.2511.1002.5",
+          "availabilityDate": "2025-11-18"
+        }
+      ],
+      "features": [
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "This release supports the following Kubernetes versions: 1.30.13, 1.30.14, 1.31.9, 1.31.10, 1.32.5, 1.32.6.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2511.1002.502/CombinedSolutionBundle.12.2511.1002.502.zip",
+        "fileHash": "497ABE8459F86415B91A7F75741B37975B15A19BFFFEDB1A45F171F49B9CB1F6"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2511",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "11.2510.1002.93",
+      "availabilityDate": "2025-10-24",
+      "firstAvailabilityDate": "2025-10-24",
+      "newDeployments": false,
+      "osBuild": "25398.1913",
+      "osVersion": "23H2",
+      "releaseTrain": "2510",
+      "release": "2510.1002.93",
+      "releaseShortened": "2510.1002",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-04-22",
+      "supported": false,
+      "supersedes": [
+        {
+          "version": "11.2510.1002.87",
+          "availabilityDate": "2025-10-24"
+        }
+      ],
+      "features": [
+        {
+          "title": "Azure Local rack aware clustering",
+          "summary": "Azure Local now supports rack aware clustering. This Preview feature allows you to define local availability zones based on physical racks in your datacenter, enhancing the resilience of your cluster against rack-level…",
+          "preview": true
+        },
+        {
+          "title": "Upgrade",
+          "summary": "Starting with this release, solution upgrade from 11.2510 to 12.2510 is available to everyone and no longer requires you to opt in. The reliability of the upgrade orchestration is also improved.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM updates",
+          "summary": "Software Defined Networking (SDN) : SDN enabled by Azure Arc on Azure Local is now generally available. This feature allows you to create and manage network security groups (NSGs) and network security rules for your…",
+          "preview": false
+        },
+        {
+          "title": "Trusted Virtual Machine (Trusted VM) guest attestation",
+          "summary": "- Azure Local 2510 release introduces guest attestation (also known as boot integrity verification) for Azure Local virtual machines with Trusted launch.",
+          "preview": true
+        },
+        {
+          "title": "Azure Local deployment using local identity",
+          "summary": "This feature moved from Limited Preview to Preview. There were many changes made to the documentation for deploying Azure Local using local identity with Azure Key Vault, including:",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2510.1002.93/CombinedSolutionBundle.11.2510.1002.93.zip",
+        "fileHash": "E1B0B205A90A93827E14643927767DD2675710844FCA56EE3DF2C8FFD60622F9"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-25010&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2510",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2509.1001.22",
+      "availabilityDate": "2025-09-22",
+      "firstAvailabilityDate": "2025-09-22",
+      "newDeployments": false,
+      "osBuild": "26100.6584",
+      "osVersion": "24H2",
+      "releaseTrain": "2509",
+      "release": "2509.1001.22",
+      "releaseShortened": "2509.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-03-21",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Update and upgrade changes",
+          "summary": "Starting with this release, you can opt in to update the solution version 11.25xx (running OS 25398.xxx) to solution version 12.25xx (running OS 26100.xxxx).",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM updates",
+          "summary": "Enhanced storage path deletion workflow - Starting with this release, you can view all the dependent resources linked to a storage path before deletion. Azure portal lets you delete both the storage path and its…",
+          "preview": false
+        },
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "The default OS disk size for the AKS VM is increased from 100 GB to 200 GB. A larger OS disk size offers flexibility on the size of the containerized workloads.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local deployment using local identity",
+          "summary": "include zone name for both external and internal DNS servers.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM doc changes",
+          "summary": "include:",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2509.1001.22/CombinedSolutionBundle.12.2509.1001.22.zip",
+        "fileHash": "15771552A97785B7EE291587FE62EE678EDE850E2250A5407EE6738AFEF729B6"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2509",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "11.2509.1001.21",
+      "availabilityDate": "2025-09-22",
+      "firstAvailabilityDate": "2025-09-22",
+      "newDeployments": false,
+      "osBuild": "25398.1849",
+      "osVersion": "23H2",
+      "releaseTrain": "2509",
+      "release": "2509.1001.21",
+      "releaseShortened": "2509.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-03-21",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Update and upgrade changes",
+          "summary": "Starting with this release, you can opt in to update the solution version 11.25xx (running OS 25398.xxx) to solution version 12.25xx (running OS 26100.xxxx).",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM updates",
+          "summary": "Enhanced storage path deletion workflow - Starting with this release, you can view all the dependent resources linked to a storage path before deletion. Azure portal lets you delete both the storage path and its…",
+          "preview": false
+        },
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "The default OS disk size for the AKS VM is increased from 100 GB to 200 GB. A larger OS disk size offers flexibility on the size of the containerized workloads.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local deployment using local identity",
+          "summary": "include zone name for both external and internal DNS servers.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM doc changes",
+          "summary": "include:",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2509.1001.21/CombinedSolutionBundle.11.2509.1001.21.zip",
+        "fileHash": "D78D0B687E1AB9BE3C7EC0568CFEF2D346CDD421AB00DFE2A484060F0BAE52BF"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2509",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2508.1001.52",
+      "availabilityDate": "2025-08-29",
+      "firstAvailabilityDate": "2025-08-29",
+      "newDeployments": false,
+      "osBuild": "26100.4946",
+      "osVersion": "24H2",
+      "releaseTrain": "2508",
+      "release": "2508.1001.52",
+      "releaseShortened": "2508.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-02-25",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Trusted Virtual Machine (Trusted VM) guest attestation",
+          "summary": "Azure Local 2508 release introduces guest attestation (also known as boot integrity verification) for Azure Local virtual machines with Trusted launch. This feature lets you verify that the virtual machine starts in a…",
+          "preview": false
+        },
+        {
+          "title": "Deployment and upgrade changes",
+          "summary": "Starting with this release, Azure Resource Manager (ARM) deployment templates are available for previous releases.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM updates",
+          "summary": "Edit DNS servers on logical networks via Azure CLI : Starting with this release, you can modify DNS servers associated with the logical networks for Azure Local virtual machines.",
+          "preview": false
+        },
+        {
+          "title": "Disconnected operations",
+          "summary": "Azure Local now supports disconnected operations, letting you work in environments with limited or no internet connectivity. Build, deploy, and manage virtual machines (VMs) and containerized applications with select…",
+          "preview": false
+        },
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "This release supports the following Kubernetes versions: 1.29.12, 1.29.13, 1.30.8, 1.30.9, 1.31.4, 1.31.5.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2508.1001.52/CombinedSolutionBundle.12.2508.1001.52.zip",
+        "fileHash": "410723EAD2177247932B10AD79978F2E4D8049FBFF70E8F9F94943384B59BB80"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2508",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "11.2508.1001.51",
+      "availabilityDate": "2025-08-29",
+      "firstAvailabilityDate": "2025-08-29",
+      "newDeployments": false,
+      "osBuild": "25398.1791",
+      "osVersion": "23H2",
+      "releaseTrain": "2508",
+      "release": "2508.1001.51",
+      "releaseShortened": "2508.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-02-25",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Trusted Virtual Machine (Trusted VM) guest attestation",
+          "summary": "Azure Local 2508 release introduces guest attestation (also known as boot integrity verification) for Azure Local virtual machines with Trusted launch. This feature lets you verify that the virtual machine starts in a…",
+          "preview": false
+        },
+        {
+          "title": "Deployment and upgrade changes",
+          "summary": "Starting with this release, Azure Resource Manager (ARM) deployment templates are available for previous releases.",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM updates",
+          "summary": "Edit DNS servers on logical networks via Azure CLI : Starting with this release, you can modify DNS servers associated with the logical networks for Azure Local virtual machines.",
+          "preview": false
+        },
+        {
+          "title": "Disconnected operations",
+          "summary": "Azure Local now supports disconnected operations, letting you work in environments with limited or no internet connectivity. Build, deploy, and manage virtual machines (VMs) and containerized applications with select…",
+          "preview": false
+        },
+        {
+          "title": "AKS enabled by Azure Arc changes",
+          "summary": "This release supports the following Kubernetes versions: 1.29.12, 1.29.13, 1.30.8, 1.30.9, 1.31.4, 1.31.5.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2508.1001.51/CombinedSolutionBundle.11.2508.1001.51.zip",
+        "fileHash": "DF8578E95D2A0ACBA91AA08266723D44E2B5EE43CDBC26CA8890700F3B6B1158"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2508",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2507.1001.10",
+      "availabilityDate": "2025-07-24",
+      "firstAvailabilityDate": "2025-07-24",
+      "newDeployments": false,
+      "osBuild": "26100.4652",
+      "osVersion": "24H2",
+      "releaseTrain": "2507",
+      "release": "2507.1001.10",
+      "releaseShortened": "2507.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-01-20",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "AKS on Azure Local",
+          "summary": "- This release has several new features and enhancements for AKS on Azure Local. This release supports the following Kubernetes versions: 1.28.12, 1.28.14, 1.29.7, 1.29.9, 1.30.3, and 1.30.4. Ensure your AKS clusters…",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2507.1001.10/CombinedSolutionBundle.12.2507.1001.10.zip",
+        "fileHash": "8FAC8A7F52C570682407573F7AAAB79BDBA62299C9F50C3497FD0A10FBF73105"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2507",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "11.2507.1001.9",
+      "availabilityDate": "2025-07-24",
+      "firstAvailabilityDate": "2025-07-24",
+      "newDeployments": false,
+      "osBuild": "25398.1732",
+      "osVersion": "23H2",
+      "releaseTrain": "2507",
+      "release": "2507.1001.9",
+      "releaseShortened": "2507.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-01-20",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "AKS on Azure Local",
+          "summary": "- This release has several new features and enhancements for AKS on Azure Local. This release supports the following Kubernetes versions: 1.28.12, 1.28.14, 1.29.7, 1.29.9, 1.30.3, and 1.30.4. Ensure your AKS clusters…",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2507.1001.9/CombinedSolutionBundle.11.2507.1001.9.zip",
+        "fileHash": "42AD44EEBD8E063A0FD5A7A41588ABF8F847A661B747ADD050C58CF4B75A6B7E"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2507",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2507.0.6",
+      "availabilityDate": "2025-07-24",
+      "firstAvailabilityDate": "2025-07-24",
+      "newDeployments": false,
+      "osBuild": "25398.1732",
+      "osVersion": "23H2",
+      "releaseTrain": "2507",
+      "release": "2507.0.6",
+      "releaseShortened": "2507.0",
+      "baselineRelease": true,
+      "endOfSupportDate": "2026-01-20",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "AKS on Azure Local",
+          "summary": "- This release has several new features and enhancements for AKS on Azure Local. This release supports the following Kubernetes versions: 1.28.12, 1.28.14, 1.29.7, 1.29.9, 1.30.3, and 1.30.4. Ensure your AKS clusters…",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2507",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2506.1001.29",
+      "availabilityDate": "2025-07-02",
+      "firstAvailabilityDate": "2025-07-02",
+      "newDeployments": false,
+      "osBuild": "26100.4349",
+      "osVersion": "24H2",
+      "releaseTrain": "2506",
+      "release": "2506.1001.29",
+      "releaseShortened": "2506.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-12-29",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Software-Defined Networking (SDN) enabled by Azure Arc",
+          "summary": "Azure Local now supports creating Networking Security Groups (NSGs), configuring Network Security Rules, and assigning them to logical networks and network interfaces. This support provides a consistent networking…",
+          "preview": true
+        },
+        {
+          "title": "Deployment changes",
+          "summary": "To ensure consistent validation before you deploy Azure Local, deployment validators for Microsoft On-premises Cloud and Azure resource bridge are now a part of environment checker.",
+          "preview": false
+        },
+        {
+          "title": "Overprovisioning alert",
+          "summary": "A warning is shown prior to starting an update if an Azure Local instance is overprovisioned. This alert indicates there's insufficient compute capacity (memory) to live migrate workloads during an update. You must…",
+          "preview": false
+        },
+        {
+          "title": "Security improvements",
+          "summary": "New security baseline : The 2506 release introduces a security baseline with 407 evaluated rules, a 25% increase from the previous 324. Key improvements include: Over 90% alignment with CIS Azure Compute Windows…",
+          "preview": false
+        },
+        {
+          "title": "Azure Government cloud",
+          "summary": "The solution update isn't supported for Azure Local instances deployment in Azure Government cloud.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2506.1001.29/CombinedSolutionBundle.12.2506.1001.29.zip",
+        "fileHash": "C8227DF98F97FDE807A2B711206A1FE23531340DC717F89CDA7A324BA0B316C7"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2506&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2506&preserve-view=true#features-and-improvements-in-2506",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2506&preserve-view=true"
+      }
+    },
+    {
+      "version": "11.2506.1001.28",
+      "availabilityDate": "2025-07-02",
+      "firstAvailabilityDate": "2025-07-02",
+      "newDeployments": false,
+      "osBuild": "25398.1665",
+      "osVersion": "23H2",
+      "releaseTrain": "2506",
+      "release": "2506.1001.28",
+      "releaseShortened": "2506.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-12-29",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Software-Defined Networking (SDN) enabled by Azure Arc",
+          "summary": "Azure Local now supports creating Networking Security Groups (NSGs), configuring Network Security Rules, and assigning them to logical networks and network interfaces. This support provides a consistent networking…",
+          "preview": true
+        },
+        {
+          "title": "Deployment changes",
+          "summary": "To ensure consistent validation before you deploy Azure Local, deployment validators for Microsoft On-premises Cloud and Azure resource bridge are now a part of environment checker.",
+          "preview": false
+        },
+        {
+          "title": "Overprovisioning alert",
+          "summary": "A warning is shown prior to starting an update if an Azure Local instance is overprovisioned. This alert indicates there's insufficient compute capacity (memory) to live migrate workloads during an update. You must…",
+          "preview": false
+        },
+        {
+          "title": "Security improvements",
+          "summary": "New security baseline : The 2506 release introduces a security baseline with 407 evaluated rules, a 25% increase from the previous 324. Key improvements include: Over 90% alignment with CIS Azure Compute Windows…",
+          "preview": false
+        },
+        {
+          "title": "Azure Government cloud",
+          "summary": "The solution update isn't supported for Azure Local instances deployment in Azure Government cloud.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2506.1001.28/CombinedSolutionBundle.11.2506.1001.28.zip",
+        "fileHash": "18975A06372192DD7249B5DCF8844EA0A68AD08B1C9F3C554FABF79EA74CB290"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2506",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2506.0.15",
+      "availabilityDate": "2025-07-02",
+      "firstAvailabilityDate": "2025-07-02",
+      "newDeployments": false,
+      "osBuild": "25398.1665",
+      "osVersion": "23H2",
+      "releaseTrain": "2506",
+      "release": "2506.0.15",
+      "releaseShortened": "2506.0",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-12-29",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Software-Defined Networking (SDN) enabled by Azure Arc",
+          "summary": "Azure Local now supports creating Networking Security Groups (NSGs), configuring Network Security Rules, and assigning them to logical networks and network interfaces. This support provides a consistent networking…",
+          "preview": true
+        },
+        {
+          "title": "Deployment changes",
+          "summary": "To ensure consistent validation before you deploy Azure Local, deployment validators for Microsoft On-premises Cloud and Azure resource bridge are now a part of environment checker.",
+          "preview": false
+        },
+        {
+          "title": "Overprovisioning alert",
+          "summary": "A warning is shown prior to starting an update if an Azure Local instance is overprovisioned. This alert indicates there's insufficient compute capacity (memory) to live migrate workloads during an update. You must…",
+          "preview": false
+        },
+        {
+          "title": "Security improvements",
+          "summary": "New security baseline : The 2506 release introduces a security baseline with 407 evaluated rules, a 25% increase from the previous 324. Key improvements include: Over 90% alignment with CIS Azure Compute Windows…",
+          "preview": false
+        },
+        {
+          "title": "Azure Government cloud",
+          "summary": "The solution update isn't supported for Azure Local instances deployment in Azure Government cloud.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2506&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2506&preserve-view=true#features-and-improvements-in-2506",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2506&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2505.1001.23",
+      "availabilityDate": "2025-05-28",
+      "firstAvailabilityDate": "2025-05-28",
+      "newDeployments": false,
+      "osBuild": "26100.4061",
+      "osVersion": "24H2",
+      "releaseTrain": "2505",
+      "release": "2505.1001.23",
+      "releaseShortened": "2505.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-11-24",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Update changes",
+          "summary": "This release includes reliability improvements to the update process.",
+          "preview": false
+        },
+        {
+          "title": "Ability to upload logs",
+          "summary": "You can now upload a Support log package that includes all relevant logs to help Microsoft Support troubleshoot machine problems, directly from the Configurator app. For details, see Upload the Support log package .",
+          "preview": false
+        },
+        {
+          "title": "AKS on Azure Local",
+          "summary": "- This release supports the following Kubernetes versions: 1.28.12, 1.28.14, 1.29.7, 1.29.9, 1.30.3, and 1.30.4. Ensure your AKS clusters are on a supported Kubernetes version before upgrading Azure Local.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2505.1001.23/CombinedSolutionBundle.12.2505.1001.23.zip",
+        "fileHash": "29E5F6732D9B1BD4E0C2667F6FB1D7F43ADF78B4AEA8E34486C7F03DD46D155C"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2505&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2505&preserve-view=true#features-and-improvements-in-2505",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2505&preserve-view=true"
+      }
+    },
+    {
+      "version": "11.2505.1001.22",
+      "availabilityDate": "2025-05-28",
+      "firstAvailabilityDate": "2025-05-28",
+      "newDeployments": false,
+      "osBuild": "25398.1611",
+      "osVersion": "23H2",
+      "releaseTrain": "2505",
+      "release": "2505.1001.22",
+      "releaseShortened": "2505.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-11-24",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Update changes",
+          "summary": "This release includes reliability improvements to the update process.",
+          "preview": false
+        },
+        {
+          "title": "Ability to upload logs",
+          "summary": "You can now upload a Support log package that includes all relevant logs to help Microsoft Support troubleshoot machine problems, directly from the Configurator app. For details, see Upload the Support log package .",
+          "preview": false
+        },
+        {
+          "title": "AKS on Azure Local",
+          "summary": "- This release supports the following Kubernetes versions: 1.28.12, 1.28.14, 1.29.7, 1.29.9, 1.30.3, and 1.30.4. Ensure your AKS clusters are on a supported Kubernetes version before upgrading Azure Local.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/11.2505.1001.22/CombinedSolutionBundle.11.2505.1001.22.zip",
+        "fileHash": "AB2C7CE74168BF9FD679E7CE644BC57A20A0A3A418C5E8663EBCF53FC0B45113"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2505",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2505.0.16",
+      "availabilityDate": "2025-05-28",
+      "firstAvailabilityDate": "2025-05-28",
+      "newDeployments": false,
+      "osBuild": "25398.1611",
+      "osVersion": "23H2",
+      "releaseTrain": "2505",
+      "release": "2505.0.16",
+      "releaseShortened": "2505.0",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-11-24",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Update changes",
+          "summary": "This release includes reliability improvements to the update process.",
+          "preview": false
+        },
+        {
+          "title": "Ability to upload logs",
+          "summary": "You can now upload a Support log package that includes all relevant logs to help Microsoft Support troubleshoot machine problems, directly from the Configurator app. For details, see Upload the Support log package .",
+          "preview": false
+        },
+        {
+          "title": "AKS on Azure Local",
+          "summary": "- This release supports the following Kubernetes versions: 1.28.12, 1.28.14, 1.29.7, 1.29.9, 1.30.3, and 1.30.4. Ensure your AKS clusters are on a supported Kubernetes version before upgrading Azure Local.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2505&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2505&preserve-view=true#features-and-improvements-in-2505",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2505&preserve-view=true"
+      }
+    },
+    {
+      "version": "12.2504.1001.20",
+      "availabilityDate": "2025-04-29",
+      "firstAvailabilityDate": "2025-04-29",
+      "newDeployments": false,
+      "osBuild": "26100.3775",
+      "osVersion": "24H2",
+      "releaseTrain": "2504",
+      "release": "2504.1001.20",
+      "releaseShortened": "2504.1001",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-10-26",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Registration and deployment changes",
+          "summary": "Starting with this release, you can download a specific version of Azure Local software instead of just the latest version. For each upcoming release, you can choose from up to last six supported versions.",
+          "preview": false
+        },
+        {
+          "title": "Security changes",
+          "summary": "The Dynamic Root of Trust for Measurement (DRTM) is enabled by default for all new 2504 deployments running OS version 26100.3775 .",
+          "preview": false
+        },
+        {
+          "title": "Azure Local VM changes",
+          "summary": "Data disk expansion : With this release, you can expand the size of a data disk attached to an Azure Local VM.",
+          "preview": false
+        },
+        {
+          "title": "Update improvements",
+          "summary": "Improved reliability when downloading updates.",
+          "preview": false
+        },
+        {
+          "title": "Add and repair node changes",
+          "summary": "For Microsoft images, download the OS image matching the solution version of your existing cluster. See the Release table for the correct version. For OEM images, contact your OEM.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2504&preserve-view=true&tabs=new-deployments",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2504&preserve-view=true#features-and-improvements-in-2504",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-2504&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2503.0.13",
+      "availabilityDate": "2025-03-31",
+      "firstAvailabilityDate": "2025-03-31",
+      "newDeployments": false,
+      "osBuild": "25398.1486",
+      "osVersion": "23H2",
+      "releaseTrain": "2503",
+      "release": "2503.0.13",
+      "releaseShortened": "2503.0",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-09-27",
+      "supported": false,
+      "supersedes": [],
+      "features": [
+        {
+          "title": "Preview availability of Azure Government cloud",
+          "summary": "- Azure Local is now available in the US Government regions in preview. Download the latest Azure Stack HCI OS image for Azure Government from OS image .",
+          "preview": false
+        },
+        {
+          "title": "Registration and deployment changes",
+          "summary": "Extension installation : Extensions are no longer installed during the registration of Azure Local machines. Instead, the machine validation step during the Azure Local instance deployment installs the extensions.",
+          "preview": false
+        },
+        {
+          "title": "Register via app",
+          "summary": "You can bootstrap your Azure Local machines by using the Configurator app. The local UI is now deprecated.",
+          "preview": false
+        },
+        {
+          "title": "Deployment of current version and previous versions",
+          "summary": "Starting with this release, you can deploy the current version of Azure Local by using the Azure portal. To deploy a previous version, use an Azure Resource Manager template that matches the version you want to deploy.",
+          "preview": false
+        },
+        {
+          "title": "Environment checker related changes",
+          "summary": "Environment checker is now integrated for connectivity tests.",
+          "preview": false
+        }
+      ],
+      "solutionUpdate": {
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/10.2503.0.13/CombinedSolutionBundle.10.2503.0.13.zip",
+        "fileHash": "BAA0CEB0CF695CCCF36E39F70BF2E67E0B886B91CDE97F8C2860CE299E2A5126"
+      },
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2503",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2411.3.2",
+      "availabilityDate": "2025-02-20",
+      "firstAvailabilityDate": "2025-02-20",
+      "newDeployments": false,
+      "osBuild": "25398.1425",
+      "osVersion": "23H2",
+      "releaseTrain": "2411",
+      "release": "2411.3.2",
+      "releaseShortened": "2411.3",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-08-19",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2411.2.12",
+      "availabilityDate": "2025-02-10",
+      "firstAvailabilityDate": "2025-02-10",
+      "newDeployments": false,
+      "osBuild": "25398.1369",
+      "osVersion": "23H2",
+      "releaseTrain": "2411",
+      "release": "2411.2.12",
+      "releaseShortened": "2411.2",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-08-09",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-24112&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2411.1.10",
+      "availabilityDate": "2024-12-17",
+      "firstAvailabilityDate": "2024-12-17",
+      "newDeployments": false,
+      "osBuild": "25398.1308",
+      "osVersion": "23H2",
+      "releaseTrain": "2411",
+      "release": "2411.1.10",
+      "releaseShortened": "2411.1",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-06-15",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2411.0.24",
+      "availabilityDate": "2024-11-26",
+      "firstAvailabilityDate": "2024-11-26",
+      "newDeployments": false,
+      "osBuild": "25398.1251",
+      "osVersion": "23H2",
+      "releaseTrain": "2411",
+      "release": "2411.0.24",
+      "releaseShortened": "2411.0",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-05-25",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2411.0.22",
+      "availabilityDate": "2024-11-14",
+      "firstAvailabilityDate": "2024-11-14",
+      "newDeployments": false,
+      "osBuild": "25398.1251",
+      "osVersion": "23H2",
+      "releaseTrain": "2411",
+      "release": "2411.0.22",
+      "releaseShortened": "2411.0",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-05-13",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2408.2.7",
+      "availabilityDate": "2024-10-23",
+      "firstAvailabilityDate": "2024-10-23",
+      "newDeployments": false,
+      "osBuild": "25398.1189",
+      "osVersion": "23H2",
+      "releaseTrain": "2408",
+      "release": "2408.2.7",
+      "releaseShortened": "2408.2",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-04-21",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2408.1.9",
+      "availabilityDate": "2024-09-25",
+      "firstAvailabilityDate": "2024-09-25",
+      "newDeployments": false,
+      "osBuild": "25398.1128",
+      "osVersion": "23H2",
+      "releaseTrain": "2408",
+      "release": "2408.1.9",
+      "releaseShortened": "2408.1",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-03-24",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2408.0.29",
+      "availabilityDate": "2024-09-05",
+      "firstAvailabilityDate": "2024-09-05",
+      "newDeployments": false,
+      "osBuild": "25398.1085",
+      "osVersion": "23H2",
+      "releaseTrain": "2408",
+      "release": "2408.0.29",
+      "releaseShortened": "2408.0",
+      "baselineRelease": true,
+      "endOfSupportDate": "2025-03-04",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2405.3.7",
+      "availabilityDate": "2024-08-20",
+      "firstAvailabilityDate": "2024-08-20",
+      "newDeployments": false,
+      "osBuild": "25398.1085",
+      "osVersion": "23H2",
+      "releaseTrain": "2405",
+      "release": "2405.3.7",
+      "releaseShortened": "2405.3",
+      "baselineRelease": false,
+      "endOfSupportDate": "2025-02-16",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    },
+    {
+      "version": "10.2405.2.7",
+      "availabilityDate": "2024-07-16",
+      "firstAvailabilityDate": "2024-07-16",
+      "newDeployments": false,
+      "osBuild": "25398.1009",
+      "osVersion": "23H2",
+      "releaseTrain": "2405",
+      "release": "2405.2.7",
+      "releaseShortened": "2405.2",
+      "baselineRelease": false,
+      "endOfSupportDate": "2025-01-12",
+      "supported": false,
+      "supersedes": [],
+      "features": [],
+      "solutionUpdate": {},
+      "urls": {
+        "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-previous&preserve-view=true",
+        "news": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new",
+        "issues": "https://learn.microsoft.com/en-us/azure/azure-local/known-issues?view=azloc-previous&preserve-view=true"
+      }
+    }
+  ]
+}

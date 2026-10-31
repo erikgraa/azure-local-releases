@@ -11,6 +11,11 @@ on:
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Regenerate and redeploy even if the data did not change"
+        type: boolean
+        default: false
 
 concurrency:
   group: pages
@@ -23,33 +28,43 @@ jobs:
     permissions:
       contents: write
 
+    outputs:
+      # Scheduled runs only deploy when the data changed. Pushes (site or script changes) and manual runs always deploy.
+      deploy: ${{ steps.build.outputs.changed == 'true' || github.event_name != 'schedule' }}
+
     steps:
       - uses: actions/checkout@v4
 
+      # Compares against the committed site/data/releases.json (ignoring generatedAt) and only writes files when the
+      # content changed. Fails without touching any files if parsing yields nothing or looks suspicious.
       - name: Generate site data (JSON, RSS, JSON Feed)
+        id: build
         shell: pwsh
         env:
           SITE_URL: ${{ vars.SITE_URL }}
-        run: ./scripts/Build-Site.ps1
+        run: ./scripts/Build-Site.ps1 -Force:('${{ inputs.force }}' -eq 'true')
 
-      # Keeps json/azure-local-releases.json current for consumers of the raw file
-      - name: Commit updated JSON
-        if: github.ref == 'refs/heads/main'
+      - name: Commit updated data
+        if: steps.build.outputs.changed == 'true' && github.ref == 'refs/heads/main'
         run: |
-          if [ -n "$(git status --porcelain json)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data site/feed.xml site/feed.json json
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
             git commit -m "Auto updating Azure Local Releases"
             git push
           fi
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload site
+        if: steps.build.outputs.changed == 'true' || github.event_name != 'schedule'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: site
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: needs.build.outputs.deploy == 'true' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
 

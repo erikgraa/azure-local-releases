@@ -266,7 +266,7 @@
   }
 
   function jumpToTrain(train) {
-    state.status = 'all'; state.os = ''; state.q = train;
+    state.status = 'all'; state.os = ''; state.q = 'train:' + train;
     syncControls();
     draw();
     $('releases').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
@@ -289,7 +289,8 @@
       if (!matchesStatus(r)) return false;
       if (state.os && r.osVersion !== state.os) return false;
       const hay = [r.version, r.releaseTrain, r.osBuild, r.osVersion, r.release, STATUS[r.status].label].join(' ').toLowerCase();
-      return terms.every(t => hay.indexOf(t) !== -1);
+      // "train:2610" matches the release train exactly (a plain "2610" also matches OS build 26100.x)
+      return terms.every(t => t.indexOf('train:') === 0 ? r.releaseTrain === t.slice(6) : hay.indexOf(t) !== -1);
     });
   }
 
@@ -312,6 +313,14 @@
     const builds = [r.version + ' · ' + fmt(parseDate(r.availabilityDate))]
       .concat((r.supersedes || []).map(b => b.version + ' · ' + fmt(parseDate(b.availabilityDate))));
     const hash = r.solutionUpdate && r.solutionUpdate.fileHash;
+    const features = (Array.isArray(r.features) ? r.features : []).filter(f => f && f.title);
+    const notes = safeUrl(u.news);
+    const featureHtml = features.length
+      ? '<ul class="features">' + features.map(f =>
+        '<li><span class="ft-title"><b>' + esc(f.title) + '</b>' + (f.preview ? '<span class="tag">Preview</span>' : '') + '</span>' +
+        (f.summary ? '<span class="ft-summary">' + esc(f.summary) + '</span>' : '') + '</li>').join('') + '</ul>' +
+        (notes ? '<a class="all-notes" href="' + notes + '" rel="noopener">Full release notes →</a>' : '')
+      : '<p class="muted small">No feature highlights are listed for this release.' + (notes ? ' See the <a href="' + notes + '" rel="noopener">release notes</a>.' : '') + '</p>';
 
     return '<article class="card ' + s.cls + '" id="c-' + esc(r.version) + '" style="animation-delay:' + Math.min(i, 8) * 55 + 'ms">' +
       '<div class="card-top"><div><div class="ver">' + esc(r.releaseTrain) + '</div><div class="build mono">' + esc(r.version) + '</div></div><span class="pill">' + s.label + '</span></div>' +
@@ -320,8 +329,10 @@
       '<div class="dates"><span>' + fmtShort(r.first) + '</span><span>' + fmtShort(r.eol) + '</span></div>' +
       '<div class="dates" style="margin-top:2px"><span>Released ' + fmt(r.first) + '</span><span>Ends ' + fmt(r.eol) + '</span></div>' +
       '<div class="left">' + leftText(r) + '</div>' +
-      '<details class="more"><summary>Details</summary>' +
-      '<ul>' + builds.map(b => '<li class="mono">' + esc(b) + '</li>').join('') + '</ul>' +
+      '<details class="more"><summary>Details' + (features.length ? '<small>' + features.length + ' features</small>' : '') + '</summary>' +
+      '<h4>Features</h4>' + featureHtml +
+      '<h4>Build</h4><p class="muted small">OS build <b class="mono">' + esc(r.osBuild) + '</b> (' + esc(r.osVersion) + ')</p>' +
+      '<ul class="builds">' + builds.map(b => '<li class="mono">' + esc(b) + '</li>').join('') + '</ul>' +
       (links.length ? '<div class="links">' + links.join('') + '</div>' : '') +
       '<div class="row"><button type="button" class="mini" data-copy="' + esc(r.version) + '">Copy version</button>' +
       (hash ? '<button type="button" class="mini" data-copy="' + esc(hash) + '">Copy ZIP SHA256</button>' : '') + '</div></details>' +
@@ -420,7 +431,8 @@
   fetch('data/releases.json', { cache: 'no-cache' })
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(init)
-    .catch(() => {
+    .catch(err => {
+      console.error(err);
       $('error').hidden = false;
       $('rec').innerHTML = '<p class="loading">Release data is unavailable.</p>';
     });

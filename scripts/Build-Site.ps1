@@ -4,19 +4,25 @@
 
   .DESCRIPTION
   Retrieves releases using Get-AzureLocalRelease and writes:
-    <OutputPath>\data\releases.json  Releases and release trains (consumed by the site)
-    <OutputPath>\feed.xml            RSS 2.0 feed
-    <OutputPath>\feed.json           JSON Feed 1.1
+    <OutputPath>/data/releases.json  Releases and release trains (consumed by the site)
+    <OutputPath>/feed.xml            RSS 2.0 feed
+    <OutputPath>/feed.json           JSON Feed 1.1
     <LegacyJsonPath>                 Plain array of releases (kept for consumers of the original raw JSON file)
+
+  Nothing is written if the retrieved content is identical to what is already on disk (the generatedAt timestamp is
+  ignored in the comparison), so a scheduled run leaves no trace when nothing changed. The script throws, without
+  touching any files, if parsing yields too little or suspicious data.
+
+  When running in GitHub Actions the result is exposed as the step output "changed" (true/false).
 #>
 
 [CmdletBinding()]
 param (
   [Parameter(Mandatory=$false)]
-  [String]$OutputPath = (Join-Path -Path $PSScriptRoot -ChildPath '..\site'),
+  [String]$OutputPath = (Join-Path -Path $PSScriptRoot -ChildPath '../site'),
 
   [Parameter(Mandatory=$false)]
-  [String]$LegacyJsonPath = (Join-Path -Path $PSScriptRoot -ChildPath '..\json\azure-local-releases.json'),
+  [String]$LegacyJsonPath = (Join-Path -Path $PSScriptRoot -ChildPath '../json/azure-local-releases.json'),
 
   [Parameter(Mandatory=$false)]
   [String]$SiteUrl = $(if ($env:SITE_URL) { $env:SITE_URL } elseif ($env:GITHUB_REPOSITORY) { 'https://{0}.github.io/{1}/' -f ($env:GITHUB_REPOSITORY -split '/')[0].ToLower(), ($env:GITHUB_REPOSITORY -split '/')[1] } else { 'https://erikgraa.github.io/azure-local-releases/' }),
@@ -26,7 +32,11 @@ param (
 
   # Guards against publishing an empty or partially parsed site if Microsoft's documentation changes format
   [Parameter(Mandatory=$false)]
-  [Int]$MinimumReleaseCount = 20
+  [Int]$MinimumReleaseCount = 20,
+
+  # Write the files even if the content did not change, for instance after changing the site URL
+  [Parameter(Mandatory=$false)]
+  [Switch]$Force
 )
 
 $ErrorActionPreference = 'Stop'
@@ -35,8 +45,30 @@ $ErrorActionPreference = 'Stop'
 
 $sourceUrl = 'https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2'
 $SiteUrl = $SiteUrl.TrimEnd('/') + '/'
+$dataPath = Join-Path -Path $OutputPath -ChildPath 'data/releases.json'
+
+$setOutput = {
+  param ([String]$Value)
+
+  Write-Host ('changed={0}' -f $Value)
+
+  if ($env:GITHUB_OUTPUT) {
+    Add-Content -Path $env:GITHUB_OUTPUT -Value ('changed={0}' -f $Value)
+  }
+}
 
 $releases = @(Get-AzureLocalRelease)
+
+$previous = $null
+
+if (Test-Path -Path $dataPath -PathType Leaf) {
+  try {
+    $previous = Get-Content -Path $dataPath -Raw | ConvertFrom-Json
+  }
+  catch {
+    Write-Warning ('Existing data at {0} could not be read and will be replaced: {1}' -f $dataPath, $_)
+  }
+}
 
 if ($releases.Count -lt $MinimumReleaseCount) {
   throw ('Only {0} releases were parsed (expected at least {1}), the documentation format may have changed' -f $releases.Count, $MinimumReleaseCount)
@@ -44,6 +76,40 @@ if ($releases.Count -lt $MinimumReleaseCount) {
 
 if (-not ($releases | Where-Object { $_.supported })) {
   throw 'No supported releases were found, the documentation format may have changed'
+}
+
+if ($null -ne $previous) {
+  $previousReleases = @($previous.releases)
+
+  # Releases are only ever added, so a big drop means parsing went wrong
+  if ($releases.Count -lt [Math]::Floor($previousReleases.Count * 0.9)) {
+    throw ('Only {0} releases were parsed but {1} were published before, the documentation format may have changed' -f $releases.Count, $previousReleases.Count)
+  }
+
+  # ConvertFrom-Json turns ISO dates into DateTime, so compare as dates
+  $latestPrevious = ($previousReleases | ForEach-Object { [DateTime]$_.firstAvailabilityDate } | Sort-Object | Select-Object -Last 1)
+  $latestCurrent = ($releases | ForEach-Object { [DateTime]$_.firstAvailabilityDate } | Sort-Object | Select-Object -Last 1)
+
+  if ($latestCurrent -lt $latestPrevious) {
+    throw ('The newest release parsed ({0:yyyy-MM-dd}) is older than the newest published release ({1:yyyy-MM-dd}), the documentation format may have changed' -f $latestCurrent, $latestPrevious)
+  }
+
+  # Feature highlights are best effort. Keep what was published rather than dropping it if the What's new article could not be parsed this time.
+  $previousFeatures = @{}
+
+  foreach ($_previousRelease in $previousReleases) {
+    $published = @($_previousRelease.features | Where-Object { $null -ne $_ })
+
+    if ($published.Count -gt 0) {
+      $previousFeatures[[String]$_previousRelease.version] = $published
+    }
+  }
+
+  foreach ($_release in $releases) {
+    if (@($_release.features | Where-Object { $null -ne $_ }).Count -eq 0 -and $previousFeatures.ContainsKey([String]$_release.version)) {
+      $_release.features = $previousFeatures[[String]$_release.version]
+    }
+  }
 }
 
 $utf8 = New-Object -TypeName System.Text.UTF8Encoding -ArgumentList $false
@@ -89,14 +155,29 @@ $data = [Ordered]@{
   'releases' = $newestFirst
 }
 
-Write-TextFile -Path (Join-Path $OutputPath 'data\releases.json') -Content (($data | ConvertTo-Json -Depth 6) + "`n")
-Write-TextFile -Path $LegacyJsonPath -Content (($releases | ConvertTo-Json -Depth 6) + "`n")
+$dataJson = ($data | ConvertTo-Json -Depth 8) + "`n"
+
+# Compare the content ignoring the generatedAt timestamp, which changes on every run
+$withoutTimestamp = { param ([String]$Text) ($Text -replace "`r`n", "`n") -replace '(?m)^\s*"generatedAt":.*\n', '' }
+
+if (-not $Force -and (Test-Path -Path $dataPath -PathType Leaf) -and ((& $withoutTimestamp (Get-Content -Path $dataPath -Raw)) -ceq (& $withoutTimestamp $dataJson))) {
+  Write-Host ('No changes in {0} releases ({1} supported), nothing written' -f $releases.Count, @($releases | Where-Object { $_.supported }).Count)
+  & $setOutput 'false'
+  return
+}
+
+Write-TextFile -Path $dataPath -Content $dataJson
+Write-TextFile -Path $LegacyJsonPath -Content (($releases | ConvertTo-Json -Depth 8) + "`n")
 
 $feedItems = @($newestFirst | Select-Object -First $FeedItemCount | ForEach-Object {
   $summary = ('Azure Local {0} (OS build {1}, {2}) became available on {3}. End of support: {4}.' -f $_.version, $_.osBuild, $_.osVersion, $_.availabilityDate, $_.endOfSupportDate)
 
   if ($_.newDeployments) {
     $summary += ' Use this build for new deployments.'
+  }
+
+  if (@($_.features).Count -gt 0) {
+    $summary += ' Highlights: {0}.' -f ((@($_.features) | Select-Object -First 3 | ForEach-Object { $_.title }) -join '; ')
   }
 
   [PSCustomObject]@{
@@ -164,3 +245,4 @@ $jsonFeed = [Ordered]@{
 Write-TextFile -Path (Join-Path $OutputPath 'feed.json') -Content (($jsonFeed | ConvertTo-Json -Depth 6) + "`n")
 
 Write-Host ('Generated {0} releases ({1} supported) in {2}' -f $releases.Count, @($releases | Where-Object { $_.supported }).Count, (Resolve-Path -Path $OutputPath))
+& $setOutput 'true'

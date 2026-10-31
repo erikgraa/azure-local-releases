@@ -1,0 +1,340 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Azure Local releases",
+  "home_page_url": "https://erikgraa.github.io/azure-local-releases/",
+  "feed_url": "https://erikgraa.github.io/azure-local-releases/feed.json",
+  "description": "New Azure Local releases and when they reach end of support.",
+  "language": "en",
+  "items": [
+    {
+      "id": "azure-local-12.2610.1004.41",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2610&preserve-view=true#features-and-improvements-in-2610",
+      "title": "Azure Local 12.2610.1004.41 released",
+      "content_text": "Azure Local 12.2610.1004.41 (OS build 26100.33650, 24H2) became available on 2026-10-22. End of support: 2027-04-20. Use this build for new deployments. Highlights: Azure Government Arizona region expansion; Rack aware clusters with SAN; Disk witness for SAN deployments.",
+      "date_published": "2026-10-22T00:00:00Z",
+      "tags": [
+        "2610",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2609.1003.7",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2609&preserve-view=true#features-and-improvements-in-2609",
+      "title": "Azure Local 12.2609.1003.7 released",
+      "content_text": "Azure Local 12.2609.1003.7 (OS build 26100.33438, 24H2) became available on 2026-09-11. End of support: 2027-03-10. Highlights: Automatic backup of system-level secrets; Local Identity with Azure Key Vault.",
+      "date_published": "2026-09-11T00:00:00Z",
+      "tags": [
+        "2609",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2608.1003.9",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2608&preserve-view=true#features-and-improvements-in-2608",
+      "title": "Azure Local 12.2608.1003.9 released",
+      "content_text": "Azure Local 12.2608.1003.9 (OS build 26100.33296, 24H2) became available on 2026-09-01. End of support: 2027-02-14. Highlights: Azure Local VMs; Azure Arc Site Manager; Add node via Azure portal.",
+      "date_published": "2026-09-01T00:00:00Z",
+      "tags": [
+        "2608",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2607.1003.73",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2607&preserve-view=true#features-and-improvements-in-2607",
+      "title": "Azure Local 12.2607.1003.73 released",
+      "content_text": "Azure Local 12.2607.1003.73 (OS build 26100.33158, 24H2) became available on 2026-08-07. End of support: 2027-01-18. Highlights: Azure Local VMs; Full file system location displayed for storage paths; New built-in roles for Azure Local migrations.",
+      "date_published": "2026-08-07T00:00:00Z",
+      "tags": [
+        "2607",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2605.1003.1003",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2605&preserve-view=true#features-and-improvements-in-2605",
+      "title": "Azure Local 12.2605.1003.1003 released",
+      "content_text": "Azure Local 12.2605.1003.1003 (OS build 26100.32860, 24H2) became available on 2026-06-18. End of support: 2026-11-24. Highlights: SAN integration using iSCSI; GPU metrics.",
+      "date_published": "2026-06-18T00:00:00Z",
+      "tags": [
+        "2605",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2606.1003.205",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2606&preserve-view=true#features-and-improvements-in-2606",
+      "title": "Azure Local 12.2606.1003.205 released",
+      "content_text": "Azure Local 12.2606.1003.205 (OS build 26100.32995, 24H2) became available on 2026-06-15. End of support: 2026-12-12.",
+      "date_published": "2026-06-15T00:00:00Z",
+      "tags": [
+        "2606",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2604.1003.1006",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2604",
+      "title": "Azure Local 12.2604.1003.1006 released",
+      "content_text": "Azure Local 12.2604.1003.1006 (OS build 26100.32690, 24H2) became available on 2026-05-28. End of support: 2026-10-19. Highlights: AKS enabled by Azure Arc changes; Disaggregated deployments for Azure Local; SAN support for Azure Local.",
+      "date_published": "2026-05-28T00:00:00Z",
+      "tags": [
+        "2604",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2603.1002.502",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2603",
+      "title": "Azure Local 12.2603.1002.502 released",
+      "content_text": "Azure Local 12.2603.1002.502 (OS build 26100.32522, 24H2) became available on 2026-05-28. End of support: 2026-09-13. Highlights: AKS enabled by Azure Arc changes; Support for NVIDIA RTX PRO 6000 Blackwell Server Edition GPU on Azure Local; Improved Secure Boot Certificate readiness.",
+      "date_published": "2026-05-28T00:00:00Z",
+      "tags": [
+        "2603",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2602.1002.501",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2602",
+      "title": "Azure Local 12.2602.1002.501 released",
+      "content_text": "Azure Local 12.2602.1002.501 (OS build 26100.32370, 24H2) became available on 2026-03-02. End of support: 2026-08-16. Highlights: AKS enabled by Azure Arc changes; Enhanced update workflow from the Azure portal; End of Windows Server Subscription and Extended Security Updates (ESU) purchases for OS version 20349.xxxx (22H2).",
+      "date_published": "2026-03-02T00:00:00Z",
+      "tags": [
+        "2602",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2510.1002.531",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2510",
+      "title": "Azure Local 12.2510.1002.531 released",
+      "content_text": "Azure Local 12.2510.1002.531 (OS build 26100.6899, 24H2) became available on 2026-02-17. End of support: 2026-05-04. Highlights: Azure Local rack aware clustering; Upgrade; Azure Local VM updates.",
+      "date_published": "2026-02-17T00:00:00Z",
+      "tags": [
+        "2510",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2601.1002.503",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2601",
+      "title": "Azure Local 12.2601.1002.503 released",
+      "content_text": "Azure Local 12.2601.1002.503 (OS build 26100.32230, 24H2) became available on 2026-02-02. End of support: 2026-07-21. Highlights: Infrastructure logical network surfaced in Azure portal; VMConnect for Azure Local VMs; Unique ID for data disks.",
+      "date_published": "2026-02-02T00:00:00Z",
+      "tags": [
+        "2601",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-11.2504.1001.21",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2504",
+      "title": "Azure Local 11.2504.1001.21 released",
+      "content_text": "Azure Local 11.2504.1001.21 (OS build 25398.1551, 23H2) became available on 2026-01-22. End of support: 2025-10-18. Highlights: Registration and deployment changes; Security changes; Azure Local VM changes.",
+      "date_published": "2026-01-22T00:00:00Z",
+      "tags": [
+        "2504",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2512.1002.16",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2512&preserve-view=true#features-and-improvements-in-2512",
+      "title": "Azure Local 12.2512.1002.16 released",
+      "content_text": "Azure Local 12.2512.1002.16 (OS build 26100.7462, 24H2) became available on 2025-12-16. End of support: 2026-06-14. Highlights: Simplified cluster registration during deployment; Support for NVIDIA L-series GPU on AKS on Azure Local; AKS enabled by Azure Arc changes.",
+      "date_published": "2025-12-16T00:00:00Z",
+      "tags": [
+        "2512",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2511.1002.502",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2511",
+      "title": "Azure Local 12.2511.1002.502 released",
+      "content_text": "Azure Local 12.2511.1002.502 (OS build 26100.7171, 24H2) became available on 2025-12-03. End of support: 2026-05-17. Highlights: AKS enabled by Azure Arc changes.",
+      "date_published": "2025-12-03T00:00:00Z",
+      "tags": [
+        "2511",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-11.2510.1002.93",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2510",
+      "title": "Azure Local 11.2510.1002.93 released",
+      "content_text": "Azure Local 11.2510.1002.93 (OS build 25398.1913, 23H2) became available on 2025-10-24. End of support: 2026-04-22. Highlights: Azure Local rack aware clustering; Upgrade; Azure Local VM updates.",
+      "date_published": "2025-10-24T00:00:00Z",
+      "tags": [
+        "2510",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2509.1001.22",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2509",
+      "title": "Azure Local 12.2509.1001.22 released",
+      "content_text": "Azure Local 12.2509.1001.22 (OS build 26100.6584, 24H2) became available on 2025-09-22. End of support: 2026-03-21. Highlights: Update and upgrade changes; Azure Local VM updates; AKS enabled by Azure Arc changes.",
+      "date_published": "2025-09-22T00:00:00Z",
+      "tags": [
+        "2509",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-11.2509.1001.21",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2509",
+      "title": "Azure Local 11.2509.1001.21 released",
+      "content_text": "Azure Local 11.2509.1001.21 (OS build 25398.1849, 23H2) became available on 2025-09-22. End of support: 2026-03-21. Highlights: Update and upgrade changes; Azure Local VM updates; AKS enabled by Azure Arc changes.",
+      "date_published": "2025-09-22T00:00:00Z",
+      "tags": [
+        "2509",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2508.1001.52",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2508",
+      "title": "Azure Local 12.2508.1001.52 released",
+      "content_text": "Azure Local 12.2508.1001.52 (OS build 26100.4946, 24H2) became available on 2025-08-29. End of support: 2026-02-25. Highlights: Trusted Virtual Machine (Trusted VM) guest attestation; Deployment and upgrade changes; Azure Local VM updates.",
+      "date_published": "2025-08-29T00:00:00Z",
+      "tags": [
+        "2508",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-11.2508.1001.51",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2508",
+      "title": "Azure Local 11.2508.1001.51 released",
+      "content_text": "Azure Local 11.2508.1001.51 (OS build 25398.1791, 23H2) became available on 2025-08-29. End of support: 2026-02-25. Highlights: Trusted Virtual Machine (Trusted VM) guest attestation; Deployment and upgrade changes; Azure Local VM updates.",
+      "date_published": "2025-08-29T00:00:00Z",
+      "tags": [
+        "2508",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2507.1001.10",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2507",
+      "title": "Azure Local 12.2507.1001.10 released",
+      "content_text": "Azure Local 12.2507.1001.10 (OS build 26100.4652, 24H2) became available on 2025-07-24. End of support: 2026-01-20. Highlights: AKS on Azure Local.",
+      "date_published": "2025-07-24T00:00:00Z",
+      "tags": [
+        "2507",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-11.2507.1001.9",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2507",
+      "title": "Azure Local 11.2507.1001.9 released",
+      "content_text": "Azure Local 11.2507.1001.9 (OS build 25398.1732, 23H2) became available on 2025-07-24. End of support: 2026-01-20. Highlights: AKS on Azure Local.",
+      "date_published": "2025-07-24T00:00:00Z",
+      "tags": [
+        "2507",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-10.2507.0.6",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2507",
+      "title": "Azure Local 10.2507.0.6 released",
+      "content_text": "Azure Local 10.2507.0.6 (OS build 25398.1732, 23H2) became available on 2025-07-24. End of support: 2026-01-20. Highlights: AKS on Azure Local.",
+      "date_published": "2025-07-24T00:00:00Z",
+      "tags": [
+        "2507",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2506.1001.29",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2506&preserve-view=true#features-and-improvements-in-2506",
+      "title": "Azure Local 12.2506.1001.29 released",
+      "content_text": "Azure Local 12.2506.1001.29 (OS build 26100.4349, 24H2) became available on 2025-07-02. End of support: 2025-12-29. Highlights: Software-Defined Networking (SDN) enabled by Azure Arc; Deployment changes; Overprovisioning alert.",
+      "date_published": "2025-07-02T00:00:00Z",
+      "tags": [
+        "2506",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-11.2506.1001.28",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2506",
+      "title": "Azure Local 11.2506.1001.28 released",
+      "content_text": "Azure Local 11.2506.1001.28 (OS build 25398.1665, 23H2) became available on 2025-07-02. End of support: 2025-12-29. Highlights: Software-Defined Networking (SDN) enabled by Azure Arc; Deployment changes; Overprovisioning alert.",
+      "date_published": "2025-07-02T00:00:00Z",
+      "tags": [
+        "2506",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-10.2506.0.15",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2506&preserve-view=true#features-and-improvements-in-2506",
+      "title": "Azure Local 10.2506.0.15 released",
+      "content_text": "Azure Local 10.2506.0.15 (OS build 25398.1665, 23H2) became available on 2025-07-02. End of support: 2025-12-29. Highlights: Software-Defined Networking (SDN) enabled by Azure Arc; Deployment changes; Overprovisioning alert.",
+      "date_published": "2025-07-02T00:00:00Z",
+      "tags": [
+        "2506",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2505.1001.23",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2505&preserve-view=true#features-and-improvements-in-2505",
+      "title": "Azure Local 12.2505.1001.23 released",
+      "content_text": "Azure Local 12.2505.1001.23 (OS build 26100.4061, 24H2) became available on 2025-05-28. End of support: 2025-11-24. Highlights: Update changes; Ability to upload logs; AKS on Azure Local.",
+      "date_published": "2025-05-28T00:00:00Z",
+      "tags": [
+        "2505",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-11.2505.1001.22",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2505",
+      "title": "Azure Local 11.2505.1001.22 released",
+      "content_text": "Azure Local 11.2505.1001.22 (OS build 25398.1611, 23H2) became available on 2025-05-28. End of support: 2025-11-24. Highlights: Update changes; Ability to upload logs; AKS on Azure Local.",
+      "date_published": "2025-05-28T00:00:00Z",
+      "tags": [
+        "2505",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-10.2505.0.16",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2505&preserve-view=true#features-and-improvements-in-2505",
+      "title": "Azure Local 10.2505.0.16 released",
+      "content_text": "Azure Local 10.2505.0.16 (OS build 25398.1611, 23H2) became available on 2025-05-28. End of support: 2025-11-24. Highlights: Update changes; Ability to upload logs; AKS on Azure Local.",
+      "date_published": "2025-05-28T00:00:00Z",
+      "tags": [
+        "2505",
+        "23H2"
+      ]
+    },
+    {
+      "id": "azure-local-12.2504.1001.20",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2504&preserve-view=true#features-and-improvements-in-2504",
+      "title": "Azure Local 12.2504.1001.20 released",
+      "content_text": "Azure Local 12.2504.1001.20 (OS build 26100.3775, 24H2) became available on 2025-04-29. End of support: 2025-10-26. Highlights: Registration and deployment changes; Security changes; Azure Local VM changes.",
+      "date_published": "2025-04-29T00:00:00Z",
+      "tags": [
+        "2504",
+        "24H2"
+      ]
+    },
+    {
+      "id": "azure-local-10.2503.0.13",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-previous&preserve-view=true#features-and-improvements-in-2503",
+      "title": "Azure Local 10.2503.0.13 released",
+      "content_text": "Azure Local 10.2503.0.13 (OS build 25398.1486, 23H2) became available on 2025-03-31. End of support: 2025-09-27. Highlights: Preview availability of Azure Government cloud; Registration and deployment changes; Register via app.",
+      "date_published": "2025-03-31T00:00:00Z",
+      "tags": [
+        "2503",
+        "23H2"
+      ]
+    }
+  ]
+}

@@ -200,6 +200,16 @@ section{padding:56px 0 8px}
 .more summary::after{content:"+";font-size:1.2rem;transition:.2s}
 .more[open] summary::after{transform:rotate(45deg)}
 .more ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:.88rem;display:grid;gap:5px}
+.more h4{margin:14px 0 0;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600}
+.more h4:first-of-type{margin-top:12px}
+.more .features{list-style:none;padding:0;gap:10px;margin-top:8px}
+.more .features li{display:grid;gap:2px}
+.more .features .ft-title{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.more .features li b{color:var(--text);font-weight:650}
+.more .features .ft-summary{color:var(--muted)}
+.more .small{font-size:.85rem;margin-top:6px}
+.more .all-notes{display:inline-block;margin-top:10px;font-size:.85rem}
+.more summary small{margin-left:auto;margin-right:10px;font-weight:500;color:var(--faint)}
 .more .links{display:flex;gap:6px 14px;flex-wrap:wrap;margin-top:12px;font-size:.88rem}
 .more .row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .mini{padding:6px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);font-size:.78rem;font-weight:600}
