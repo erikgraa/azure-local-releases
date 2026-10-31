@@ -46,6 +46,8 @@ a { color: var(--accent); }
 .top { background: var(--head); color: #fff; padding: 28px 0 24px; }
 .top .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: flex-end; }
 .top h1 { margin: 0; font-size: 1.9rem; font-weight: 650; letter-spacing: -.01em; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo { display: block; flex: none; border-radius: 10px; }
 .top h1 span { color: #7fc0ff; }
 .tagline { margin: 2px 0 0; color: #b9c2cb; }
 .top nav { display: flex; gap: 16px; font-size: .92rem; }
