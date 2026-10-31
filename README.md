@@ -11,7 +11,7 @@ A static site that shows [Azure Local](https://learn.microsoft.com/en-us/azure/a
 
 This repository used to offer a PowerShell cmdlet and a [Pode](https://badgerati.github.io/Pode) API hosted as an Azure Container App. It is now a static site on GitHub Pages:
 
-- **Static releases site** with a table of releases, release dates, support status and end of support dates, with status badges, countdowns, search, filtering and sorting.
+- **Static releases site ("Release Radar")** with a hero showing the recommended release and a live countdown to the next end of support, a lifecycle timeline, a "Which version are you running?" checker and filterable release cards, all driven by the generated JSON data.
 - **Feeds**: an RSS feed, a JSON Feed and a JSON data file (plus the plain JSON array that was already committed here).
 - **Fixed cmdlet and parser**: `Get-AzureLocalRelease` had stopped working because Microsoft changed the layout of the release documentation (the committed JSON had not been updated since February 2026). The parser has been rewritten for the current layout and now also handles builds that supersede earlier ones.
 - **End of support dates** derived from Microsoft's six-month support policy, see [How end of support is determined](#how-end-of-support-is-determined).
@@ -24,10 +24,14 @@ Live at https://erikgraa.github.io/azure-local-releases/.
 
 [![Azure Local releases site](/assets/demo.png)](https://erikgraa.github.io/azure-local-releases/)
 
-- Status badges (**Supported**, **Ending soon**, **End of support**) and countdowns to end of support
-- Search, filter by status and OS version (24H2/23H2) and sortable columns; the view is kept in the URL so it can be shared
-- Links to what's new, security updates, known issues and solution update ZIPs
-- Light and dark mode
+- **Hero**: the release recommended for new deployments (release date, end of support, OS build, link to the release notes) next to a live countdown (days, hours, minutes, seconds) to the next end of support and a retirement queue of all supported releases
+- **Version checker**: pick the version you run and see how much runway you have, or that it is out of support, and what to update to
+- **Lifecycle timeline**: a Gantt-style view with one bar per release train from first availability to end of support, the last 60 days hatched as *ending soon*, and a marker for today. Shows recent trains by default, with the full history one click away. Click a bar to jump to its releases.
+- **Release cards**: status pill (**Recommended**, **Supported**, **Ending soon**, **End of support**), progress through the support window, days left, OS build, earlier builds, links to what's new, security updates, known issues and the solution update ZIP, and buttons to copy the version or ZIP SHA256
+- **Search, filters and sorting**: search by version, release train or OS build (press `/`), filter by status chip and OS version (24H2/23H2) and sort by newest, oldest or ends soonest. The view is kept in the URL so it can be shared.
+- Feed links (RSS, JSON Feed, JSON data) in the header and footer
+- Light and dark theme (follows your system, with a toggle), reduced-motion support and a layout for mobile screens
+- Works offline once loaded: a small service worker caches the site and data (network first, so it never serves stale data when online). Status and countdowns are calculated in the browser, so they stay correct between daily data refreshes.
 
 ## 📡 Feeds and data
 
@@ -101,7 +105,7 @@ What changed in the cmdlet:
 
 ## 🛠 Development
 
-The site is plain HTML, CSS and JavaScript in [site](site) with no build step. Generate the data and preview it locally (requires PowerShell 7):
+The site is plain HTML, CSS and JavaScript in [site](site) with no build step and no external dependencies or fonts (all paths are relative, so it works under a Pages project path). Generate the data and preview it locally (requires PowerShell 7):
 
 ```powershell
 ./scripts/Build-Site.ps1
@@ -183,6 +187,7 @@ See the related blog posts at https://blog.graa.dev for possible use cases:
         app.js
         index.html
         style.css
+        sw.js
 ```
 
 ## 👏 Contributions
