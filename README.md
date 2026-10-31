@@ -1,6 +1,6 @@
-# Azure Local Releases
+# Azure Local EOL
 
-A static site that shows [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) releases, when they became available, whether they are still supported and when they reach end of support. It is rebuilt daily from [Microsoft's release information](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2) and hosted on GitHub Pages.
+When does your Azure Local version run out of support? A static site that lists every [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) release with its release date and end of support date. It is rebuilt daily from [Microsoft's release information](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2) and hosted on GitHub Pages at https://releases.azurelocal.graa.dev/ (repository: `azure-local-releases`).
 
 [![Build and deploy site](https://github.com/erikgraa/azure-local-releases/actions/workflows/pages.yml/badge.svg)](https://github.com/erikgraa/azure-local-releases/actions/workflows/pages.yml)
 
@@ -11,7 +11,7 @@ A static site that shows [Azure Local](https://learn.microsoft.com/en-us/azure/a
 
 This repository used to offer a PowerShell cmdlet and a [Pode](https://badgerati.github.io/Pode) API hosted as an Azure Container App. It is now a static site on GitHub Pages:
 
-- **Static releases site ("Release Radar")** with a hero showing the recommended release and a live countdown to the next end of support, a lifecycle timeline, a "Which version are you running?" checker and filterable release cards, all driven by the generated JSON data.
+- **Static site "Azure Local EOL"**: a plain, table-first page (in the spirit of the old Pode page) with the recommended release, the next end of support, a "Which version are you running?" checker and a table of releases with status and days left, all driven by the generated JSON data.
 - **Feeds**: an RSS feed, a JSON Feed and a JSON data file (plus the plain JSON array that was already committed here).
 - **Fixed cmdlet and parser**: `Get-AzureLocalRelease` had stopped working because Microsoft changed the layout of the release documentation (the committed JSON had not been updated since February 2026). The parser has been rewritten for the current layout and now also handles builds that supersede earlier ones.
 - **End of support dates** derived from Microsoft's six-month support policy, see [How end of support is determined](#how-end-of-support-is-determined).
@@ -24,14 +24,14 @@ Live at https://releases.azurelocal.graa.dev/.
 
 [![Azure Local releases site](/assets/demo.png)](https://releases.azurelocal.graa.dev/)
 
-- **Hero**: the release recommended for new deployments (release date, end of support, OS build, link to the release notes) next to a live countdown (days, hours, minutes, seconds) to the next end of support and a retirement queue of all supported releases
-- **Version checker**: pick the version you run and see how much runway you have, or that it is out of support, and what to update to
-- **Lifecycle timeline**: a Gantt-style view with one bar per release train from first availability to end of support, the last 60 days hatched as *ending soon*, and a marker for today. Shows recent trains by default, with the full history one click away. Click a bar to jump to its releases.
-- **Release cards**: status pill (**Recommended**, **Supported**, **Ending soon**, **End of support**), progress through the support window and days left. **Details** expands to the release's top feature highlights (with a *Preview* marker and a link to the full release notes), the OS build and earlier builds, links to what's new, security updates, known issues and the solution update ZIP, and buttons to copy the version or ZIP SHA256
-- **Search, filters and sorting**: search by version, release train or OS build (press `/`), filter by status chip and OS version (24H2/23H2) and sort by newest, oldest or ends soonest. The view is kept in the URL so it can be shared.
-- Feed links (RSS, JSON Feed, JSON data) in the header and footer
-- Light and dark theme (follows your system, with a toggle), reduced-motion support and a layout for mobile screens
-- Works offline once loaded: a small service worker caches the site and data (network first, so it never serves stale data when online). Status and countdowns are calculated in the browser, so they stay correct between daily data refreshes.
+- **At a glance**: the release recommended for new deployments (with its end of support date) and the next release to reach end of support, with days left
+- **Version checker**: pick the version you run and see when it goes out of support, or that it already has, and what to update to
+- **Releases table**: release, version, release date, end of support date and a status (**Supported**, **Ending soon** within 60 days, **End of support**) with the time left. Retired releases are hidden unless you tick *Show retired*.
+- **Row details**: click a row for the release's top feature highlights (with a *Preview* marker), the OS build, earlier builds that the release superseded and links to what's new, security updates, known issues and the solution update ZIP
+- **Search and filters**: search by version, release train or OS build and filter by OS version (24H2/23H2). The view is kept in the URL so it can be shared.
+- Feed links (RSS, JSON Feed, JSON) in the header
+- Follows your light or dark system theme, with a mobile layout and an icon (`favicon.svg`, light and dark aware) plus a social share image
+- Works offline once loaded: a small service worker caches the site and data (network first, so it never serves stale data when online). Status and days left are calculated in the browser, so they stay correct between daily data refreshes. The footer shows when the data last changed (a daily run without changes writes nothing).
 
 ## 📡 Feeds and data
 
@@ -155,7 +155,7 @@ What it does:
 
 So on a day where Microsoft's documentation has not changed, a scheduled run fetches, compares and stops: **no commit and no redeploy**. Data changes that count include a new release, new feature highlights, a release reaching its end of support date (`supported` flips) and a different recommended build.
 
-Guards: `Build-Site.ps1` throws, before any file is written, if fewer than 20 releases are parsed, no release is supported, the number of releases drops by more than 10% compared with the published data, or the newest release is older than the newest published one. The run then fails (the repository owner gets the usual failed workflow notification), the committed data stays as it was and the published site stays up. The countdowns and status badges are calculated in the browser, so they stay correct between refreshes even without a redeploy.
+Guards: `Build-Site.ps1` throws, before any file is written, if fewer than 20 releases are parsed, no release is supported, the number of releases drops by more than 10% compared with the published data, or the newest release is older than the newest published one. The run then fails (the repository owner gets the usual failed workflow notification), the committed data stays as it was and the published site stays up. The status and days left are calculated in the browser, so they stay correct between refreshes even without a redeploy.
 
 If `main` has branch protection that blocks pushes from `github-actions[bot]`, allow the bot to bypass it or the data commit step will fail.
 
@@ -212,11 +212,23 @@ See the related blog posts at https://blog.graa.dev for possible use cases:
 │       Get-AzureLocalRelease.ps1
 │
 └───site
-        app.js
-        CNAME
-        index.html
-        style.css
-        sw.js
+    │   apple-touch-icon.png
+    │   app.js
+    │   CNAME
+    │   favicon-32.png
+    │   favicon.svg
+    │   feed.json
+    │   feed.xml
+    │   icon-192.png
+    │   icon-512.png
+    │   index.html
+    │   og-image.png
+    │   site.webmanifest
+    │   style.css
+    │   sw.js
+    │
+    └───data
+            releases.json
 ```
 
 ## 👏 Contributions
