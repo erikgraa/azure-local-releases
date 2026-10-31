@@ -7,6 +7,7 @@ on:
     paths:
       - scripts/**
       - site/**
+      - tests/**
       - .github/workflows/pages.yml
   schedule:
     - cron: "0 6 * * *"
@@ -28,31 +29,75 @@ jobs:
     permissions:
       contents: write
       pages: write
+      issues: read
 
     outputs:
-      # Scheduled runs only deploy when the data changed. Pushes (site or script changes) and manual runs always deploy.
-      deploy: ${{ steps.build.outputs.changed == 'true' || github.event_name != 'schedule' }}
+      # Scheduled runs only deploy when the data changed (or when an earlier failure is still open, so a missed deploy is retried).
+      # Pushes (site or script changes) and manual runs always deploy.
+      deploy: ${{ steps.build.outputs.changed == 'true' || github.event_name != 'schedule' || steps.alert.outputs.open == 'true' }}
+      error: ${{ steps.tests.outputs.error || steps.build.outputs.error || steps.validate.outputs.error }}
+      stale: ${{ steps.freshness.outputs.stale }}
+      stale_message: ${{ steps.freshness.outputs.stale_message }}
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/configure-pages@v5
 
-      # Compares against the committed site/data/releases.json (ignoring generatedAt) and only writes files when the
-      # content changed. Fails without touching any files if parsing yields nothing or looks suspicious.
-      - name: Generate site data (JSON, RSS, JSON Feed)
+      # Offline tests of the build and validation scripts, including that failed runs never overwrite good files
+      - name: Test scripts
+        id: tests
+        shell: pwsh
+        run: |
+          $result = Invoke-Pester -Path ./tests -PassThru -Output Minimal
+          if ($result.FailedCount -gt 0 -or $result.Result -ne 'Passed') {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value ('error=The script tests failed ({0} failed)' -f $result.FailedCount)
+            throw 'The script tests failed'
+          }
+
+      - name: Check for an open alert
+        id: alert
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          open=$(gh issue list --label parser-broken --state open --json number --jq 'length' || echo 0)
+          if [ "${open:-0}" -gt 0 ]; then echo "open=true" >> "$GITHUB_OUTPUT"; else echo "open=false" >> "$GITHUB_OUTPUT"; fi
+
+      # Generates everything in a temporary directory, validates it (counts, fields, dates, comparison with the committed data, feeds,
+      # calendars) and only then replaces the files atomically. If anything is wrong the step fails without touching any file,
+      # so nothing below runs: no commit, no deployment, and the last good site stays live.
+      - name: Generate site data (JSON, RSS, JSON Feed, ICS)
         id: build
         shell: pwsh
         env:
           SITE_URL: ${{ vars.SITE_URL }}
         run: ./scripts/Build-Site.ps1 -Force:('${{ inputs.force }}' -eq 'true')
 
+      # Final gate on exactly what is about to be committed and published, also when nothing changed
+      - name: Validate generated files
+        id: validate
+        shell: pwsh
+        run: |
+          try {
+            ./scripts/Test-SiteOutput.ps1
+          }
+          catch {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value ('error={0}' -f (($_.Exception.Message -replace '[\r\n]+', ' ')))
+            throw
+          }
+
+      # Does not fail the build: the data changes at least monthly, so a long gap means the parser or this workflow stopped working
+      - name: Check data freshness
+        id: freshness
+        shell: pwsh
+        run: ./scripts/Test-SiteOutput.ps1 -FreshnessOnly -MaxAgeDays ${{ vars.STALE_AFTER_DAYS || 60 }}
+
       - name: Commit updated data
         if: steps.build.outputs.changed == 'true' && github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/data site/feed.xml site/feed.json json
+          git add site/data site/feed.xml site/feed.json site/calendar.ics site/calendar-reminders.ics json
           if git diff --cached --quiet; then
             echo "Nothing to commit"
           else
@@ -61,7 +106,7 @@ jobs:
           fi
 
       - name: Upload site
-        if: steps.build.outputs.changed == 'true' || github.event_name != 'schedule'
+        if: steps.build.outputs.changed == 'true' || github.event_name != 'schedule' || steps.alert.outputs.open == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
@@ -82,3 +127,117 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Opens (or comments on) an issue when the build or deployment failed and closes it again when a later run succeeds.
+  # Uses only the built-in token. Failed scheduled runs also email the repository owner through GitHub's default notifications.
+  notify:
+    if: ${{ always() && github.ref == 'refs/heads/main' && needs.build.result != 'cancelled' && needs.deploy.result != 'cancelled' }}
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          BUILD_RESULT: ${{ needs.build.result }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          BUILD_ERROR: ${{ needs.build.outputs.error }}
+          STALE: ${{ needs.build.outputs.stale }}
+          STALE_MESSAGE: ${{ needs.build.outputs.stale_message }}
+          STALE_AFTER_DAYS: ${{ vars.STALE_AFTER_DAYS || 60 }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const env = process.env;
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`;
+            const clean = text => String(text || '').replace(/`/g, "'").trim();
+
+            async function ensureLabel(name, color, description) {
+              try {
+                await github.rest.issues.createLabel({ owner, repo, name, color, description });
+              } catch (error) {
+                if (error.status !== 422) throw error; // already exists
+              }
+            }
+
+            async function findOpen(label) {
+              const issues = await github.paginate(github.rest.issues.listForRepo, { owner, repo, state: 'open', labels: label, per_page: 100 });
+              return issues.filter(issue => !issue.pull_request);
+            }
+
+            // Opens an issue, or comments on the open one unless this run was already reported
+            async function raise(label, color, description, title, body) {
+              await ensureLabel(label, color, description);
+              const [existing] = await findOpen(label);
+
+              if (!existing) {
+                const created = await github.rest.issues.create({ owner, repo, title, body, labels: [label] });
+                core.info(`Opened issue #${created.data.number}`);
+                return;
+              }
+
+              const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: existing.number, per_page: 100 });
+
+              if ((existing.body || '').includes(runUrl) || comments.some(comment => (comment.body || '').includes(runUrl))) {
+                core.info(`Issue #${existing.number} already mentions this run`);
+                return;
+              }
+
+              await github.rest.issues.createComment({ owner, repo, issue_number: existing.number, body });
+              core.info(`Commented on issue #${existing.number}`);
+            }
+
+            async function resolve(label, message) {
+              for (const issue of await findOpen(label)) {
+                await github.rest.issues.createComment({ owner, repo, issue_number: issue.number, body: message });
+                await github.rest.issues.update({ owner, repo, issue_number: issue.number, state: 'closed', state_reason: 'completed' });
+                core.info(`Closed issue #${issue.number}`);
+              }
+            }
+
+            const buildFailed = env.BUILD_RESULT === 'failure';
+            const deployFailed = env.DEPLOY_RESULT === 'failure';
+            const succeeded = env.BUILD_RESULT === 'success' && ['success', 'skipped'].includes(env.DEPLOY_RESULT);
+
+            if (buildFailed || deployFailed) {
+              const failedJob = buildFailed ? 'build (parsing, validation or commit)' : 'deploy (publishing to GitHub Pages)';
+              const reason = buildFailed ? (clean(env.BUILD_ERROR) || 'See the run log for details.') : 'Deploying to GitHub Pages failed. See the run log for details.';
+              const body = [
+                `The **${context.eventName}** run of *Build and deploy site* failed in the **${failedJob}** job.`,
+                '',
+                `- Run: ${runUrl}`,
+                `- Reason: \`${reason}\``,
+                '',
+                buildFailed
+                  ? 'Nothing was committed or deployed, so the last good data and site are still live. Microsoft may have changed the layout of the release documentation: check `scripts/Get-AzureLocalRelease.ps1` against https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2.'
+                  : 'The data was built and validated, but the site was not published. The next scheduled run redeploys while this issue is open.',
+                '',
+                'This issue closes automatically when a later run succeeds.',
+              ].join('\n');
+
+              await raise('parser-broken', 'b60205', 'The scheduled build or deployment failed', 'Azure Local data build failed: site not updated', body);
+            }
+            else if (succeeded) {
+              await resolve('parser-broken', `Resolved: ${runUrl} succeeded.`);
+            }
+
+            // The freshness check only ran if the build got that far
+            if (env.BUILD_RESULT === 'success') {
+              if (env.STALE === 'true') {
+                const body = [
+                  `The data on the site has not been refreshed within ${env.STALE_AFTER_DAYS} days.`,
+                  '',
+                  `- Run: ${runUrl}`,
+                  `- Detail: ${clean(env.STALE_MESSAGE)}`,
+                  '',
+                  'Builds are succeeding, so check that the parser still finds new releases in https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2 and that the scheduled workflow is still enabled. The threshold can be changed with the repository variable `STALE_AFTER_DAYS`. This issue closes automatically once the data is refreshed.',
+                ].join('\n');
+
+                await raise('data-stale', 'fbca04', 'The published data has not been refreshed recently', 'Azure Local data looks stale', body);
+              }
+              else if (env.STALE === 'false') {
+                await resolve('data-stale', `Resolved: the data is fresh again as of ${runUrl}.`);
+              }
+            }

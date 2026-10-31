@@ -1,0 +1,2 @@
+# RFC 5545 requires CRLF line endings, so never let git normalize the generated calendars
+*.ics -text

@@ -12,7 +12,8 @@ When does your Azure Local version run out of support? A static site that lists 
 This repository used to offer a PowerShell cmdlet and a [Pode](https://badgerati.github.io/Pode) API hosted as an Azure Container App. It is now a static site on GitHub Pages:
 
 - **Static site "Azure Local EOL"**: a plain, table-first page (in the spirit of the old Pode page) with the recommended release, the next end of support, a "Which version are you running?" checker and a table of releases with status and days left, all driven by the generated JSON data.
-- **Feeds**: an RSS feed, a JSON Feed and a JSON data file (plus the plain JSON array that was already committed here).
+- **Feeds**: an RSS feed, a JSON Feed, an end of support calendar (ICS) and a JSON data file (plus the plain JSON array that was already committed here).
+- **Safe by design**: generated files are validated before anything is published, so a broken parser can never replace good data with empty or partial data, and the owner is alerted through a GitHub issue when a run fails, see [Failure protection and alerts](#failure-protection-and-alerts).
 - **Fixed cmdlet and parser**: `Get-AzureLocalRelease` had stopped working because Microsoft changed the layout of the release documentation (the committed JSON had not been updated since February 2026). The parser has been rewritten for the current layout and now also handles builds that supersede earlier ones.
 - **End of support dates** derived from Microsoft's six-month support policy, see [How end of support is determined](#how-end-of-support-is-determined).
 - **Daily automatic refresh** through a GitHub Actions workflow, see [Deployment](#deployment).
@@ -29,7 +30,7 @@ Live at https://releases.azurelocal.graa.dev/.
 - **Releases table**: release, version, release date, end of support date and a status (**Supported**, **Ending soon** within 60 days, **End of support**) with the time left. Retired releases are hidden unless you tick *Show retired*.
 - **Row details**: click a row for the release's top feature highlights (with a *Preview* marker), the OS build, earlier builds that the release superseded and links to what's new, security updates, known issues and the solution update ZIP
 - **Search and filters**: search by version, release train or OS build and filter by OS version (24H2/23H2). The view is kept in the URL so it can be shared.
-- Feed links (RSS, JSON Feed, JSON) in the header
+- Feed links (RSS, JSON Feed, Calendar, JSON) in the header, and a short note on subscribing to the end of support calendar
 - Follows your light or dark system theme, with a mobile layout and an icon (`favicon.svg`, light and dark aware) plus a social share image
 - Works offline once loaded: a small service worker caches the site and data (network first, so it never serves stale data when online). Status and days left are calculated in the browser, so they stay correct between daily data refreshes. The footer shows when the data last changed (a daily run without changes writes nothing).
 
@@ -39,6 +40,8 @@ Live at https://releases.azurelocal.graa.dev/.
 | --- | --- |
 | RSS 2.0 feed of new releases | https://releases.azurelocal.graa.dev/feed.xml |
 | JSON Feed 1.1 of new releases | https://releases.azurelocal.graa.dev/feed.json |
+| End of support calendar (ICS) | https://releases.azurelocal.graa.dev/calendar.ics |
+| The same calendar with reminders | https://releases.azurelocal.graa.dev/calendar-reminders.ics |
 | Releases and release trains as JSON | https://releases.azurelocal.graa.dev/data/releases.json |
 | Plain array of releases (also committed to this repository) | [json/azure-local-releases.json](json/azure-local-releases.json) |
 
@@ -77,6 +80,18 @@ Live at https://releases.azurelocal.graa.dev/.
 ```
 
 `supported` reflects the time of generation. Consumers that need an accurate value should compare `endOfSupportDate` to the current date.
+
+### Calendar (ICS)
+
+`calendar.ics` has one all-day event per release on its end of support date (all releases, including ones that already ended). Subscribe to it by URL rather than importing the file, so your calendar picks up new releases automatically:
+
+- **Outlook**: *Add calendar → Subscribe from web*, paste `https://releases.azurelocal.graa.dev/calendar.ics`
+- **Google Calendar**: *Other calendars → From URL*
+- **Apple Calendar**: *File → New Calendar Subscription*, or open `webcal://releases.azurelocal.graa.dev/calendar.ics`
+
+`calendar-reminders.ics` is the same calendar with a reminder at 09:00, 30 and 7 days before each end of support. Pick the one that fits: Outlook and Apple Calendar honor these reminders, Google Calendar ignores reminders in subscribed calendars. Use one of the two, not both.
+
+Technical notes: valid RFC 5545 (CRLF line endings, folded lines, escaped text), events are transparent (they do not mark you busy) and carry a stable `UID` such as `azure-local-12.2610-eos@releases.azurelocal.graa.dev` (major version and release train, so a later build superseding the release, or a changed site domain, updates the event instead of duplicating it). Events are named after the train, `Azure Local 12.2610 end of support`, and the description lists the latest build. The calendar suggests a daily refresh (`REFRESH-INTERVAL`); clients decide how often they poll.
 
 ### Feature highlights
 
@@ -129,11 +144,14 @@ cd site
 python -m http.server 8000   # or any other static file server
 ```
 
-`Build-Site.ps1` writes `site/data/releases.json`, `site/feed.xml`, `site/feed.json` and `json/azure-local-releases.json`. These files are committed: the existing `site/data/releases.json` is the baseline the next run is compared against, see [Deployment](#deployment).
+`Build-Site.ps1` writes `site/data/releases.json`, `site/feed.xml`, `site/feed.json`, `site/calendar.ics`, `site/calendar-reminders.ics` and `json/azure-local-releases.json`. These files are committed: the existing `site/data/releases.json` is the baseline the next run is compared against, see [Deployment](#deployment).
 
 ```powershell
 ./scripts/Build-Site.ps1          # writes files only if the content changed
 ./scripts/Build-Site.ps1 -Force   # always write, for instance after changing the site URL
+
+./scripts/Test-SiteOutput.ps1     # validate the generated files in site/ and json/
+Invoke-Pester ./tests             # offline tests (Pester 5), also run by the workflow
 ```
 
 ### Deployment
@@ -143,23 +161,47 @@ The workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) ("Buil
 | Trigger | When | Deploys |
 | --- | --- | --- |
 | Schedule | Daily at 06:00 UTC (`cron: "0 6 * * *"`) | Only if the data changed |
-| Push to `main` | When `scripts/**`, `site/**` or the workflow itself changes | Always, so site changes go live |
+| Push to `main` | When `scripts/**`, `site/**`, `tests/**` or the workflow itself changes | Always, so site changes go live |
 | Manual | *Run workflow* on the Actions tab (`workflow_dispatch`), optionally with *force* | Always |
 
 What it does:
 
-1. **build** job: runs `scripts/Build-Site.ps1` with PowerShell 7. The script fetches Microsoft's release information and What's new article and compares the result with the committed `site/data/releases.json`, **ignoring the `generatedAt` timestamp**. If the content is identical it writes nothing and reports `changed=false`.
-2. If the content changed, the script writes the JSON data, RSS feed, JSON Feed and `json/azure-local-releases.json` (with a new `generatedAt`), and the workflow commits them to `main` as `github-actions[bot]` (commit message "Auto updating Azure Local Releases"). Commits made with the workflow token do not retrigger the workflow.
-3. Uploads `site/` as a Pages artifact, unless this is a scheduled run where nothing changed.
-4. **deploy** job (only on `main`): publishes the artifact with `actions/deploy-pages`. It is skipped on scheduled runs where nothing changed.
+1. **build** job: runs the Pester tests, then `scripts/Build-Site.ps1` with PowerShell 7. The script fetches Microsoft's release information and What's new article, generates every output in a temporary directory, validates it (see [Failure protection](#failure-protection-and-alerts)) and compares the result with the committed `site/data/releases.json`, **ignoring the `generatedAt` timestamp**. If the content is identical it writes nothing and reports `changed=false`.
+2. If the content changed, the files are replaced atomically (JSON data, RSS feed, JSON Feed, both calendars and `json/azure-local-releases.json`, with a new `generatedAt`) and the workflow commits them to `main` as `github-actions[bot]` (commit message "Auto updating Azure Local Releases"). Commits made with the workflow token do not retrigger the workflow.
+3. Validates the files once more with `scripts/Test-SiteOutput.ps1` and checks the data freshness, then uploads `site/` as a Pages artifact, unless this is a scheduled run where nothing changed.
+4. **deploy** job (only on `main`): publishes the artifact with `actions/deploy-pages`. It is skipped on scheduled runs where nothing changed, unless a `parser-broken` issue is open (so a deployment that failed earlier is retried).
+5. **notify** job: opens, updates or closes the alert issues, see [Alerts](#alerts).
 
-So on a day where Microsoft's documentation has not changed, a scheduled run fetches, compares and stops: **no commit and no redeploy**. Data changes that count include a new release, new feature highlights, a release reaching its end of support date (`supported` flips) and a different recommended build.
-
-Guards: `Build-Site.ps1` throws, before any file is written, if fewer than 20 releases are parsed, no release is supported, the number of releases drops by more than 10% compared with the published data, or the newest release is older than the newest published one. The run then fails (the repository owner gets the usual failed workflow notification), the committed data stays as it was and the published site stays up. The status and days left are calculated in the browser, so they stay correct between refreshes even without a redeploy.
+So on a day where Microsoft's documentation has not changed, a scheduled run fetches, compares and stops: **no commit and no redeploy**. Data changes that count include a new release, new feature highlights, a release reaching its end of support date (`supported` flips) and a different recommended build. The status and days left are calculated in the browser, so they stay correct between refreshes even without a redeploy.
 
 If `main` has branch protection that blocks pushes from `github-actions[bot]`, allow the bot to bypass it or the data commit step will fail.
 
-Permissions are scoped per job: `contents: write` (to commit the data) and `pages: write` (for `actions/configure-pages`) for the build job, and `pages: write` plus `id-token: write` for the deploy job, which uses the `github-pages` environment. The artifact is `site/`, including `site/CNAME`.
+Permissions are scoped per job: `contents: write` (to commit the data), `pages: write` (for `actions/configure-pages`) and `issues: read` (to see open alerts) for the build job, `pages: write` plus `id-token: write` for the deploy job, which uses the `github-pages` environment, and `issues: write` for the notify job. The artifact is `site/`, including `site/CNAME`. No extra secrets are used.
+
+### Failure protection and alerts
+
+#### Failure protection
+
+A parser or script failure must never publish empty or degraded files. `Build-Site.ps1` builds all outputs in a temporary directory and runs `scripts/Test-SiteOutput.ps1` on them before any real file is touched; only if that passes are the files replaced, one by one, each atomically (written next to the target and renamed over it). Any problem makes the step fail with the reason listed: the committed data, feeds and calendars stay as they were, nothing is committed and nothing is deployed, so the last good site stays live. The checks cover all outputs (JSON data, RSS, JSON Feed, both ICS calendars and the plain JSON array):
+
+- at least 20 releases, at least one supported release and a recommended build for new deployments
+- required fields present (version, dates, OS build, release train, links), version format, unique versions
+- sane dates: valid `yyyy-MM-dd`, not in the future, first availability not after the latest build, end of support exactly 180 days after first availability
+- not more than 10% fewer releases than the committed data, and the newest release not older than the newest committed one
+- RSS and JSON Feed are well formed, non-empty, list the same items and contain the newest release
+- both calendars are structurally valid RFC 5545, have one event per release with the end of support date as start, unique UIDs, the same events in both, and reminders only in the reminders calendar
+
+The tests in [tests](tests) (`Invoke-Pester ./tests`, run by the workflow before every build) cover the happy path, ICS output and UID stability, and failure cases (empty or too small result, big drop, missing fields, bad dates, nothing supported, garbage input) asserting that every existing file is byte-for-byte unchanged afterwards. The workflow also validates the working tree once more right before committing and uploading, including runs where nothing changed.
+
+#### Alerts
+
+The `notify` job uses only the built-in `GITHUB_TOKEN`:
+
+- **Run failed** (parsing, validation, tests, commit or deployment): opens an issue labelled `parser-broken` with a link to the failed run and the validation error. If one is already open, a comment with the new run is added instead (once per run, so the issue never gets duplicates). The issue is **closed automatically** with a comment when a later run succeeds. While it is open, scheduled runs redeploy even if the data did not change.
+- **Data looks stale**: the data changes at least monthly (a new release, or a release reaching end of support), so if `generatedAt` in `data/releases.json` is older than 60 days an issue labelled `data-stale` is opened (the build still succeeds). This catches a parser that runs fine but no longer finds anything new. It closes automatically once the data is refreshed. Change the limit with the repository variable `STALE_AFTER_DAYS`.
+- The labels are created on first use. Watch the repository (or just the issues) to get the alert by email or in the GitHub notifications.
+- **Email**: GitHub also emails the owner about **failed scheduled workflow runs** by default (to the person who last changed the cron schedule in the workflow file), as long as notifications for Actions are enabled in *Settings → Notifications → Actions*. That email works even if the issue alert itself fails.
+- Scheduled workflows in a public repository are disabled by GitHub after 60 days without repository activity. The daily run commits data changes, but if you see a "workflow disabled" notice, re-enable it on the Actions tab. If nothing runs, nothing alerts; the stale check is only evaluated when the workflow runs.
 
 ### One-time setup
 
@@ -210,10 +252,16 @@ See the related blog posts at https://blog.graa.dev for possible use cases:
 ├───scripts
 │       Build-Site.ps1
 │       Get-AzureLocalRelease.ps1
+│       Test-SiteOutput.ps1
+│
+├───tests
+│       Build-Site.Tests.ps1
 │
 └───site
     │   apple-touch-icon.png
     │   app.js
+    │   calendar-reminders.ics
+    │   calendar.ics
     │   CNAME
     │   favicon-32.png
     │   favicon.svg

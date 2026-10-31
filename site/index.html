@@ -27,6 +27,7 @@
   <meta name="twitter:image" content="https://releases.azurelocal.graa.dev/og-image.png">
   <link rel="alternate" type="application/rss+xml" title="Azure Local releases (RSS)" href="feed.xml">
   <link rel="alternate" type="application/feed+json" title="Azure Local releases (JSON Feed)" href="feed.json">
+  <link rel="alternate" type="text/calendar" title="Azure Local end of support (calendar)" href="calendar.ics">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,6 +43,7 @@
       <nav aria-label="Links">
         <a href="feed.xml">RSS</a>
         <a href="feed.json">JSON Feed</a>
+        <a href="calendar.ics">Calendar</a>
         <a href="data/releases.json">JSON</a>
         <a href="https://github.com/erikgraa/azure-local-releases">GitHub</a>
       </nav>
@@ -49,7 +51,7 @@
   </header>
 
   <main class="wrap">
-    <noscript><p class="notice">This page needs JavaScript. The data is also available as <a href="data/releases.json">JSON</a> and <a href="feed.xml">RSS</a>.</p></noscript>
+    <noscript><p class="notice">This page needs JavaScript. The data is also available as <a href="data/releases.json">JSON</a>, <a href="feed.xml">RSS</a> and <a href="calendar.ics">calendar</a>.</p></noscript>
     <p class="notice" id="error" hidden>The release data could not be loaded. Try again later, or use the <a href="data/releases.json">JSON data</a> directly.</p>
 
     <section class="facts" id="facts" aria-label="Summary">
@@ -97,6 +99,7 @@
       <h2>How this works</h2>
       <p>Microsoft supports each Azure Local release for six months. The end of support date is 180 days after a release first became available, as listed in <a href="https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2">Microsoft's release information</a>. Releases within 60 days of that date are marked <em>ending soon</em>.</p>
       <p class="muted">Only generic Azure Local releases are covered. Check supported installation and update paths with your OEM hardware vendor.</p>
+      <p>Get the dates in your calendar: subscribe by URL (not import, so it stays up to date) to <a href="calendar.ics">calendar.ics</a>, or to <a href="calendar-reminders.ics">calendar-reminders.ics</a> for a reminder 30 and 7 days before each end of support. Works in Outlook, Apple Calendar and Google Calendar (which ignores reminders from subscribed calendars).</p>
     </section>
   </main>
 
