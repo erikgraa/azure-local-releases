@@ -7,6 +7,17 @@ A static site that shows [Azure Local](https://learn.microsoft.com/en-us/azure/a
 > [!IMPORTANT]  
 > This tool only covers generic Azure Local releases as parsed from [Microsoft's documentation](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2). Please verify with specific OEM hardware vendors' documentation for supported installation/upgrade paths according to their particular compatibility matrices
 
+## ✨ What's new
+
+This repository used to offer a PowerShell cmdlet and a [Pode](https://badgerati.github.io/Pode) API hosted as an Azure Container App. It is now a static site on GitHub Pages:
+
+- **Static releases site** with a table of releases, release dates, support status and end of support dates, with status badges, countdowns, search, filtering and sorting.
+- **Feeds**: an RSS feed, a JSON Feed and a JSON data file (plus the plain JSON array that was already committed here).
+- **Fixed cmdlet and parser**: `Get-AzureLocalRelease` had stopped working because Microsoft changed the layout of the release documentation (the committed JSON had not been updated since February 2026). The parser has been rewritten for the current layout and now also handles builds that supersede earlier ones.
+- **End of support dates** derived from Microsoft's six-month support policy, see [How end of support is determined](#how-end-of-support-is-determined).
+- **Daily automatic refresh** through a GitHub Actions workflow, see [Deployment](#deployment).
+- **Removed**: the Pode app, the `Dockerfile`, the container app workflow and the query API, see [What was removed](#-what-was-removed).
+
 ## 🎬 Site
 
 Live at https://erikgraa.github.io/azure-local-releases/.
@@ -78,6 +89,16 @@ Get-AzureLocalRelease
 Get-AzureLocalRelease -SupportedReleases
 ```
 
+Parameters: `-Uri` (documentation URL), `-SupportedReleases` (only releases not yet at end of support) and `-OutputType String|Version` (type of `version`).
+
+What changed in the cmdlet:
+
+- Parses the current layout of Microsoft's release information, including the "Older versions" tables for 26100.xxx (12.x), 25398.xxx (11.x) and 25398.xxx (10.x), instead of relying on tab ids and a column layout that no longer exist.
+- Follows the chain of builds in a table row (`Supersedes: <version> Availability date: <date>`). `version` and `availabilityDate` are the latest build, `firstAvailabilityDate` is when the release first became available and `supersedes` lists the earlier builds.
+- Reads which build is meant for new deployments (`newDeployments`) from the "New deployments of this software use the … build" note.
+- Adds `firstAvailabilityDate`, `osVersion` (`24H2`/`23H2`) and `supersedes`. Existing properties are kept, and `supported` now compares dates correctly.
+- Falls back to the general documentation pages when a row has no links, ignores the offline update ZIP lookup if it is unavailable (with a warning) and throws if no releases are found, so a documentation change is noticed rather than producing empty data.
+
 ## 🛠 Development
 
 The site is plain HTML, CSS and JavaScript in [site](site) with no build step. Generate the data and preview it locally (requires PowerShell 7):
@@ -93,9 +114,43 @@ python -m http.server 8000   # or any other static file server
 
 ### Deployment
 
-The [workflow](.github/workflows/pages.yml) runs on pushes to `main`, daily and on demand. It generates the data, commits `json/azure-local-releases.json` if it changed and deploys `site` to GitHub Pages.
+The workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) ("Build and deploy site") keeps the site and data up to date.
 
-To enable it in a fork, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. If the site is served from a custom domain, set the repository variable `SITE_URL` so the feeds contain the right links.
+| Trigger | When |
+| --- | --- |
+| Schedule | Daily at 06:00 UTC (`cron: "0 6 * * *"`) |
+| Push to `main` | When `scripts/**`, `site/**` or the workflow itself changes |
+| Manual | *Run workflow* on the Actions tab (`workflow_dispatch`) |
+
+What it does:
+
+1. **build** job: runs `scripts/Build-Site.ps1` with PowerShell 7, which fetches Microsoft's documentation and writes the JSON data, RSS feed and JSON Feed.
+2. Commits `json/azure-local-releases.json` back to `main` only if it changed (as `github-actions[bot]`). This keeps the raw file URL working for existing consumers. These commits do not retrigger the workflow.
+3. Uploads `site/` as a Pages artifact.
+4. **deploy** job (only on `main`): publishes the artifact with `actions/deploy-pages`.
+
+Guard: if Microsoft changes the documentation format and fewer than 20 releases are parsed, or none are supported, `Build-Site.ps1` fails and the workflow stops before deploying. The previously published site stays up and the failed run is visible in the Actions tab. The countdowns and status badges are calculated in the browser, so they stay correct between refreshes.
+
+Permissions are scoped per job: `contents: write` for the build job (to commit the JSON) and `pages: write` plus `id-token: write` for the deploy job.
+
+### One-time setup
+
+1. In the repository go to **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. Without this the deploy job cannot publish.
+2. Run the workflow once from the Actions tab (or push to `main`) to publish the first version. The site will then be at `https://<owner>.github.io/<repo>/`.
+3. Optional: if the site is served from a custom domain, set the repository variable `SITE_URL` (**Settings → Secrets and variables → Actions → Variables**) so the feeds contain the right links, and configure the domain under Pages.
+
+## 🗑 What was removed
+
+| Removed | Why / replacement |
+| --- | --- |
+| `pode/` (Pode server, views, OpenAPI/Swagger) | Replaced by the static site in `site/` |
+| `Dockerfile` | No container is needed any more |
+| `.github/workflows/containerapp.yml` (Docker Hub, ACR and Azure Container App deploy) | Replaced by `pages.yml`. The Azure Container App, its registry and the related repository secrets (`DOCKERHUB_*`, `AZURE_CREDENTIALS`, `REGISTRY_*`, `CONTAINER_APP_NAME`, `RESOURCE_GROUP`) and variable `CONTAINER_IMAGE_NAME` are no longer used and can be deleted |
+| `.github/workflows/json.yml` | Merged into `pages.yml`, which also keeps `json/azure-local-releases.json` updated |
+| `assets/pode.png` | No longer relevant |
+| Query API `/api/releases` (`supported`, `releaseTrain`, `baselineRelease`, `osBuild`, `version`, `newDeployments`, `solutionUpdate`, `latest`) and `/api/releasetrains` | A static site cannot filter server side. Fetch `data/releases.json` and filter client side, for example `jq '.releases[] \| select(.supported)'` or `Where-Object supported`. `trains` in the JSON replaces `/api/releasetrains` and `newDeployments` replaces `?newDeployments=true`. |
+
+The previous demo at `releases.azurelocal.graa.dev` was hosted by the container app. The GitHub Pages site does not use that domain unless it is configured as a custom domain.
 
 ## ✍ Blog post
 
@@ -129,9 +184,6 @@ See the related blog posts at https://blog.graa.dev for possible use cases:
         index.html
         style.css
 ```
-
-> [!NOTE]
-> The earlier Pode API and container app deployment have been replaced by the static site. The JSON files above replace the former `/api/releases` endpoints; filter them client-side (for example with `jq` or `Where-Object`).
 
 ## 👏 Contributions
 
