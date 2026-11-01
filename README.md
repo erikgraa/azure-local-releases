@@ -1,6 +1,6 @@
 # Azure Local Lifecycle
 
-When does your Azure Local version run out of support? A static site that lists every [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) release with its release date and end of support date. It is rebuilt daily from [Microsoft's release information](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2) and hosted on GitHub Pages at https://lifecycle.azl.graa.dev/ (repository: `azure-local-releases`).
+Keep on top of your Azure Local releases and when support ends. A static site that lists every [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) release with its release date and end of support date. It is rebuilt daily from [Microsoft's release information](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2) and hosted on GitHub Pages at https://lifecycle.azl.graa.dev/ (repository: `azure-local-releases`).
 
 [![Build and deploy site](https://github.com/erikgraa/azure-local-releases/actions/workflows/pages.yml/badge.svg)](https://github.com/erikgraa/azure-local-releases/actions/workflows/pages.yml)
 
