@@ -69,7 +69,29 @@
     $('mine').innerHTML = '<option value="">Select a version</option>' +
       '<optgroup label="In support">' + sorted.filter(r => r.status !== 'eol').map(option).join('') + '</optgroup>' +
       '<optgroup label="Out of support">' + sorted.filter(r => r.status === 'eol').map(option).join('') + '</optgroup>';
-    $('mine').addEventListener('change', () => { setVerdict(); saveState(); });
+    $('mine').addEventListener('change', () => { setVerdict(); saveState(); updateChips(); });
+    renderChips(sorted.filter(r => r.status !== 'eol'));
+  }
+
+  // One-click buttons for the supported releases, kept in sync with the dropdown
+  function renderChips(supported) {
+    const group = $('chips');
+    group.innerHTML = supported.map(r => {
+      const duplicate = supported.filter(x => x.releaseTrain === r.releaseTrain).length > 1;
+      const label = duplicate ? r.version.split('.').slice(0, 2).join('.') : r.releaseTrain;
+      return '<button type="button" class="chip" data-version="' + esc(r.version) + '" aria-pressed="false" title="' + esc(r.version) + '" aria-label="' + esc(label + ' (' + r.version + ')') + '">' + esc(label) + '</button>';
+    }).join('');
+    group.hidden = supported.length === 0;
+    group.addEventListener('click', e => {
+      const btn = e.target.closest('button.chip');
+      if (!btn) return;
+      $('mine').value = $('mine').value === btn.dataset.version ? '' : btn.dataset.version;
+      setVerdict(); saveState(); updateChips();
+    });
+  }
+
+  function updateChips() {
+    $('chips').querySelectorAll('button.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.version === $('mine').value)));
   }
 
   function setVerdict() {
@@ -185,6 +207,7 @@
     const mine = loadState();
     if (mine && releases.some(r => r.version === mine)) $('mine').value = mine;
     setVerdict();
+    updateChips();
     draw();
   }
 
