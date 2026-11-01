@@ -1,6 +1,6 @@
-# Azure Local EOL
+# Azure Local Lifecycle
 
-When does your Azure Local version run out of support? A static site that lists every [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) release with its release date and end of support date. It is rebuilt daily from [Microsoft's release information](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2) and hosted on GitHub Pages at https://eol.azl.graa.dev/ (repository: `azure-local-releases`).
+When does your Azure Local version run out of support? A static site that lists every [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) release with its release date and end of support date. It is rebuilt daily from [Microsoft's release information](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2) and hosted on GitHub Pages at https://lifecycle.azl.graa.dev/ (repository: `azure-local-releases`).
 
 [![Build and deploy site](https://github.com/erikgraa/azure-local-releases/actions/workflows/pages.yml/badge.svg)](https://github.com/erikgraa/azure-local-releases/actions/workflows/pages.yml)
 
@@ -11,7 +11,7 @@ When does your Azure Local version run out of support? A static site that lists 
 
 This repository used to offer a PowerShell cmdlet and a [Pode](https://badgerati.github.io/Pode) API hosted as an Azure Container App. It is now a static site on GitHub Pages:
 
-- **Static site "Azure Local EOL"**: a plain, table-first page (in the spirit of the old Pode page) with the recommended release, the next end of support, a "Which version are you running?" checker and a table of releases with status and days left, all driven by the generated JSON data.
+- **Static site "Azure Local Lifecycle"**: a plain, table-first page (in the spirit of the old Pode page) with the recommended release, the next end of support, a "Which version are you running?" checker and a table of releases with status and days left, all driven by the generated JSON data.
 - **Feeds**: an RSS feed, a JSON Feed, an end of support calendar (ICS) and a JSON data file (plus the plain JSON array that was already committed here).
 - **Safe by design**: generated files are validated before anything is published, so a broken parser can never replace good data with empty or partial data, and the owner is alerted through a GitHub issue when a run fails, see [Failure protection and alerts](#failure-protection-and-alerts).
 - **Fixed cmdlet and parser**: `Get-AzureLocalRelease` had stopped working because Microsoft changed the layout of the release documentation (the committed JSON had not been updated since February 2026). The parser has been rewritten for the current layout and now also handles builds that supersede earlier ones.
@@ -21,9 +21,9 @@ This repository used to offer a PowerShell cmdlet and a [Pode](https://badgerati
 
 ## 🎬 Site
 
-Live at https://eol.azl.graa.dev/.
+Live at https://lifecycle.azl.graa.dev/.
 
-[![Azure Local releases site](/assets/demo.png)](https://eol.azl.graa.dev/)
+[![Azure Local releases site](/assets/demo.png)](https://lifecycle.azl.graa.dev/)
 
 - **At a glance**: the release recommended for new deployments (with its end of support date) and the next release to reach end of support, with days left
 - **Version checker**: pick the version you run and see when it goes out of support, or that it already has, and what to update to
@@ -38,11 +38,11 @@ Live at https://eol.azl.graa.dev/.
 
 | Artifact | URL |
 | --- | --- |
-| RSS 2.0 feed of new releases | https://eol.azl.graa.dev/feed.xml |
-| JSON Feed 1.1 of new releases | https://eol.azl.graa.dev/feed.json |
-| End of support calendar (ICS) | https://eol.azl.graa.dev/calendar.ics |
-| The same calendar with reminders | https://eol.azl.graa.dev/calendar-reminders.ics |
-| Releases and release trains as JSON | https://eol.azl.graa.dev/data/releases.json |
+| RSS 2.0 feed of new releases | https://lifecycle.azl.graa.dev/feed.xml |
+| JSON Feed 1.1 of new releases | https://lifecycle.azl.graa.dev/feed.json |
+| End of support calendar (ICS) | https://lifecycle.azl.graa.dev/calendar.ics |
+| The same calendar with reminders | https://lifecycle.azl.graa.dev/calendar-reminders.ics |
+| Releases and release trains as JSON | https://lifecycle.azl.graa.dev/data/releases.json |
 | Plain array of releases (also committed to this repository) | [json/azure-local-releases.json](json/azure-local-releases.json) |
 
 `data/releases.json` looks like this:
@@ -85,13 +85,13 @@ Live at https://eol.azl.graa.dev/.
 
 `calendar.ics` has one all-day event per release on its end of support date (all releases, including ones that already ended). Subscribe to it by URL rather than importing the file, so your calendar picks up new releases automatically:
 
-- **Outlook**: *Add calendar → Subscribe from web*, paste `https://eol.azl.graa.dev/calendar.ics`
+- **Outlook**: *Add calendar → Subscribe from web*, paste `https://lifecycle.azl.graa.dev/calendar.ics`
 - **Google Calendar**: *Other calendars → From URL*
-- **Apple Calendar**: *File → New Calendar Subscription*, or open `webcal://eol.azl.graa.dev/calendar.ics`
+- **Apple Calendar**: *File → New Calendar Subscription*, or open `webcal://lifecycle.azl.graa.dev/calendar.ics`
 
 `calendar-reminders.ics` is the same calendar with a reminder at 09:00, 30 and 7 days before each end of support. Pick the one that fits: Outlook and Apple Calendar honor these reminders, Google Calendar ignores reminders in subscribed calendars. Use one of the two, not both.
 
-Technical notes: valid RFC 5545 (CRLF line endings, folded lines, escaped text), events are transparent (they do not mark you busy) and carry a stable `UID` such as `azure-local-12.2610-eos@releases.azurelocal.graa.dev` (major version and release train, so a later build superseding the release, or a changed site domain, updates the event instead of duplicating it; the identifier deliberately keeps the original domain `releases.azurelocal.graa.dev` even though the site now lives at `eol.azl.graa.dev`, because changing a UID would make existing subscribers see every event twice). Events are named after the train, `Azure Local 12.2610 end of support`, and the description lists the latest build. The calendar suggests a daily refresh (`REFRESH-INTERVAL`); clients decide how often they poll.
+Technical notes: valid RFC 5545 (CRLF line endings, folded lines, escaped text), events are transparent (they do not mark you busy) and carry a stable `UID` such as `azure-local-12.2610-eos@releases.azurelocal.graa.dev` (major version and release train, so a later build superseding the release, or a changed site domain, updates the event instead of duplicating it; the identifier deliberately keeps the original domain `releases.azurelocal.graa.dev` even though the site now lives at `lifecycle.azl.graa.dev`, because changing a UID would make existing subscribers see every event twice). Events are named after the train, `Azure Local 12.2610 end of support`, and the description lists the latest build. The calendar suggests a daily refresh (`REFRESH-INTERVAL`); clients decide how often they poll.
 
 ### Feature highlights
 
@@ -205,11 +205,11 @@ The `notify` job uses only the built-in `GITHUB_TOKEN`:
 
 ### One-time setup
 
-The repository is already set up for Pages with GitHub Actions as the source and the custom domain `eol.azl.graa.dev`. In a fork, or if you change the domain:
+The repository is already set up for Pages with GitHub Actions as the source and the custom domain `lifecycle.azl.graa.dev`. In a fork, or if you change the domain:
 
 1. **Source**: **Settings → Pages → Build and deployment → Source** must be **GitHub Actions**. Without this the deploy job cannot publish.
 2. **Custom domain**: set it under **Settings → Pages → Custom domain** and keep [`site/CNAME`](site/CNAME) in sync. The file is part of the published artifact, and `Build-Site.ps1` uses it as the base URL for the absolute links in the feeds (override with the repository variable `SITE_URL` or `-SiteUrl`). Changing the domain regenerates the feeds on the next run. Without a custom domain, delete `site/CNAME` and the site is served from `https://<owner>.github.io/<repo>/`, which works too because all site links are relative.
-3. **DNS**: the domain needs a `CNAME` record pointing to `<owner>.github.io` (for `eol.azl.graa.dev`: `erikgraa.github.io`). If it still points at the old Azure Container App, change it. It can take a while before GitHub provisions the certificate.
+3. **DNS**: the domain needs a `CNAME` record pointing to `<owner>.github.io` (for `lifecycle.azl.graa.dev`: `erikgraa.github.io`). If it still points at the old Azure Container App, change it. It can take a while before GitHub provisions the certificate.
 4. **HTTPS**: once the certificate is ready, tick **Enforce HTTPS** under Pages.
 5. Run the workflow once from the Actions tab (or push to `main`) to publish the first version.
 
@@ -224,7 +224,7 @@ The repository is already set up for Pages with GitHub Actions as the source and
 | `assets/pode.png` | No longer relevant |
 | Query API `/api/releases` (`supported`, `releaseTrain`, `baselineRelease`, `osBuild`, `version`, `newDeployments`, `solutionUpdate`, `latest`) and `/api/releasetrains` | A static site cannot filter server side. Fetch `data/releases.json` and filter client side, for example `jq '.releases[] \| select(.supported)'` or `Where-Object supported`. `trains` in the JSON replaces `/api/releasetrains` and `newDeployments` replaces `?newDeployments=true`. |
 
-The previous demo at `releases.azurelocal.graa.dev` was hosted by the container app. The site now lives at `eol.azl.graa.dev` on GitHub Pages, so the DNS record for the new domain has to point at GitHub Pages, see [One-time setup](#one-time-setup).
+The previous demo at `releases.azurelocal.graa.dev` was hosted by the container app. The site now lives at `lifecycle.azl.graa.dev` on GitHub Pages, so the DNS record for the new domain has to point at GitHub Pages, see [One-time setup](#one-time-setup).
 
 ## ✍ Blog post
 

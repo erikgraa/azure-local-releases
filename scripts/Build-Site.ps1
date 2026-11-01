@@ -1,6 +1,6 @@
 <#
   .SYNOPSIS
-  Generates the data behind the Azure Local EOL site: JSON data, RSS and JSON feeds and ICS calendars.
+  Generates the data behind the Azure Local Lifecycle site: JSON data, RSS and JSON feeds and ICS calendars.
 
   .DESCRIPTION
   Retrieves releases using Get-AzureLocalRelease and writes:
@@ -342,7 +342,7 @@ try {
     foreach ($line in @(
       'BEGIN:VCALENDAR'
       'VERSION:2.0'
-      'PRODID:-//erikgraa//Azure Local EOL//EN'
+      'PRODID:-//erikgraa//Azure Local Lifecycle//EN'
       'CALSCALE:GREGORIAN'
       'METHOD:PUBLISH'
       ('NAME:{0}' -f (& $escapeIcs $name))

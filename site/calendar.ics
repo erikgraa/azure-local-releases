@@ -1,612 +1,612 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//erikgraa//Azure Local EOL//EN
+PRODID:-//erikgraa//Azure Local Lifecycle//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 NAME:Azure Local end of support
 X-WR-CALNAME:Azure Local end of support
 DESCRIPTION:When each Azure Local release reaches end of support. Updated d
- aily from https://eol.azl.graa.dev/
+ aily from https://lifecycle.azl.graa.dev/
 X-WR-CALDESC:When each Azure Local release reaches end of support. Updated 
- daily from https://eol.azl.graa.dev/
+ daily from https://lifecycle.azl.graa.dev/
 REFRESH-INTERVAL;VALUE=DURATION:P1D
 X-PUBLISHED-TTL:P1D
 BEGIN:VEVENT
 UID:azure-local-10.2405.2-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250112
 DTEND;VALUE=DATE:20250113
 SUMMARY:Azure Local 10.2405.2 end of support
 DESCRIPTION:Azure Local 10.2405.2 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2024-07-16
  ). Latest build: 10.2405.2.7 (OS build 25398.1009).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2405.3-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250216
 DTEND;VALUE=DATE:20250217
 SUMMARY:Azure Local 10.2405.3 end of support
 DESCRIPTION:Azure Local 10.2405.3 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2024-08-20
  ). Latest build: 10.2405.3.7 (OS build 25398.1085).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2408.0-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250304
 DTEND;VALUE=DATE:20250305
 SUMMARY:Azure Local 10.2408.0 end of support
 DESCRIPTION:Azure Local 10.2408.0 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2024-09-05
  ). Latest build: 10.2408.0.29 (OS build 25398.1085).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2408.1-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250324
 DTEND;VALUE=DATE:20250325
 SUMMARY:Azure Local 10.2408.1 end of support
 DESCRIPTION:Azure Local 10.2408.1 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2024-09-25
  ). Latest build: 10.2408.1.9 (OS build 25398.1128).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2408.2-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250421
 DTEND;VALUE=DATE:20250422
 SUMMARY:Azure Local 10.2408.2 end of support
 DESCRIPTION:Azure Local 10.2408.2 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2024-10-23
  ). Latest build: 10.2408.2.7 (OS build 25398.1189).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2411.0.22-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250513
 DTEND;VALUE=DATE:20250514
 SUMMARY:Azure Local 10.2411.0.22 end of support
 DESCRIPTION:Azure Local 10.2411.0.22 (23H2) reaches end of support. Each re
  lease is supported for six months after it first became available (2024-11
  -14). Latest build: 10.2411.0.22 (OS build 25398.1251).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2411.0.24-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250525
 DTEND;VALUE=DATE:20250526
 SUMMARY:Azure Local 10.2411.0.24 end of support
 DESCRIPTION:Azure Local 10.2411.0.24 (23H2) reaches end of support. Each re
  lease is supported for six months after it first became available (2024-11
  -26). Latest build: 10.2411.0.24 (OS build 25398.1251).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2411.1-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250615
 DTEND;VALUE=DATE:20250616
 SUMMARY:Azure Local 10.2411.1 end of support
 DESCRIPTION:Azure Local 10.2411.1 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2024-12-17
  ). Latest build: 10.2411.1.10 (OS build 25398.1308).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2411.2-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250809
 DTEND;VALUE=DATE:20250810
 SUMMARY:Azure Local 10.2411.2 end of support
 DESCRIPTION:Azure Local 10.2411.2 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2025-02-10
  ). Latest build: 10.2411.2.12 (OS build 25398.1369).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2411.3-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250819
 DTEND;VALUE=DATE:20250820
 SUMMARY:Azure Local 10.2411.3 end of support
 DESCRIPTION:Azure Local 10.2411.3 (23H2) reaches end of support. Each relea
  se is supported for six months after it first became available (2025-02-20
  ). Latest build: 10.2411.3.2 (OS build 25398.1425).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2503-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20250927
 DTEND;VALUE=DATE:20250928
 SUMMARY:Azure Local 10.2503 end of support
 DESCRIPTION:Azure Local 10.2503 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-03-31).
   Latest build: 10.2503.0.13 (OS build 25398.1486).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-11.2504-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251018
 DTEND;VALUE=DATE:20251019
 SUMMARY:Azure Local 11.2504 end of support
 DESCRIPTION:Azure Local 11.2504 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-04-21).
   Latest build: 11.2504.1001.21 (OS build 25398.1551).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2504-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251026
 DTEND;VALUE=DATE:20251027
 SUMMARY:Azure Local 12.2504 end of support
 DESCRIPTION:Azure Local 12.2504 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-04-29).
   Latest build: 12.2504.1001.20 (OS build 26100.3775).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2505-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251124
 DTEND;VALUE=DATE:20251125
 SUMMARY:Azure Local 10.2505 end of support
 DESCRIPTION:Azure Local 10.2505 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-05-28).
   Latest build: 10.2505.0.16 (OS build 25398.1611).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-11.2505-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251124
 DTEND;VALUE=DATE:20251125
 SUMMARY:Azure Local 11.2505 end of support
 DESCRIPTION:Azure Local 11.2505 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-05-28).
   Latest build: 11.2505.1001.22 (OS build 25398.1611).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2505-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251124
 DTEND;VALUE=DATE:20251125
 SUMMARY:Azure Local 12.2505 end of support
 DESCRIPTION:Azure Local 12.2505 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-05-28).
   Latest build: 12.2505.1001.23 (OS build 26100.4061).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2506-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251229
 DTEND;VALUE=DATE:20251230
 SUMMARY:Azure Local 10.2506 end of support
 DESCRIPTION:Azure Local 10.2506 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-07-02).
   Latest build: 10.2506.0.15 (OS build 25398.1665).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-11.2506-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251229
 DTEND;VALUE=DATE:20251230
 SUMMARY:Azure Local 11.2506 end of support
 DESCRIPTION:Azure Local 11.2506 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-07-02).
   Latest build: 11.2506.1001.28 (OS build 25398.1665).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2506-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20251229
 DTEND;VALUE=DATE:20251230
 SUMMARY:Azure Local 12.2506 end of support
 DESCRIPTION:Azure Local 12.2506 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-07-02).
   Latest build: 12.2506.1001.29 (OS build 26100.4349).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-10.2507-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260120
 DTEND;VALUE=DATE:20260121
 SUMMARY:Azure Local 10.2507 end of support
 DESCRIPTION:Azure Local 10.2507 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-07-24).
   Latest build: 10.2507.0.6 (OS build 25398.1732).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-11.2507-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260120
 DTEND;VALUE=DATE:20260121
 SUMMARY:Azure Local 11.2507 end of support
 DESCRIPTION:Azure Local 11.2507 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-07-24).
   Latest build: 11.2507.1001.9 (OS build 25398.1732).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2507-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260120
 DTEND;VALUE=DATE:20260121
 SUMMARY:Azure Local 12.2507 end of support
 DESCRIPTION:Azure Local 12.2507 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-07-24).
   Latest build: 12.2507.1001.10 (OS build 26100.4652).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-11.2508-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260225
 DTEND;VALUE=DATE:20260226
 SUMMARY:Azure Local 11.2508 end of support
 DESCRIPTION:Azure Local 11.2508 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-08-29).
   Latest build: 11.2508.1001.51 (OS build 25398.1791).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2508-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260225
 DTEND;VALUE=DATE:20260226
 SUMMARY:Azure Local 12.2508 end of support
 DESCRIPTION:Azure Local 12.2508 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-08-29).
   Latest build: 12.2508.1001.52 (OS build 26100.4946).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-11.2509-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260321
 DTEND;VALUE=DATE:20260322
 SUMMARY:Azure Local 11.2509 end of support
 DESCRIPTION:Azure Local 11.2509 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-09-22).
   Latest build: 11.2509.1001.21 (OS build 25398.1849).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2509-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260321
 DTEND;VALUE=DATE:20260322
 SUMMARY:Azure Local 12.2509 end of support
 DESCRIPTION:Azure Local 12.2509 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-09-22).
   Latest build: 12.2509.1001.22 (OS build 26100.6584).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-11.2510-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260422
 DTEND;VALUE=DATE:20260423
 SUMMARY:Azure Local 11.2510 end of support
 DESCRIPTION:Azure Local 11.2510 (23H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-10-24).
   Latest build: 11.2510.1002.93 (OS build 25398.1913).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2510-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260504
 DTEND;VALUE=DATE:20260505
 SUMMARY:Azure Local 12.2510 end of support
 DESCRIPTION:Azure Local 12.2510 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-11-05).
   Latest build: 12.2510.1002.531 (OS build 26100.6899).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2511-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260517
 DTEND;VALUE=DATE:20260518
 SUMMARY:Azure Local 12.2511 end of support
 DESCRIPTION:Azure Local 12.2511 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-11-18).
   Latest build: 12.2511.1002.502 (OS build 26100.7171).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2512-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260614
 DTEND;VALUE=DATE:20260615
 SUMMARY:Azure Local 12.2512 end of support
 DESCRIPTION:Azure Local 12.2512 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2025-12-16).
   Latest build: 12.2512.1002.16 (OS build 26100.7462).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2601-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260721
 DTEND;VALUE=DATE:20260722
 SUMMARY:Azure Local 12.2601 end of support
 DESCRIPTION:Azure Local 12.2601 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-01-22).
   Latest build: 12.2601.1002.503 (OS build 26100.32230).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2602-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260816
 DTEND;VALUE=DATE:20260817
 SUMMARY:Azure Local 12.2602 end of support
 DESCRIPTION:Azure Local 12.2602 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-02-17).
   Latest build: 12.2602.1002.501 (OS build 26100.32370).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2603-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20260913
 DTEND;VALUE=DATE:20260914
 SUMMARY:Azure Local 12.2603 end of support
 DESCRIPTION:Azure Local 12.2603 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-03-17).
   Latest build: 12.2603.1002.502 (OS build 26100.32522).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2604-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20261019
 DTEND;VALUE=DATE:20261020
 SUMMARY:Azure Local 12.2604 end of support
 DESCRIPTION:Azure Local 12.2604 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-04-22).
   Latest build: 12.2604.1003.1006 (OS build 26100.32690).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2605-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:Azure Local 12.2605 end of support
 DESCRIPTION:Azure Local 12.2605 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-05-28).
   Latest build: 12.2605.1003.1003 (OS build 26100.32860).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2606-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20261212
 DTEND;VALUE=DATE:20261213
 SUMMARY:Azure Local 12.2606 end of support
 DESCRIPTION:Azure Local 12.2606 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-06-15).
   Latest build: 12.2606.1003.205 (OS build 26100.32995).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2607-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20270118
 DTEND;VALUE=DATE:20270119
 SUMMARY:Azure Local 12.2607 end of support
 DESCRIPTION:Azure Local 12.2607 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-07-22).
   Latest build: 12.2607.1003.73 (OS build 26100.33158).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2608-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20270214
 DTEND;VALUE=DATE:20270215
 SUMMARY:Azure Local 12.2608 end of support
 DESCRIPTION:Azure Local 12.2608 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-08-18).
   Latest build: 12.2608.1003.9 (OS build 26100.33296).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2609-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20270310
 DTEND;VALUE=DATE:20270311
 SUMMARY:Azure Local 12.2609 end of support
 DESCRIPTION:Azure Local 12.2609 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-09-11).
   Latest build: 12.2609.1003.7 (OS build 26100.33438).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:azure-local-12.2610-eos@releases.azurelocal.graa.dev
-DTSTAMP:20261101T105939Z
-LAST-MODIFIED:20261101T105939Z
+DTSTAMP:20261101T110319Z
+LAST-MODIFIED:20261101T110319Z
 DTSTART;VALUE=DATE:20270420
 DTEND;VALUE=DATE:20270421
 SUMMARY:Azure Local 12.2610 end of support
 DESCRIPTION:Azure Local 12.2610 (24H2) reaches end of support. Each release
   is supported for six months after it first became available (2026-10-22).
   Latest build: 12.2610.1004.41 (OS build 26100.33650).
-URL:https://eol.azl.graa.dev/
+URL:https://lifecycle.azl.graa.dev/
 CATEGORIES:Azure Local
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
