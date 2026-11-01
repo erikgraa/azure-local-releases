@@ -1,5 +1,5 @@
 // Network first, falling back to the cache, so the site keeps working offline without ever serving stale data online
-const CACHE = 'eol-v4';
+const CACHE = 'eol-v5';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'favicon.svg', 'site.webmanifest', 'data/releases.json'];
 
 self.addEventListener('install', event => {
