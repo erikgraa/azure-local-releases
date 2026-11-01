@@ -4,26 +4,30 @@
     .bg { fill: #005a9e; }
     .page { fill: #fff; }
     .head { fill: #cfe4f5; }
+    .dot { fill: #005a9e; }
     .ring { fill: #fff; stroke: #005a9e; }
-    .cloud { fill: #005a9e; }
+    .badge { fill: #fff; stroke: #005a9e; }
     .end { fill: #f5a742; }
     @media (prefers-color-scheme: dark) {
       .bg { fill: #7fc0ff; }
       .page { fill: #0f1b27; }
       .head { fill: #243648; }
+      .dot { fill: #7fc0ff; }
       .ring { fill: #0f1b27; stroke: #7fc0ff; }
-      .cloud { fill: #7fc0ff; }
+      .badge { fill: #0f1b27; stroke: #7fc0ff; }
       .end { fill: #e8a13a; }
     }
   </style>
   <rect class="bg" width="64" height="64" rx="14"/>
   <!-- Calendar page -->
-  <rect class="page" x="9" y="12" width="46" height="43" rx="7"/>
-  <path class="head" d="M9 25h46v-6a7 7 0 0 0-7-7H16a7 7 0 0 0-7 7Z"/>
-  <rect class="ring" x="19" y="7" width="5" height="11" rx="2.5" stroke-width="2"/>
-  <rect class="ring" x="40" y="7" width="5" height="11" rx="2.5" stroke-width="2"/>
-  <!-- Azure Local: the cloud, brought on premises -->
-  <path class="cloud" transform="translate(13.5 21.5) scale(1.55)" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
-  <!-- End of support date -->
-  <circle class="end" cx="46" cy="33" r="4"/>
+  <rect class="page" x="7" y="9" width="40" height="39" rx="6"/>
+  <path class="head" d="M7 22h40v-7a6 6 0 0 0-6-6H13a6 6 0 0 0-6 6Z"/>
+  <rect class="ring" x="15" y="5" width="5" height="10" rx="2.5" stroke-width="2"/>
+  <rect class="ring" x="34" y="5" width="5" height="10" rx="2.5" stroke-width="2"/>
+  <circle class="dot" cx="15" cy="30" r="3"/>
+  <circle class="dot" cx="25" cy="30" r="3"/>
+  <circle class="dot" cx="15" cy="40" r="3"/>
+  <circle class="end" cx="35" cy="30" r="3.5"/>
+  <!-- Azure Local: the cloud, as a badge -->
+  <path class="badge" transform="translate(22 26) scale(1.7)" stroke-width="2" stroke-linejoin="round" paint-order="stroke" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
 </svg>
