@@ -69,7 +69,8 @@ try {
 
   $sourceUrl = 'https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2'
 
-  # Event UIDs must stay the same for as long as the calendar exists, so they are independent of the site URL
+  # Event UIDs must stay the same for as long as the calendar exists, so they are independent of the site URL.
+  # This is the original site domain, kept on purpose: changing it would make subscribed calendars duplicate every event.
   $uidDomain = 'releases.azurelocal.graa.dev'
 
   if (-not $SiteUrl) {
