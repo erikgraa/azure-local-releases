@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Azure Local releases</title>
-    <link>https://releases.azurelocal.graa.dev/</link>
+    <link>https://lifecycle.azl.graa.dev/</link>
     <description>New Azure Local releases and when they reach end of support.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 31 Oct 2026 18:51:41 GMT</lastBuildDate>
-    <atom:link href="https://releases.azurelocal.graa.dev/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Nov 2026 11:03:19 GMT</lastBuildDate>
+    <atom:link href="https://lifecycle.azl.graa.dev/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Azure Local 12.2610.1004.41 released</title>
       <link>https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2610&amp;preserve-view=true#features-and-improvements-in-2610</link>

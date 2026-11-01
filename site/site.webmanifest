@@ -1,6 +1,6 @@
 {
-  "name": "Azure Local EOL",
-  "short_name": "Azure Local EOL",
+  "name": "Azure Local Lifecycle",
+  "short_name": "Azure Local Lifecycle",
   "description": "Azure Local releases and when they reach end of support.",
   "start_url": "./",
   "scope": "./",

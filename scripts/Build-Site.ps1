@@ -1,6 +1,6 @@
 <#
   .SYNOPSIS
-  Generates the data behind the Azure Local EOL site: JSON data, RSS and JSON feeds and ICS calendars.
+  Generates the data behind the Azure Local Lifecycle site: JSON data, RSS and JSON feeds and ICS calendars.
 
   .DESCRIPTION
   Retrieves releases using Get-AzureLocalRelease and writes:
@@ -69,7 +69,8 @@ try {
 
   $sourceUrl = 'https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2'
 
-  # Event UIDs must stay the same for as long as the calendar exists, so they are independent of the site URL
+  # Event UIDs must stay the same for as long as the calendar exists, so they are independent of the site URL.
+  # This is the original site domain, kept on purpose: changing it would make subscribed calendars duplicate every event.
   $uidDomain = 'releases.azurelocal.graa.dev'
 
   if (-not $SiteUrl) {
@@ -341,7 +342,7 @@ try {
     foreach ($line in @(
       'BEGIN:VCALENDAR'
       'VERSION:2.0'
-      'PRODID:-//erikgraa//Azure Local EOL//EN'
+      'PRODID:-//erikgraa//Azure Local Lifecycle//EN'
       'CALSCALE:GREGORIAN'
       'METHOD:PUBLISH'
       ('NAME:{0}' -f (& $escapeIcs $name))
