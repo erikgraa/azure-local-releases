@@ -123,6 +123,9 @@ tr.detail > td { white-space: normal; background: color-mix(in srgb, var(--line)
 
 footer { border-top: 1px solid var(--line); padding: 16px 0 32px; color: var(--muted); font-size: .85rem; }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+footer #updated { flex: 1 0 100%; }
+footer .disclaimer { max-width: 72ch; margin: 0; line-height: 1.5; }
+footer .disclaimer a { color: inherit; text-decoration: underline; }
 
 @media (max-width: 640px) {
   .facts { grid-template-columns: 1fr; }
