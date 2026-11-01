@@ -1,4 +1,5 @@
-:root {
+:root,
+:root[data-theme="light"] {
   --bg: #fbfaf8;
   --surface: #ffffff;
   --text: #1c1f23;
@@ -12,8 +13,23 @@
   color-scheme: light;
 }
 
+:root[data-theme="dark"] {
+  --bg: #14171a;
+  --surface: #1b1f23;
+  --text: #e8e6e1;
+  --muted: #9aa0a6;
+  --line: #2d3238;
+  --accent: #6cb6ff;
+  --ok: #4cc38a;
+  --warn: #e8a13a;
+  --bad: #f0786a;
+  --head: #0f1215;
+  color-scheme: dark;
+}
+
+/* Without JavaScript, follow the system theme */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --bg: #14171a;
     --surface: #1b1f23;
     --text: #e8e6e1;
@@ -44,11 +60,30 @@ a { color: var(--accent); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .top { background: var(--head); color: #fff; padding: 28px 0 24px; }
-.top .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: flex-end; }
+.top .wrap { display: flex; flex-wrap: nowrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
 .top h1 { margin: 0; font-size: 1.9rem; font-weight: 650; letter-spacing: -.01em; }
 .brand { display: flex; align-items: center; gap: 14px; }
 .logo { display: block; flex: none; border-radius: 10px; }
 .home { display: block; flex: none; border-radius: 10px; }
+.logo-dark { display: none; }
+:root[data-theme="dark"] .logo-light { display: none; }
+:root[data-theme="dark"] .logo-dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .logo-light { display: none; }
+  :root:not([data-theme]) .logo-dark { display: block; }
+}
+
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 40px; height: 40px; padding: 0; cursor: pointer;
+  color: #d6dde4; background: transparent; border: 1px solid rgba(255, 255, 255, .28); border-radius: 50%;
+}
+.theme-toggle:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+.theme-toggle:focus-visible { outline: 2px solid #7fc0ff; outline-offset: 2px; }
+.theme-toggle .icon { width: 20px; height: 20px; }
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 .top h1 span { color: #7fc0ff; }
 .tagline { margin: 2px 0 0; color: #b9c2cb; }
 
