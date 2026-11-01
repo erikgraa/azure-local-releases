@@ -31,7 +31,7 @@ Live at https://lifecycle.azl.graa.dev/.
 - **Row details**: click a row for the release's top feature highlights (with a *Preview* marker), the OS build, earlier builds that the release superseded and links to what's new, security updates, known issues and the solution update ZIP
 - **Search and filters**: search by version, release train or OS build and filter by OS version (24H2/23H2). The view is kept in the URL so it can be shared.
 - Feed links (RSS, JSON Feed, Calendar, JSON), the GitHub and Microsoft documentation links and a community-driven disclaimer in the footer, and a short note on subscribing to the end of support calendar
-- Follows your light or dark system theme, with a mobile layout and an icon (`favicon.svg`, light and dark aware) plus a social share image
+- Follows your light or dark system theme, with a theme button in the header (your choice is remembered in the browser), a mobile layout and separate light and dark icons (the browser tab icon follows the system theme) plus a social share image
 - Works offline once loaded: a small service worker caches the site and data (network first, so it never serves stale data when online). Status and days left are calculated in the browser, so they stay correct between daily data refreshes. The footer shows when the data last changed (a daily run without changes writes nothing).
 
 ## 📡 Feeds and data
@@ -263,17 +263,21 @@ See the related blog posts at https://blog.graa.dev for possible use cases:
     │   calendar-reminders.ics
     │   calendar.ics
     │   CNAME
+    │   favicon-32-dark.png
     │   favicon-32.png
     │   favicon.svg
     │   feed.json
     │   feed.xml
     │   icon-192.png
     │   icon-512.png
+    │   icon-dark.svg
+    │   icon-light.svg
     │   index.html
     │   og-image.png
     │   site.webmanifest
     │   style.css
     │   sw.js
+    │   theme.js
     │
     └───data
             releases.json

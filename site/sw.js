@@ -1,6 +1,6 @@
 // Network first, falling back to the cache, so the site keeps working offline without ever serving stale data online
-const CACHE = 'eol-v7';
-const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'favicon.svg', 'site.webmanifest', 'data/releases.json'];
+const CACHE = 'eol-v9';
+const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'theme.js', 'favicon.svg', 'icon-light.svg', 'icon-dark.svg', 'site.webmanifest', 'data/releases.json'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
