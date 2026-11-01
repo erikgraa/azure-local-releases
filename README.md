@@ -281,4 +281,8 @@ See the related blog posts at https://blog.graa.dev for possible use cases:
 
 ## 👏 Contributions
 
-Any contributions are welcome and appreciated!
+Any contributions are welcome and appreciated! Issues and pull requests are welcome.
+
+## ⚖️ Disclaimer
+
+This is an independent, community-driven project. It is not affiliated with, endorsed by, or sponsored by Microsoft, and Azure and Azure Local are trademarks of Microsoft Corporation. Dates are derived from [Microsoft's public release documentation](https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2), so verify them against the official docs and your OEM vendor's guidance before planning upgrades.
