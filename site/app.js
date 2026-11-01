@@ -77,7 +77,8 @@
   function renderChips(supported) {
     const group = $('chips');
     group.innerHTML = supported.map(r => {
-      const label = r.version.split('.').slice(0, 2).join('.');
+      const duplicate = supported.filter(x => x.releaseTrain === r.releaseTrain).length > 1;
+      const label = duplicate ? r.version.split('.').slice(0, 2).join('.') : r.releaseTrain;
       return '<button type="button" class="chip" data-version="' + esc(r.version) + '" aria-pressed="false" title="' + esc(r.version) + '" aria-label="' + esc(label + ' (' + r.version + ')') + '">' + esc(label) + '</button>';
     }).join('');
     group.hidden = supported.length === 0;
