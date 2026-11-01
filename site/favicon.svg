@@ -2,19 +2,28 @@
   <title>Azure Local Lifecycle</title>
   <style>
     .bg { fill: #005a9e; }
-    .shape { fill: #fff; }
+    .page { fill: #fff; }
+    .head { fill: #cfe4f5; }
+    .ring { fill: #fff; stroke: #005a9e; }
+    .cloud { fill: #005a9e; }
     .end { fill: #f5a742; }
     @media (prefers-color-scheme: dark) {
       .bg { fill: #7fc0ff; }
-      .shape { fill: #0f1b27; }
-      .end { fill: #c46a00; }
+      .page { fill: #0f1b27; }
+      .head { fill: #243648; }
+      .ring { fill: #0f1b27; stroke: #7fc0ff; }
+      .cloud { fill: #7fc0ff; }
+      .end { fill: #e8a13a; }
     }
   </style>
   <rect class="bg" width="64" height="64" rx="14"/>
+  <!-- Calendar page -->
+  <rect class="page" x="9" y="12" width="46" height="43" rx="7"/>
+  <path class="head" d="M9 25h46v-6a7 7 0 0 0-7-7H16a7 7 0 0 0-7 7Z"/>
+  <rect class="ring" x="19" y="7" width="5" height="11" rx="2.5" stroke-width="2"/>
+  <rect class="ring" x="40" y="7" width="5" height="11" rx="2.5" stroke-width="2"/>
   <!-- Azure Local: the cloud, brought on premises -->
-  <path class="shape" transform="translate(9.5 1.5) scale(1.85)" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
-  <!-- Overlapping support windows, the earlier one is the next to end -->
-  <rect class="shape" x="8" y="41" width="32" height="7" rx="3.5"/>
-  <rect class="shape" x="20" y="51" width="36" height="7" rx="3.5"/>
-  <circle class="end" cx="45" cy="44.5" r="5"/>
+  <path class="cloud" transform="translate(13.5 21.5) scale(1.55)" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+  <!-- End of support date -->
+  <circle class="end" cx="46" cy="33" r="4"/>
 </svg>
