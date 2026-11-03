@@ -273,6 +273,10 @@ The `notify` job uses only the built-in `GITHUB_TOKEN`:
 - **Email**: GitHub also emails the owner about **failed scheduled workflow runs** by default (to the person who last changed the cron schedule in the workflow file), as long as notifications for Actions are enabled in *Settings → Notifications → Actions*. That email works even if the issue alert itself fails.
 - Scheduled workflows in a public repository are disabled by GitHub after 60 days without repository activity. The daily run commits data changes, but if you see a "workflow disabled" notice, re-enable it on the Actions tab. If nothing runs, nothing alerts; the stale check is only evaluated when the workflow runs.
 
+### Dependency updates
+
+[Dependabot](.github/dependabot.yml) checks weekly for new versions of the GitHub Actions used by the workflow (all in one grouped pull request) and of the nginx base image in the `Dockerfile` (minor and patch updates grouped), labelled `dependencies`. Pull requests run the tests and the site build, but never deploy or publish an image: those jobs only run on `main`. PowerShell has no Dependabot ecosystem, so the scripts have no dependencies to track.
+
 ### One-time setup
 
 The repository is already set up for Pages with GitHub Actions as the source and the custom domain `lifecycle.azl.graa.dev`. In a fork, or if you change the domain:
@@ -288,7 +292,7 @@ The repository is already set up for Pages with GitHub Actions as the source and
 | Removed | Why / replacement |
 | --- | --- |
 | `pode/` (Pode server, views, OpenAPI/Swagger) | Replaced by the static site in `site/` |
-| `Dockerfile` | No container is needed any more |
+| `Dockerfile` (Pode image) | The Pode server is gone. A new, unrelated `Dockerfile` serves the static site with nginx, see [Run it as a container](#-run-it-as-a-container) |
 | `.github/workflows/containerapp.yml` (Docker Hub, ACR and Azure Container App deploy) | Replaced by `pages.yml`. The Azure Container App, its registry and the related repository secrets (`DOCKERHUB_*`, `AZURE_CREDENTIALS`, `REGISTRY_*`, `CONTAINER_APP_NAME`, `RESOURCE_GROUP`) and variable `CONTAINER_IMAGE_NAME` are no longer used and can be deleted |
 | `.github/workflows/json.yml` | Merged into `pages.yml`, which also keeps `json/azure-local-releases.json` updated |
 | `assets/pode.png` | No longer relevant |

@@ -115,10 +115,13 @@ Describe 'Build-Site.ps1' {
       $uidsBefore = [regex]::Matches($before, '(?m)^UID:(.+)\r$') | ForEach-Object { $_.Groups[1].Value } | Sort-Object
 
       $releases = Get-Releases
-      $newest = $releases | Where-Object { $_.version -eq '12.2610.1004.41' }
-      $newest.version = '12.2610.1004.42'
-      $newest.availabilityDate = '2026-10-29'
-      $newest.supersedes = @('12.2610.1004.41')
+      $newest = $releases | Sort-Object { [DateTime]$_.availabilityDate } | Select-Object -Last 1
+      $previous = $newest.version
+      $parts = $previous -split '\.'
+      $parts[-1] = [string]([int]$parts[-1] + 1)
+      $newest.version = $parts -join '.'
+      $newest.availabilityDate = ([DateTime]$newest.availabilityDate).AddDays(1).ToString('yyyy-MM-dd')
+      $newest.supersedes = @($previous)
 
       $sandbox = New-Sandbox
       Invoke-Build -Sandbox $sandbox -Source (Write-Source $sandbox $releases)
