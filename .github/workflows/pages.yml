@@ -12,6 +12,17 @@ on:
       - container/**
       - scripts/test-container.sh
       - .github/workflows/pages.yml
+  # Test and build only (for example Dependabot updates): deploy, image and notify only run on main
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/**
+      - site/**
+      - tests/**
+      - Dockerfile
+      - container/**
+      - .github/workflows/pages.yml
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
@@ -22,7 +33,7 @@ on:
         default: false
 
 concurrency:
-  group: pages
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.ref) || 'pages' }}
   cancel-in-progress: false
 
 jobs:
