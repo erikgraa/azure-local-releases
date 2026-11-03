@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-01T11:03:19Z",
+  "generatedAt": "2026-11-03T01:36:31Z",
   "source": "https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2",
   "supportPolicy": {
     "days": 180,
     "description": "Each Azure Local release is supported for six months (180 days) after it first became available. endOfSupportDate is derived from firstAvailabilityDate."
   },
   "newDeployments": [
-    "12.2610.1004.41"
+    "12.2610.1004.50"
   ],
   "trains": [
     {
@@ -18,7 +18,7 @@
       "endOfSupportDate": "2027-04-20",
       "supported": true,
       "versions": [
-        "12.2610.1004.41"
+        "12.2610.1004.50"
       ]
     },
     {
@@ -312,19 +312,24 @@
   ],
   "releases": [
     {
-      "version": "12.2610.1004.41",
-      "availabilityDate": "2026-10-22",
+      "version": "12.2610.1004.50",
+      "availabilityDate": "2026-11-02",
       "firstAvailabilityDate": "2026-10-22",
       "newDeployments": true,
       "osBuild": "26100.33650",
       "osVersion": "24H2",
       "releaseTrain": "2610",
-      "release": "2610.1004.41",
+      "release": "2610.1004.50",
       "releaseShortened": "2610.1004",
       "baselineRelease": true,
       "endOfSupportDate": "2027-04-20",
       "supported": true,
-      "supersedes": [],
+      "supersedes": [
+        {
+          "version": "12.2610.1004.41",
+          "availabilityDate": "2026-10-22"
+        }
+      ],
       "features": [
         {
           "title": "Azure Government Arizona region expansion",
@@ -353,8 +358,8 @@
         }
       ],
       "solutionUpdate": {
-        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2610.1004.41/CombinedSolutionBundle.12.2610.1004.41.zip",
-        "fileHash": "5E240F2982F4B2403172238B49F357641A195BC2FDA164543EDCF63236303F44"
+        "uri": "https://azurestackreleases.download.prss.microsoft.com/dbazure/AzureLocal/CombinedSolutionBundle/12.2610.1004.50/CombinedSolutionBundle.12.2610.1004.50.zip",
+        "fileHash": "81B6FC33745BC5E2D94644219C18969BCA1CF6D4B9F561DA4D026D2AF3F54868"
       },
       "urls": {
         "security": "https://learn.microsoft.com/en-us/azure/azure-local/security-update/security-update?view=azloc-2610&preserve-view=true&tabs=new-deployments",

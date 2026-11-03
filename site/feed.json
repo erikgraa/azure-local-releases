@@ -7,11 +7,11 @@
   "language": "en",
   "items": [
     {
-      "id": "azure-local-12.2610.1004.41",
+      "id": "azure-local-12.2610.1004.50",
       "url": "https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2610&preserve-view=true#features-and-improvements-in-2610",
-      "title": "Azure Local 12.2610.1004.41 released",
-      "content_text": "Azure Local 12.2610.1004.41 (OS build 26100.33650, 24H2) became available on 2026-10-22. End of support: 2027-04-20. Use this build for new deployments. Highlights: Azure Government Arizona region expansion; Rack aware clusters with SAN; Disk witness for SAN deployments.",
-      "date_published": "2026-10-22T00:00:00Z",
+      "title": "Azure Local 12.2610.1004.50 released",
+      "content_text": "Azure Local 12.2610.1004.50 (OS build 26100.33650, 24H2) became available on 2026-11-02. End of support: 2027-04-20. Use this build for new deployments. Highlights: Azure Government Arizona region expansion; Rack aware clusters with SAN; Disk witness for SAN deployments.",
+      "date_published": "2026-11-02T00:00:00Z",
       "tags": [
         "2610",
         "24H2"

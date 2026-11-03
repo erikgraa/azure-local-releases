@@ -5,14 +5,14 @@
     <link>https://lifecycle.azl.graa.dev/</link>
     <description>New Azure Local releases and when they reach end of support.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 01 Nov 2026 11:03:19 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 01:36:31 GMT</lastBuildDate>
     <atom:link href="https://lifecycle.azl.graa.dev/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Azure Local 12.2610.1004.41 released</title>
+      <title>Azure Local 12.2610.1004.50 released</title>
       <link>https://learn.microsoft.com/en-us/azure/azure-local/whats-new?view=azloc-2610&amp;preserve-view=true#features-and-improvements-in-2610</link>
-      <guid isPermaLink="false">azure-local-12.2610.1004.41</guid>
-      <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
-      <description>Azure Local 12.2610.1004.41 (OS build 26100.33650, 24H2) became available on 2026-10-22. End of support: 2027-04-20. Use this build for new deployments. Highlights: Azure Government Arizona region expansion; Rack aware clusters with SAN; Disk witness for SAN deployments.</description>
+      <guid isPermaLink="false">azure-local-12.2610.1004.50</guid>
+      <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Azure Local 12.2610.1004.50 (OS build 26100.33650, 24H2) became available on 2026-11-02. End of support: 2027-04-20. Use this build for new deployments. Highlights: Azure Government Arizona region expansion; Rack aware clusters with SAN; Disk witness for SAN deployments.</description>
       <category>2610</category>
       <category>24H2</category>
     </item>
