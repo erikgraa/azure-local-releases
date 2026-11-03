@@ -8,6 +8,9 @@ on:
       - scripts/**
       - site/**
       - tests/**
+      - Dockerfile
+      - container/**
+      - scripts/test-container.sh
       - .github/workflows/pages.yml
   schedule:
     - cron: "0 6 * * *"
@@ -111,6 +114,16 @@ jobs:
         with:
           path: site
 
+      # The container image is built from exactly the validated tree that Pages serves, not from a fresh checkout
+      - name: Upload site for the container image
+        if: steps.build.outputs.changed == 'true' || github.event_name != 'schedule' || steps.alert.outputs.open == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: site
+          if-no-files-found: error
+          retention-days: 1
+
   deploy:
     if: needs.build.outputs.deploy == 'true' && github.ref == 'refs/heads/main'
     needs: build
@@ -128,11 +141,105 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
+  # Builds the self-contained container from the validated site that was just deployed and publishes it to GHCR.
+  # Only runs after a successful build, validation and deployment, so a failed or empty run can never publish an image.
+  # Scheduled runs without data changes skip it (latest already matches what Pages serves).
+  image:
+    if: needs.deploy.result == 'success'
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Replaces the checked-out site/ with the validated one from the build job
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+
+      - name: Check the site content
+        id: meta
+        run: |
+          count=$(jq '.releases | length' site/data/releases.json)
+          if [ "${count:-0}" -le 0 ]; then echo "::error::site/data/releases.json has no releases"; exit 1; fi
+          echo "releases=$count" >> "$GITHUB_OUTPUT"
+          echo "data_updated=$(jq -r '.generatedAt' site/data/releases.json)" >> "$GITHUB_OUTPUT"
+          echo "created=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
+          echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+          echo "short_sha=$(git rev-parse --short=7 HEAD)" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-qemu-action@v3
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build for the smoke test
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: azl-smoke:test
+          build-args: |
+            REVISION=${{ github.sha }}
+            CREATED=${{ steps.meta.outputs.created }}
+            DATA_UPDATED=${{ steps.meta.outputs.data_updated }}
+            VERSION=${{ steps.meta.outputs.date }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test
+        run: |
+          docker run -d --name azl-smoke -p 8080:8080 azl-smoke:test
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8080/healthz >/dev/null 2>&1 && break; sleep 1; done
+          ./scripts/test-container.sh http://127.0.0.1:8080 || { docker logs azl-smoke; exit 1; }
+          docker rm -f azl-smoke
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push multi-arch image
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          provenance: mode=max
+          sbom: true
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ steps.meta.outputs.date }}
+            ${{ env.IMAGE }}:${{ steps.meta.outputs.short_sha }}
+          build-args: |
+            REVISION=${{ github.sha }}
+            CREATED=${{ steps.meta.outputs.created }}
+            DATA_UPDATED=${{ steps.meta.outputs.data_updated }}
+            VERSION=${{ steps.meta.outputs.date }}
+          cache-from: type=gha
+
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ${{ env.IMAGE }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
   # Opens (or comments on) an issue when the build or deployment failed and closes it again when a later run succeeds.
   # Uses only the built-in token. Failed scheduled runs also email the repository owner through GitHub's default notifications.
   notify:
-    if: ${{ always() && github.ref == 'refs/heads/main' && needs.build.result != 'cancelled' && needs.deploy.result != 'cancelled' }}
-    needs: [build, deploy]
+    if: ${{ always() && github.ref == 'refs/heads/main' && needs.build.result != 'cancelled' && needs.deploy.result != 'cancelled' && needs.image.result != 'cancelled' }}
+    needs: [build, deploy, image]
     runs-on: ubuntu-latest
 
     permissions:
@@ -143,6 +250,7 @@ jobs:
         env:
           BUILD_RESULT: ${{ needs.build.result }}
           DEPLOY_RESULT: ${{ needs.deploy.result }}
+          IMAGE_RESULT: ${{ needs.image.result }}
           BUILD_ERROR: ${{ needs.build.outputs.error }}
           STALE: ${{ needs.build.outputs.stale }}
           STALE_MESSAGE: ${{ needs.build.outputs.stale_message }}
@@ -199,11 +307,12 @@ jobs:
 
             const buildFailed = env.BUILD_RESULT === 'failure';
             const deployFailed = env.DEPLOY_RESULT === 'failure';
-            const succeeded = env.BUILD_RESULT === 'success' && ['success', 'skipped'].includes(env.DEPLOY_RESULT);
+            const imageFailed = env.IMAGE_RESULT === 'failure';
+            const succeeded = env.BUILD_RESULT === 'success' && ['success', 'skipped'].includes(env.DEPLOY_RESULT) && ['success', 'skipped'].includes(env.IMAGE_RESULT);
 
-            if (buildFailed || deployFailed) {
-              const failedJob = buildFailed ? 'build (parsing, validation or commit)' : 'deploy (publishing to GitHub Pages)';
-              const reason = buildFailed ? (clean(env.BUILD_ERROR) || 'See the run log for details.') : 'Deploying to GitHub Pages failed. See the run log for details.';
+            if (buildFailed || deployFailed || imageFailed) {
+              const failedJob = buildFailed ? 'build (parsing, validation or commit)' : deployFailed ? 'deploy (publishing to GitHub Pages)' : 'image (building and publishing the container image)';
+              const reason = buildFailed ? (clean(env.BUILD_ERROR) || 'See the run log for details.') : deployFailed ? 'Deploying to GitHub Pages failed. See the run log for details.' : 'Building, testing or pushing the container image failed. See the run log for details.';
               const body = [
                 `The **${context.eventName}** run of *Build and deploy site* failed in the **${failedJob}** job.`,
                 '',
@@ -212,7 +321,7 @@ jobs:
                 '',
                 buildFailed
                   ? 'Nothing was committed or deployed, so the last good data and site are still live. Microsoft may have changed the layout of the release documentation: check `scripts/Get-AzureLocalRelease.ps1` against https://learn.microsoft.com/en-us/azure/azure-local/release-information-23h2.'
-                  : 'The data was built and validated, but the site was not published. The next scheduled run redeploys while this issue is open.',
+                  : deployFailed ? 'The data was built and validated, but the site was not published. The next scheduled run redeploys while this issue is open.' : 'The site was deployed, but the container image was not published. The next scheduled run rebuilds it while this issue is open.',
                 '',
                 'This issue closes automatically when a later run succeeds.',
               ].join('\n');

@@ -108,6 +108,75 @@ Technical notes: valid RFC 5545 (CRLF line endings, folded lines, escaped text),
 
 Microsoft states that each Azure Local release is supported for six months. `endOfSupportDate` is `firstAvailabilityDate` + 180 days, where `firstAvailabilityDate` is when the first build of the release became available. The documentation lists later builds of a release as superseding earlier ones (`supersedes`), and `availabilityDate` is the date of the latest build. The site flags releases ending within 60 days as *ending soon*.
 
+## 🐳 Run it as a container
+
+The site is also published as a small, self-contained container image (nginx, runs as a non-root user, no runtime network access or build tooling needed). The site content and data are baked in.
+
+```sh
+# Docker
+docker run -d --name azure-local-lifecycle -p 8080:8080 ghcr.io/erikgraa/azure-local-releases:latest
+
+# Podman (rootless works; the image already runs as a non-root user)
+podman run -d --name azure-local-lifecycle -p 8080:8080 ghcr.io/erikgraa/azure-local-releases:latest
+```
+
+Then open <http://localhost:8080>. The container listens on **8080** (use `-p 80:8080` to publish it on port 80; rootless Podman cannot bind ports below 1024 by default, so put a reverse proxy in front or lower `net.ipv4.ip_unprivileged_port_start`). Endpoints: `/`, `/data/releases.json`, `/feed.xml`, `/feed.json`, `/calendar.ics`, `/calendar-reminders.ics` and `/healthz` (health check).
+
+**Docker Compose / Podman Compose** (`compose.yaml`, run with `docker compose up -d` or `podman compose up -d`):
+
+```yaml
+services:
+  azure-local-lifecycle:
+    image: ghcr.io/erikgraa/azure-local-releases:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+```
+
+**Podman Quadlet** (rootless: `~/.config/containers/systemd/azure-local-lifecycle.container`, then `systemctl --user daemon-reload && systemctl --user start azure-local-lifecycle`; run `loginctl enable-linger` to keep it running after logout):
+
+```ini
+[Unit]
+Description=Azure Local Lifecycle
+
+[Container]
+Image=ghcr.io/erikgraa/azure-local-releases:latest
+PublishPort=8080:8080
+AutoUpdate=registry
+HealthCmd=wget -q -O /dev/null http://127.0.0.1:8080/healthz
+HealthInterval=30s
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
+```
+
+The container does not use volumes, so no SELinux relabeling (`:Z`) is needed. `AutoUpdate=registry` together with `systemctl --user enable --now podman-auto-update.timer` picks up the daily rebuilds.
+
+**Health check:** `curl -fsS http://localhost:8080/healthz` returns `ok`. The image defines a `HEALTHCHECK`, which Docker honors; Podman ignores it for OCI-format images, so pass `--health-cmd 'wget -q -O /dev/null http://127.0.0.1:8080/healthz'` (as in the Quadlet above) if you want Podman to track health.
+
+**Pinning:** pull a specific day with `docker pull ghcr.io/erikgraa/azure-local-releases:2026-11-03`, or pin an immutable digest with `ghcr.io/erikgraa/azure-local-releases@sha256:<digest>` (shown on the package page and printed by `docker buildx imagetools inspect ghcr.io/erikgraa/azure-local-releases:latest`).
+
+| Tag | Meaning |
+| --- | --- |
+| `latest` | The newest published site |
+| `YYYY-MM-DD` | The build date (UTC), handy for pinning |
+| `<short sha>` | The commit the image was built from |
+
+- **Rebuilt** after the daily data refresh (06:00 UTC), but only when the data changed, so `latest` always matches what the website serves. It is also rebuilt on manual runs and when `site/`, the `Dockerfile` or `container/` change on `main`. Pull regularly (or use a tool such as Watchtower) to stay current.
+- **Platforms:** `linux/amd64` and `linux/arm64`. Images carry an SBOM and build provenance attestation (`gh attestation verify oci://ghcr.io/erikgraa/azure-local-releases:latest --owner erikgraa`).
+- **Labels:** the standard `org.opencontainers.image.*` labels, plus `dev.graa.azl.data-updated` with the `generatedAt` timestamp of the data in the image.
+- **Behind a reverse proxy:** terminate TLS in the proxy and forward to port 8080. All paths are relative, so the site also works under a sub-path if the proxy strips the prefix. Responses already carry cache headers (data, feeds, calendars and the service worker are always revalidated) and security headers.
+- **Offline and air-gapped:** nothing is fetched at runtime. Run `docker save` on a connected machine, move the archive and `docker load` it. The data only changes when you load a newer image. The *Microsoft release information* links in the page still point to the internet.
+- **Build it yourself:** `docker build -t azure-local-lifecycle .` (or `podman build`) bakes in whatever is in `site/`. Run `./scripts/test-container.sh` against the running container to smoke test it.
+
+The package is private when first created: after the first publish, open the package on GitHub (*Packages* > *azure-local-releases* > *Package settings*), set the visibility to **Public** and make sure it is linked to this repository. This is needed once.
+
 ## 🧰 PowerShell cmdlet
 
 The cmdlet `Get-AzureLocalRelease` retrieves Azure Local releases from Microsoft's documentation and is what generates the data above.
@@ -161,7 +230,7 @@ The workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) ("Buil
 | Trigger | When | Deploys |
 | --- | --- | --- |
 | Schedule | Daily at 06:00 UTC (`cron: "0 6 * * *"`) | Only if the data changed |
-| Push to `main` | When `scripts/**`, `site/**`, `tests/**` or the workflow itself changes | Always, so site changes go live |
+| Push to `main` | When `scripts/**`, `site/**`, `tests/**`, the `Dockerfile`, `container/**` or the workflow itself changes | Always, so site changes go live |
 | Manual | *Run workflow* on the Actions tab (`workflow_dispatch`), optionally with *force* | Always |
 
 What it does:
@@ -170,7 +239,8 @@ What it does:
 2. If the content changed, the files are replaced atomically (JSON data, RSS feed, JSON Feed, both calendars and `json/azure-local-releases.json`, with a new `generatedAt`) and the workflow commits them to `main` as `github-actions[bot]` (commit message "Auto updating Azure Local Releases"). Commits made with the workflow token do not retrigger the workflow.
 3. Validates the files once more with `scripts/Test-SiteOutput.ps1` and checks the data freshness, then uploads `site/` as a Pages artifact, unless this is a scheduled run where nothing changed.
 4. **deploy** job (only on `main`): publishes the artifact with `actions/deploy-pages`. It is skipped on scheduled runs where nothing changed, unless a `parser-broken` issue is open (so a deployment that failed earlier is retried).
-5. **notify** job: opens, updates or closes the alert issues, see [Alerts](#alerts).
+5. **image** job (only on `main`, after a successful **deploy**): downloads the exact validated `site/` from the build job, builds the container (see [Run it as a container](#-run-it-as-a-container)), smoke-tests it with `scripts/test-container.sh` and pushes it to GHCR. Because it needs a successful deploy, a failed or invalid run never publishes an image.
+6. **notify** job: opens, updates or closes the alert issues, see [Alerts](#alerts). An image failure raises the same alert, and the next scheduled run retries while it is open.
 
 So on a day where Microsoft's documentation has not changed, a scheduled run fetches, compares and stops: **no commit and no redeploy**. Data changes that count include a new release, new feature highlights, a release reaching its end of support date (`supported` flips) and a different recommended build. The status and days left are calculated in the browser, so they stay correct between refreshes even without a redeploy.
 
