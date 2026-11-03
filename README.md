@@ -113,10 +113,54 @@ Microsoft states that each Azure Local release is supported for six months. `end
 The site is also published as a small, self-contained container image (nginx, runs as a non-root user, no runtime network access or build tooling needed). The site content and data are baked in.
 
 ```sh
+# Docker
 docker run -d --name azure-local-lifecycle -p 8080:8080 ghcr.io/erikgraa/azure-local-releases:latest
+
+# Podman (rootless works; the image already runs as a non-root user)
+podman run -d --name azure-local-lifecycle -p 8080:8080 ghcr.io/erikgraa/azure-local-releases:latest
 ```
 
-Then open <http://localhost:8080>. The container listens on **8080** (use `-p 80:8080` to publish it on port 80). Endpoints: `/`, `/data/releases.json`, `/feed.xml`, `/feed.json`, `/calendar.ics`, `/calendar-reminders.ics` and `/healthz` (health check).
+Then open <http://localhost:8080>. The container listens on **8080** (use `-p 80:8080` to publish it on port 80; rootless Podman cannot bind ports below 1024 by default, so put a reverse proxy in front or lower `net.ipv4.ip_unprivileged_port_start`). Endpoints: `/`, `/data/releases.json`, `/feed.xml`, `/feed.json`, `/calendar.ics`, `/calendar-reminders.ics` and `/healthz` (health check).
+
+**Docker Compose / Podman Compose** (`compose.yaml`, run with `docker compose up -d` or `podman compose up -d`):
+
+```yaml
+services:
+  azure-local-lifecycle:
+    image: ghcr.io/erikgraa/azure-local-releases:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+```
+
+**Podman Quadlet** (rootless: `~/.config/containers/systemd/azure-local-lifecycle.container`, then `systemctl --user daemon-reload && systemctl --user start azure-local-lifecycle`; run `loginctl enable-linger` to keep it running after logout):
+
+```ini
+[Unit]
+Description=Azure Local Lifecycle
+
+[Container]
+Image=ghcr.io/erikgraa/azure-local-releases:latest
+PublishPort=8080:8080
+AutoUpdate=registry
+HealthCmd=wget -q -O /dev/null http://127.0.0.1:8080/healthz
+HealthInterval=30s
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
+```
+
+The container does not use volumes, so no SELinux relabeling (`:Z`) is needed. `AutoUpdate=registry` together with `systemctl --user enable --now podman-auto-update.timer` picks up the daily rebuilds.
+
+**Health check:** `curl -fsS http://localhost:8080/healthz` returns `ok`. The image defines a `HEALTHCHECK`, which Docker honors; Podman ignores it for OCI-format images, so pass `--health-cmd 'wget -q -O /dev/null http://127.0.0.1:8080/healthz'` (as in the Quadlet above) if you want Podman to track health.
+
+**Pinning:** pull a specific day with `docker pull ghcr.io/erikgraa/azure-local-releases:2026-11-03`, or pin an immutable digest with `ghcr.io/erikgraa/azure-local-releases@sha256:<digest>` (shown on the package page and printed by `docker buildx imagetools inspect ghcr.io/erikgraa/azure-local-releases:latest`).
 
 | Tag | Meaning |
 | --- | --- |
@@ -129,7 +173,7 @@ Then open <http://localhost:8080>. The container listens on **8080** (use `-p 80
 - **Labels:** the standard `org.opencontainers.image.*` labels, plus `dev.graa.azl.data-updated` with the `generatedAt` timestamp of the data in the image.
 - **Behind a reverse proxy:** terminate TLS in the proxy and forward to port 8080. All paths are relative, so the site also works under a sub-path if the proxy strips the prefix. Responses already carry cache headers (data, feeds, calendars and the service worker are always revalidated) and security headers.
 - **Offline and air-gapped:** nothing is fetched at runtime. Run `docker save` on a connected machine, move the archive and `docker load` it. The data only changes when you load a newer image. The *Microsoft release information* links in the page still point to the internet.
-- **Build it yourself:** `docker build -t azure-local-lifecycle .` bakes in whatever is in `site/`. Run `./scripts/test-container.sh` against the running container to smoke test it.
+- **Build it yourself:** `docker build -t azure-local-lifecycle .` (or `podman build`) bakes in whatever is in `site/`. Run `./scripts/test-container.sh` against the running container to smoke test it.
 
 The package is private when first created: after the first publish, open the package on GitHub (*Packages* > *azure-local-releases* > *Package settings*), set the visibility to **Public** and make sure it is linked to this repository. This is needed once.
 
