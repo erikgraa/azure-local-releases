@@ -1,5 +1,5 @@
 # Self-contained static site: the validated site/ is baked in, nothing is fetched at runtime.
-FROM nginxinc/nginx-unprivileged:1.27-alpine
+FROM nginxinc/nginx-unprivileged:1.31-alpine
 
 ARG REVISION=unknown
 ARG CREATED=unknown
